@@ -13,8 +13,8 @@ namespace GameLauncher.Model
     public class Review
     {
         public int Id { get; set; }
-        public string Comment { get; set; }
-        public ReviewRatingEnum Rating { get; set; }
+        public string? Comment { get; set; }
+        public ReviewGradeEnum Grade { get; set; }
         public DateTime Date { get; set; }
 
         public int ApplicationId { get; set; }

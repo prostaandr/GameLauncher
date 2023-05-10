@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GameLauncher.Model.Enum
 {
-    public enum ReviewRatingEnum
+    public enum ReviewGradeEnum
     {
-        Good,
-        Bad
+        Positive,
+        Negative
     }
 }

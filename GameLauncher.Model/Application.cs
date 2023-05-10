@@ -25,22 +25,23 @@ namespace GameLauncher.Model
         public int? DeveloperId { get; set; }
         public Developer? Developer { get; set; }
 
+        public int? PublisherId { get; set; }
+        public Publisher? Publisher { get; set; }
+
         public int? MinimumSystemRequirementsId { get; set; }
         public SystemRequirements? MinimumSystemRequirements { get; set; }
 
         public int? RecommendedSystemRequirementsId { get; set; }
         public SystemRequirements? RecommendedSystemRequirements { get; set; }
 
-        public int? PublisherId { get; set; }
-        public Publisher? Publisher { get; set; }
-
-        public List<Language> Language { get; set; } = new List<Language>();
-        public List<Feature> Feature { get; set; } = new List<Feature>();
-        public List<Genre> Genre { get; set; } = new List<Genre>();
-        public List<Promotion> Promotion { get; set; } = new List<Promotion>();
+        public List<Language> Languages { get; set; } = new List<Language>();
+        public List<Feature> Features { get; set; } = new List<Feature>();
+        public List<Genre> Genres { get; set; } = new List<Genre>();
+        public List<Media> Medias { get; set; } = new List<Media>();
+        public List<Promotion> Promotions { get; set; } = new List<Promotion>();
         public List<Review> Reviews { get; set; } = new List<Review>();
         public List<AvailableApplication> AvailableApplications { get; set; } = new List<AvailableApplication>();
-        public List<WishList> WishListApplication { get; set; } = new List<WishList>();
+        public List<WishList> WishListApplications { get; set; } = new List<WishList>();
         public List<Order> Orders { get; set; } = new List<Order>();
     }
 }

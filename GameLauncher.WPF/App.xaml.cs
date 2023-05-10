@@ -19,8 +19,7 @@ namespace GameLauncher.WPF
     /// </summary>
     public partial class App : System.Windows.Application
     {
-        [STAThread]
-        static void Main()
+        public App()
         {
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(Directory.GetCurrentDirectory());
@@ -43,10 +42,6 @@ namespace GameLauncher.WPF
                 db.Developers.Add(developer);
                 db.SaveChanges();
             }
-
-            App app = new App();
-            MainWindow window = new MainWindow();
-            app.Run(window);
         }
     }
 }

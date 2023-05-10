@@ -58,14 +58,44 @@ namespace GameLauncher.Data
                     .HasForeignKey(aa => aa.UserId);
 
             modelBuilder.Entity<Application>()
-                    .HasMany(a => a.WishListApplication)
+                    .HasMany(a => a.WishListApplications)
                     .WithOne(aa => aa.Application)
                     .HasForeignKey(aa => aa.ApplicationId);
 
             modelBuilder.Entity<Application>()
                     .HasMany(a => a.Orders)
                     .WithMany(o => o.Applications)
-                    .UsingEntity("OrderContent");
+                    .UsingEntity<Dictionary<string, object>>("OrderContent",
+                            e => e.HasOne<Order>().WithMany().HasForeignKey("OrderId"),
+                            e => e.HasOne<Application>().WithMany().HasForeignKey("ApplicationId"));
+
+            modelBuilder.Entity<Application>()
+                    .HasMany(a => a.Languages)
+                    .WithMany(l => l.Applications)
+                    .UsingEntity<Dictionary<string, object>>("ApplicationLanguage",
+                            e => e.HasOne<Language>().WithMany().HasForeignKey("LanguageId"),
+                            e => e.HasOne<Application>().WithMany().HasForeignKey("ApplicationId"));
+
+            modelBuilder.Entity<Application>()
+                    .HasMany(a => a.Genres)
+                    .WithMany(g => g.Applications)
+                    .UsingEntity<Dictionary<string, object>>("ApplicationGenre",
+                            e => e.HasOne<Genre>().WithMany().HasForeignKey("GenreId"),
+                            e => e.HasOne<Application>().WithMany().HasForeignKey("ApplicationId"));
+
+            modelBuilder.Entity<Application>()
+                    .HasMany(a => a.Features)
+                    .WithMany(f => f.Applications)
+                    .UsingEntity<Dictionary<string, object>>("ApplicationFeature",
+                            e => e.HasOne<Feature>().WithMany().HasForeignKey("FeatureId"),
+                            e => e.HasOne<Application>().WithMany().HasForeignKey("ApplicationId"));
+
+            modelBuilder.Entity<Application>()
+                    .HasMany(a => a.Medias)
+                    .WithMany(m => m.Applications)
+                    .UsingEntity<Dictionary<string, object>>("ApplicationMedia",
+                            e => e.HasOne<Media>().WithMany().HasForeignKey("MediaId"),
+                            e => e.HasOne<Application>().WithMany().HasForeignKey("ApplicationId"));
         }
     }
 }
