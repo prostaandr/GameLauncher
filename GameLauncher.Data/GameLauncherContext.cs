@@ -27,12 +27,21 @@ namespace GameLauncher.Data
         public DbSet<WishList> WishList { get; set; }
         public DbSet<Order> Orders { get; set; }
 
+        public GameLauncherContext()
+        {
+
+        }
 
         public GameLauncherContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=GameLauncher;Trusted_Connection=True;");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
