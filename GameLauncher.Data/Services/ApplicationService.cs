@@ -22,9 +22,9 @@ namespace GameLauncher.Data.Services
             return await _applicationRepository.Get(id); 
         }
 
-        public IQueryable<Application> GetApplications()
+        public async Task<List<Application>> GetApplications()
         {
-            return _applicationRepository.GetAll();
+            return await _applicationRepository.GetAll();
         }
     }
 }

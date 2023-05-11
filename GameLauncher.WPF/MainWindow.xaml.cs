@@ -2,6 +2,7 @@
 using GameLauncher.Data.Interfaces;
 using GameLauncher.Data.Repositories;
 using GameLauncher.Data.Services;
+using GameLauncher.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -30,18 +31,19 @@ namespace GameLauncher.WPF
         {
             InitializeComponent();
 
-            //ContextFactory contextFactory = new ContextFactory();
-            //GameLauncherContext db = contextFactory.CreateDbContext(Environment.GetCommandLineArgs());
-            //var service = new ApplicationService(new ApplicationRepository(db));
+            TestView();
+        }
 
+        public async Task TestView()
+        {
             var service = App.serviceProvider.GetService<IApplicationService>();
 
-            var applications = service.GetApplications().ToList();
+            var applications = await service.GetApplications();
 
             idTextBox.Text = applications[0].Id.ToString();
             nameTextBox.Text = applications[0].Name;
             descriptionTextBox.Text = applications[0].Description;
-            priceTextBox.Text = applications[0].Price.ToString();
+            priceTextBox.Text = applications[0].ToString();
             releaseDateTextBox.Text = applications[0].ReleaseDate.ToString();
             typeTextBox.Text = applications[0].ApplicationType.ToString();
         }

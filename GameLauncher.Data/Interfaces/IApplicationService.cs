@@ -10,6 +10,6 @@ namespace GameLauncher.Data.Interfaces
     public interface IApplicationService
     {
         Task<Application> GetApplication(int id);
-        IQueryable<Application> GetApplications();
+        Task<List<Application>> GetApplications();
     }
 }

@@ -24,18 +24,14 @@ namespace GameLauncher.Data.Repositories
             await _db.SaveChangesAsync();
         }
 
-        // TODO: Метод не работает, программа виснит при его выполнении. Нужно понять почему.
         public async Task<Application> Get(int id)
         {
-            var application = await _db.Applications
-                                .AsNoTracking()
-                                .SingleOrDefaultAsync(a => a.Id == id);
-            return application;
+            return await _db.Applications.AsNoTracking().SingleOrDefaultAsync(a => a.Id == id);
         }
 
-        public IQueryable<Application> GetAll()
+        public async Task<List<Application>> GetAll()
         {
-            return _db.Applications.AsNoTracking();
+            return await _db.Applications.AsNoTracking().ToListAsync();
         }
 
         public async Task Update(Application Entity)
