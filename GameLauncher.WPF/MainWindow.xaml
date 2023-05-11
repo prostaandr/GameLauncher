@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <StackPanel>
+            <TextBox x:Name="idTextBox" Height="20"/>
+            <TextBox x:Name="nameTextBox" Height="20"/>
+            <TextBox x:Name="descriptionTextBox" Height="20"/>
+            <TextBox x:Name="priceTextBox" Height="20"/>
+            <TextBox x:Name="releaseDateTextBox" Height="20"/>
+            <TextBox x:Name="typeTextBox" Height="20"/>
+        </StackPanel>
     </Grid>
 </Window>
