@@ -1,4 +1,7 @@
 ﻿using GameLauncher.Data;
+using GameLauncher.Data.Interfaces;
+using GameLauncher.Data.Repositories;
+using GameLauncher.Data.Services;
 using GameLauncher.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,17 +23,37 @@ namespace GameLauncher.WPF
     /// </summary>
     public partial class App : System.Windows.Application
     {
-        private ServiceProvider serviceProvider;
+        public static ServiceProvider serviceProvider;
 
         public App()
         {
             ServiceCollection services = new ServiceCollection();
             ConfigureServices(services);
             serviceProvider = services.BuildServiceProvider();
+
+            //var optionsBuilder = new DbContextOptionsBuilder<GameLauncherContext>();
+            //var options = optionsBuilder
+            //    .UseSqlServer(connectionString)
+            //    .Options;
         }
 
         private void ConfigureServices(ServiceCollection services)
         {
+            var builder = new ConfigurationBuilder();
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            builder.AddJsonFile("appsettings.json");
+            var config = builder.Build();
+            string connectionString = config.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<GameLauncherContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
+
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+
+            services.AddTransient<IApplicationService, ApplicationService>();
+
             services.AddSingleton<MainWindow>();
         }
     }
