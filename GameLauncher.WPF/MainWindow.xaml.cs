@@ -38,14 +38,15 @@ namespace GameLauncher.WPF
         {
             var service = App.serviceProvider.GetService<IApplicationService>();
 
-            var applications = await service.GetApplications();
+            var application = await service.GetApplication(3);
 
-            idTextBox.Text = applications[0].Id.ToString();
-            nameTextBox.Text = applications[0].Name;
-            descriptionTextBox.Text = applications[0].Description;
-            priceTextBox.Text = applications[0].ToString();
-            releaseDateTextBox.Text = applications[0].ReleaseDate.ToString();
-            typeTextBox.Text = applications[0].ApplicationType.ToString();
+            gameNameTextBlock.Text = application.Name;
+            releaseDateTextBlock.Text = application.ReleaseDate.ToShortDateString().ToString();
+            shortDescriptionTextBlock.Text = application.Description;
+            posterImage.Source = new BitmapImage(new Uri(application.PosterUrl));
+            develoverTextBlock.Text = application.Developer.Name;
+            publisherTextBlock.Text = application.Publisher.Name;
+            priceTextBlock.Text = application.Price.ToString();
         }
     }
 }

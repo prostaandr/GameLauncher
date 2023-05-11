@@ -5,15 +5,99 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameLauncher.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="720" Width="1280"
+        Background="#1c2c3c"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
     <Grid>
-        <StackPanel>
-            <TextBox x:Name="idTextBox" Height="20"/>
-            <TextBox x:Name="nameTextBox" Height="20"/>
-            <TextBox x:Name="descriptionTextBox" Height="20"/>
-            <TextBox x:Name="priceTextBox" Height="20"/>
-            <TextBox x:Name="releaseDateTextBox" Height="20"/>
-            <TextBox x:Name="typeTextBox" Height="20"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="0.7*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="gameNameTextBlock"
+                   Grid.Column="1" Grid.Row="0"
+                   Text="GameName" FontSize="32"
+                   Background="#1c2c3c" Foreground="White"/>
+        <Grid x:Name="gameMediaGrid" 
+              Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+                <StackPanel x:Name="mediaScrollerStackPanel"
+                                Orientation="Horizontal">
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="rightGameInfoGrid" 
+              Grid.Column="3" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="150"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="imageGrid"
+                  Grid.Row="0">
+                <Image x:Name="posterImage"></Image>
+            </Grid>
+            <Grid x:Name="shortDiscriptionGrid"
+                  Grid.Row="1"
+                  Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="49*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="shortDescriptionTextBlock" Text="ShortDescription" TextWrapping="Wrap" Foreground="White"/>
+            </Grid>
+            <StackPanel x:Name="reviewsPersentStackPanel" 
+                        Grid.Row="2"
+                        Orientation="Horizontal"
+                        Margin="0,10,0,0"
+>
+                <TextBlock Text="ОБЗОРЫ:" Foreground="White" Width="120" />
+                <TextBlock x:Name="reviewsPersentTextBlock" Text="ReviewsPersents" Foreground="White"/>
+            </StackPanel>
+            <StackPanel x:Name="releaseDateStackPanel"
+                        Grid.Row="3"
+                        Orientation="Horizontal"
+>
+                <TextBlock Text="ДАТА ВЫХОДА:" Foreground="White" Width="120"/>
+                <TextBlock x:Name="releaseDateTextBlock" Text="ReleaseDate" Foreground="White"/>
+            </StackPanel>
+            <StackPanel x:Name="creatorsStackPanel"
+                        Grid.Row="4"
+                        Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="РАЗРАБОТЧИК:" Foreground="White" Width="120" />
+                    <TextBlock x:Name="develoverTextBlock" Text="Developer" Foreground="White" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ИЗДАТЕЛЬ:" Foreground="White" Width="120" />
+                    <TextBlock x:Name="publisherTextBlock" Text="Publisher" Foreground="White" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="MiddleInfoGrid"
+              Grid.Row="3" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Цена: " Foreground="White" FontSize="40" />
+                <TextBlock x:Name="priceTextBlock" Text="Price" FontSize="40" Foreground="White" />
+                <TextBlock Text=" руб." Foreground="White" FontSize="40" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

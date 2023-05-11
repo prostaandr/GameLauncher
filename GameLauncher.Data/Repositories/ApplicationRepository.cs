@@ -26,7 +26,11 @@ namespace GameLauncher.Data.Repositories
 
         public async Task<Application> Get(int id)
         {
-            return await _db.Applications.AsNoTracking().SingleOrDefaultAsync(a => a.Id == id);
+            return await _db.Applications.AsNoTracking()
+                .AsSplitQuery()
+                .Include(a => a.Developer)
+                .Include(a => a.Publisher)
+                .SingleOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<List<Application>> GetAll()
