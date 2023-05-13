@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:GameLauncher.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280"
-        Background="#1c2c3c"
+        Background="#1e1e1e"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
-    <Grid>
+        WindowStyle="SingleBorderWindow">
+    <ScrollViewer>
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -26,7 +27,7 @@
         <TextBlock x:Name="gameNameTextBlock"
                    Grid.Column="1" Grid.Row="0"
                    Text="GameName" FontSize="32"
-                   Background="#1c2c3c" Foreground="White"/>
+                   Background="#1e1e1e" Foreground="White"/>
         <Grid x:Name="gameMediaGrid" 
               Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -91,13 +92,62 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <Grid x:Name="MiddleInfoGrid"
+            <Grid x:Name="MiddleInfoGrid"
               Grid.Row="3" Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Цена: " Foreground="White" FontSize="40" />
-                <TextBlock x:Name="priceTextBlock" Text="Price" FontSize="40" Foreground="White" />
-                <TextBlock Text=" руб." Foreground="White" FontSize="40" />
-            </StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Цена: " Foreground="White" FontSize="40" />
+                    <TextBlock x:Name="priceTextBlock" Text="Price" FontSize="40" Foreground="White" />
+                    <TextBlock Text=" руб." Foreground="White" FontSize="40" />
+                </StackPanel>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 0 10">
+                        <TextBlock Text="Системные требования" FontSize="18" Foreground="White"/>
+                        <Separator Margin="0 25 0 0">
+                            <Separator.RenderTransform>
+                                <ScaleTransform ScaleX="2" />
+                            </Separator.RenderTransform>
+                        </Separator>
+                    </Grid>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                        <TextBlock Text="МИНИМАЛЬНЫЕ: " Foreground="White" Margin="0 0 0 8"></TextBlock>
+                        <ListBox x:Name="minSystemRequirementsListBox" 
+                                 Foreground="White" Background="#1e1e1e"
+                                 BorderThickness="0">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Margin" Value="0 0 0 8"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                        <TextBlock Text="РЕКОМЕНДУЕМЫЕ: " Foreground="White" Margin="0 0 0 8"></TextBlock>
+                        <ListBox x:Name="recSystemRequirementsListBox" 
+                                 Foreground="White" Background="#1e1e1e"
+                                 BorderThickness="0">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Margin" Value="0 0 0 8"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </StackPanel>
+                </Grid>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </Window>

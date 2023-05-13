@@ -38,7 +38,7 @@ namespace GameLauncher.WPF
         {
             var service = App.serviceProvider.GetService<IApplicationService>();
 
-            var application = await service.GetApplication(3);
+            var application = await service.GetApplication(1);
 
             gameNameTextBlock.Text = application.Name;
             releaseDateTextBlock.Text = application.ReleaseDate.ToShortDateString().ToString();
@@ -47,6 +47,29 @@ namespace GameLauncher.WPF
             develoverTextBlock.Text = application.Developer.Name;
             publisherTextBlock.Text = application.Publisher.Name;
             priceTextBlock.Text = application.Price.ToString();
+            SetElementToListBox(minSystemRequirementsListBox, "ОС: ", application.MinimumSystemRequirements.OS);
+            SetElementToListBox(minSystemRequirementsListBox, "Процессор: ", application.MinimumSystemRequirements.Processor);
+            SetElementToListBox(minSystemRequirementsListBox, "Память: ", application.MinimumSystemRequirements.Memory);
+            SetElementToListBox(minSystemRequirementsListBox, "Графика: ", application.MinimumSystemRequirements.Graphics);
+            SetElementToListBox(minSystemRequirementsListBox, "DirectX: ", application.MinimumSystemRequirements.DirectX);
+            SetElementToListBox(minSystemRequirementsListBox, "Сеть: ", application.MinimumSystemRequirements.Network);
+            SetElementToListBox(minSystemRequirementsListBox, "Место на диске: ", application.MinimumSystemRequirements.Storage);
+
+            SetElementToListBox(recSystemRequirementsListBox, "ОС: ", application.RecommendedSystemRequirements.OS);
+            SetElementToListBox(recSystemRequirementsListBox, "Процессор: ", application.RecommendedSystemRequirements.Processor);
+            SetElementToListBox(recSystemRequirementsListBox, "Память: ", application.RecommendedSystemRequirements.Memory);
+            SetElementToListBox(recSystemRequirementsListBox, "Графика: ", application.RecommendedSystemRequirements.Graphics);
+            SetElementToListBox(recSystemRequirementsListBox, "DirectX: ", application.RecommendedSystemRequirements.DirectX);
+            SetElementToListBox(recSystemRequirementsListBox, "Сеть: ", application.RecommendedSystemRequirements.Network);
+            SetElementToListBox(recSystemRequirementsListBox, "Место на диске: ", application.RecommendedSystemRequirements.Storage);
+        }
+
+        public void SetElementToListBox(ListBox listBox, string title, string value)
+        {
+            if (value != null && value != "")
+            {
+                listBox.Items.Add(title + value);
+            }
         }
     }
 }
