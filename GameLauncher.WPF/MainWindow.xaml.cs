@@ -1,8 +1,8 @@
 ﻿using GameLauncher.Data;
 using GameLauncher.Data.Interfaces;
 using GameLauncher.Data.Repositories;
-using GameLauncher.Data.Services;
 using GameLauncher.Model;
+using GameLauncher.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;

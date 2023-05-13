@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameLauncher.Data\GameLauncher.Data.csproj" />
+    <ProjectReference Include="..\GameLauncher.Service\GameLauncher.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

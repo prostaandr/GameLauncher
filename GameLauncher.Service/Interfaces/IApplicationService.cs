@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLauncher.Data.Interfaces
+namespace GameLauncher.Service.Interfaces
 {
     public interface IApplicationService
     {

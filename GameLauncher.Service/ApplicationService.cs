@@ -1,12 +1,13 @@
 ﻿using GameLauncher.Data.Interfaces;
 using GameLauncher.Model;
+using GameLauncher.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLauncher.Data.Services
+namespace GameLauncher.Service
 {
     public class ApplicationService : IApplicationService
     {
