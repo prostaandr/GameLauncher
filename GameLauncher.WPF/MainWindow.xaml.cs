@@ -47,6 +47,11 @@ namespace GameLauncher.WPF
             develoverTextBlock.Text = application.Developer.Name;
             publisherTextBlock.Text = application.Publisher.Name;
             priceTextBlock.Text = application.Price.ToString();
+
+            genresTextBlock.Text = String.Join(", ", application.Genres.Select(a => a.Name));
+            featuresTextBlock.Text = String.Join(", ", application.Features.Select(a => a.Name));
+            languagesTextBlock.Text = String.Join(", ", application.Languages.Select(a => a.Name));
+
             SetElementToListBox(minSystemRequirementsListBox, "ОС: ", application.MinimumSystemRequirements.OS);
             SetElementToListBox(minSystemRequirementsListBox, "Процессор: ", application.MinimumSystemRequirements.Processor);
             SetElementToListBox(minSystemRequirementsListBox, "Память: ", application.MinimumSystemRequirements.Memory);

@@ -30,6 +30,9 @@ namespace GameLauncher.Data.Repositories
                 .AsSplitQuery()
                 .Include(a => a.Developer)
                 .Include(a => a.Publisher)
+                .Include(a => a.Features)
+                .Include(a => a.Genres)
+                .Include(a => a.Languages)
                 .Include(a => a.MinimumSystemRequirements)
                 .Include(a => a.RecommendedSystemRequirements)
                 .SingleOrDefaultAsync(a => a.Id == id);
