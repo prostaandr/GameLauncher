@@ -21,17 +21,17 @@ using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GameLauncher.WPF
+namespace GameLauncher.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GamePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GamePage : Window
     {
         IApplicationService service;
         Model.Application application;
 
-        public MainWindow()
+        public GamePage()
         {
             InitializeComponent();
 

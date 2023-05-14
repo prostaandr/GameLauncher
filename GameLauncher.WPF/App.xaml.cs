@@ -4,6 +4,7 @@ using GameLauncher.Data.Repositories;
 using GameLauncher.Model;
 using GameLauncher.Service;
 using GameLauncher.Service.Interfaces;
+using GameLauncher.WPF.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,7 +56,7 @@ namespace GameLauncher.WPF
 
             services.AddTransient<IApplicationService, ApplicationService>();
 
-            services.AddSingleton<MainWindow>();
+            services.AddSingleton<GamePage>();
         }
     }
 }
