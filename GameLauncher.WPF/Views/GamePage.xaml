@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GameLauncher.WPF.Views"
+        xmlns:local="clr-namespace:GameLauncher.WPF.Views" xmlns:col="clr-namespace:System.Collections;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=netstandard"
         mc:Ignorable="d"
         Title="GamePage" Height="720" Width="1280"
         Background="{StaticResource backgroundColor}"
@@ -13,6 +13,13 @@
         RenderOptions.BitmapScalingMode="HighQuality"
         RenderOptions.EdgeMode="Aliased"
         ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <col:ArrayList x:Key="menuButtons">
+            <sys:String>Магазин</sys:String>
+            <sys:String>Библиотека</sys:String>
+        </col:ArrayList>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -26,33 +33,51 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="15"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListView Grid.Row="1" Background="{StaticResource headerBackgroundColor}" BorderThickness="0"                         Margin="30 0 0 0">
+                <ListView Grid.Row="1" ItemsSource="{StaticResource menuButtons}" Background="{StaticResource headerBackgroundColor}" BorderThickness="0" Margin="30 0 0 0">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True" />
+                            <WrapPanel IsItemsHost="True"/>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding}" FontSize="20" Background="{StaticResource headerBackgroundColor}" Foreground="{StaticResource mainFontColor}" BorderThickness="0">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"></Setter>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border  Background="{StaticResource headerBackgroundColor}" BorderThickness="0" Padding="10">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Foreground" Value="{StaticResource titleFontColor}" />
+                                                <Setter Property="Background" Value="{StaticResource headerBackgroundColor}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Focusable" Value="false"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                    <Setter Property="Focusable" Value="False" />
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </ListView.ItemContainerStyle>
-                    <ListViewItem>
-                        <Button Grid.Row="1" Grid.Column="0"
-                        Content="Магазин" FontSize="24"
-                        Foreground="{StaticResource mainFontColor}"
-                        Background="{StaticResource headerBackgroundColor}"
-                        BorderThickness="0">
-                        </Button>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <Button Grid.Row="1" Grid.Column="1"
-                        Content="Библиотека" FontSize="24"
-                        Foreground="{StaticResource mainFontColor}"
-                        Background="{StaticResource headerBackgroundColor}"
-                        BorderThickness="0">
-                        </Button>
-                    </ListViewItem>
                 </ListView>
             </Grid>
         </Border>

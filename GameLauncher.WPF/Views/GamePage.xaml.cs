@@ -21,6 +21,7 @@ using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+// TODO: Нужно убрать эти блядские списки с кнопок и системных требований
 namespace GameLauncher.WPF.Views
 {
     /// <summary>
