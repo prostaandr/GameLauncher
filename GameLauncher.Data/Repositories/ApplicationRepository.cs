@@ -35,6 +35,7 @@ namespace GameLauncher.Data.Repositories
                 .Include(a => a.Languages)
                 .Include(a => a.MinimumSystemRequirements)
                 .Include(a => a.RecommendedSystemRequirements)
+                .Include(a => a.Medias)
                 .SingleOrDefaultAsync(a => a.Id == id);
         }
 

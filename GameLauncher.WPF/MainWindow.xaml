@@ -8,7 +8,9 @@
         Title="MainWindow" Height="720" Width="1280"
         Background="#1e1e1e"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="SingleBorderWindow"
+        RenderOptions.BitmapScalingMode="HighQuality"
+        RenderOptions.EdgeMode="Aliased">
     <ScrollViewer>
         <Grid>
         <Grid.RowDefinitions>
@@ -19,49 +21,58 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.7*" />
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition MinWidth="600"/>
             <ColumnDefinition Width="30" />
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="0.7*" />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="gameNameTextBlock"
-                   Grid.Column="1" Grid.Row="0"
-                   Text="GameName" FontSize="32"
-                   Background="#1e1e1e" Foreground="White"/>
-        <Grid x:Name="gameMediaGrid" 
-              Grid.Column="1" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
-                <StackPanel x:Name="mediaScrollerStackPanel"
-                                Orientation="Horizontal">
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
-        <Grid Grid.Column="3" Grid.Row="1">
+            <TextBlock x:Name="gameNameTextBlock"
+                       Grid.Column="1" Grid.Row="0"
+                       Text="GameName" FontSize="32"
+                       Background="#1e1e1e" Foreground="White"
+                       Margin="0,0,0,15"/>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="mediaImage" Grid.Row="0" Stretch="Uniform"></Image>
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden"
+                              Grid.Row="1" Margin="0 0 0 -23" CanContentScroll="True">
+                    <ListBox x:Name="mediaListBox" 
+                             Grid.Row="1" 
+                             MaxHeight="120"
+                             Background="#1e1e1e" 
+                             SelectionChanged="mediaListBox_SelectionChanged">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Column="3" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition MinHeight="150"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid x:Name="imageGrid"
                   Grid.Row="0">
                 <Image x:Name="posterImage"></Image>
             </Grid>
-            <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid Grid.Row="1" Margin="0,5,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="49*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="shortDescriptionTextBlock" Text="ShortDescription" TextWrapping="Wrap" Foreground="White"/>
             </Grid>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
                     <TextBlock Text="ОБЗОРЫ:" Foreground="DarkGray" Width="120" />
                 <TextBlock x:Name="reviewsPersentTextBlock" Text="ReviewsPersents" Foreground="White"/>
             </StackPanel>

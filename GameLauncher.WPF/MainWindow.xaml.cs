@@ -17,6 +17,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -27,6 +28,9 @@ namespace GameLauncher.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        IApplicationService service;
+        Model.Application application;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,9 +40,15 @@ namespace GameLauncher.WPF
 
         public async Task TestView()
         {
-            var service = App.serviceProvider.GetService<IApplicationService>();
+            service = App.serviceProvider.GetService<IApplicationService>();
 
-            var application = await service.GetApplication(1);
+            application = await service.GetApplication(1);
+
+            for (int i = 0; i < application.Medias.Count; i++)
+            {
+                mediaListBox.Items.Add(new Image() { Source = new BitmapImage(new Uri(application.Medias[i].Url)), Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Height = 80});
+            }
+            mediaListBox.SelectedIndex = 0;
 
             gameNameTextBlock.Text = application.Name;
             releaseDateTextBlock.Text = application.ReleaseDate.ToShortDateString().ToString();
@@ -75,6 +85,11 @@ namespace GameLauncher.WPF
             {
                 listBox.Items.Add(title + value);
             }
+        }
+
+        private void mediaListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mediaImage.Source = new BitmapImage(new Uri(application.Medias[mediaListBox.SelectedIndex].Url));
         }
     }
 }
