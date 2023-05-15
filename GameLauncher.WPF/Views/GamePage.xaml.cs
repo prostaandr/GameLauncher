@@ -78,6 +78,9 @@ namespace GameLauncher.WPF.Views
             SetElementToListBox(recSystemRequirementsListBox, "DirectX: ", application.RecommendedSystemRequirements.DirectX);
             SetElementToListBox(recSystemRequirementsListBox, "Сеть: ", application.RecommendedSystemRequirements.Network);
             SetElementToListBox(recSystemRequirementsListBox, "Место на диске: ", application.RecommendedSystemRequirements.Storage);
+
+            reviewsListBox.ItemsSource = application.Reviews;
+
         }
 
         public void SetElementToListBox(ListBox listBox, string title, string value)

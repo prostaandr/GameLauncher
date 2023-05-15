@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameLauncher.WPF.Views" xmlns:col="clr-namespace:System.Collections;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=netstandard"
+        xmlns:enums="clr-namespace:GameLauncher.Model.Enum;assembly=GameLauncher.Model"
+        xmlns:converters="clr-namespace:GameLauncher.WPF.Helpers.Converters"
         mc:Ignorable="d"
-        Title="GamePage" Height="720" Width="1280"
+        Title="GamePage" Height="Auto" Width="1280"
         Background="{StaticResource backgroundColor}"
         Foreground="{StaticResource mainFontColor}"
         WindowStartupLocation="CenterScreen"
@@ -18,6 +20,8 @@
             <sys:String>Магазин</sys:String>
             <sys:String>Библиотека</sys:String>
         </col:ArrayList>
+
+        <converters:EnumConverter x:Key="enumConverter"/>
     </Window.Resources>
     
     <Grid>
@@ -33,13 +37,13 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="15"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListView Grid.Row="1" ItemsSource="{StaticResource menuButtons}" Background="{StaticResource headerBackgroundColor}" BorderThickness="0" Margin="30 0 0 0">
-                    <ListView.ItemsPanel>
+                <ListBox Grid.Row="1" ItemsSource="{StaticResource menuButtons}" Background="{StaticResource headerBackgroundColor}" BorderThickness="0" Margin="30 0 0 0">
+                    <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel IsItemsHost="True"/>
                         </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Button Content="{Binding}" FontSize="20" Background="{StaticResource headerBackgroundColor}" Foreground="{StaticResource mainFontColor}" BorderThickness="0">
                                 <Button.Style>
@@ -48,25 +52,19 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border  Background="{StaticResource headerBackgroundColor}" BorderThickness="0" Padding="10">
+                                                    <Border  Background="{StaticResource headerBackgroundColor}" BorderThickness="0" Padding="10" >
                                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                     </Border>
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="{StaticResource titleFontColor}" />
-                                                <Setter Property="Background" Value="{StaticResource headerBackgroundColor}" />
-                                            </Trigger>
-                                        </Style.Triggers>
                                     </Style>
                                 </Button.Style>
                             </Button>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
                             <Setter Property="Focusable" Value="false"/>
                             <Setter Property="Height" Value="50"/>
                             <Style.Triggers>
@@ -74,11 +72,12 @@
                                     <Setter Property="Background" Value="Transparent" />
                                     <Setter Property="BorderBrush" Value="Transparent" />
                                     <Setter Property="Focusable" Value="False" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource headerBackgroundColor}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
             </Grid>
         </Border>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible">
@@ -87,6 +86,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="80"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -250,6 +251,67 @@
                                 </ListBox.ItemContainerStyle>
                             </ListBox>
                         </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="5" Grid.Column="1" Margin="0 15 0 10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Отзывы" FontSize="18"/>
+                        <Separator Margin="0 25 0 0">
+                            <Separator.RenderTransform>
+                                <ScaleTransform ScaleX="1" />
+                            </Separator.RenderTransform>
+                        </Separator>
+                        <ListBox x:Name="reviewsListBox" Grid.Row="1" BorderThickness="0" Background="{StaticResource backgroundColor}" Foreground="{StaticResource mainFontColor}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Row="0" Grid.Column="1" Margin="10 10 0 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="32"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="180"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" BorderBrush="White" BorderThickness="1">
+                                                <Image Source="{Binding User.IconUrl}" Stretch="Uniform" Height="32" Width="32"></Image>
+                                            </Border>
+                                            <TextBlock Grid.Column="1" Text="{Binding User.Nickname}" Margin="10 6 0 0" FontSize="16"></TextBlock>
+                                            <TextBlock Grid.Column="2" Text="{Binding Grade, Converter={StaticResource enumConverter}}" FontSize="20"></TextBlock>
+                                            </Grid>
+                                        <Separator Grid.Row="1" Grid.Column="1" Margin="0 5 0 0" VerticalAlignment="Top">
+                                            <Separator.RenderTransform>
+                                                <ScaleTransform ScaleX="5" />
+                                            </Separator.RenderTransform>
+                                        </Separator>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Comment}" Margin="10 15" FontSize="14" TextWrapping="Wrap" MaxWidth="660"></TextBlock>
+                                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="10 0 0 10">
+                                            <TextBlock Text="Опубликовано:  " Foreground="{StaticResource titleFontColor}"></TextBlock>
+                                            <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy}"></TextBlock>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Margin" Value="0 15 0 0"/>
+                                    <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"/>
+                                    <Setter Property="Focusable" Value="False"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
                     </Grid>
                 </Grid>
             </Grid>
