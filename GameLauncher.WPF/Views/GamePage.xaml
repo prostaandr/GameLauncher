@@ -144,8 +144,10 @@
                         <TextBlock x:Name="shortDescriptionTextBlock" Text="ShortDescription" TextWrapping="Wrap"/>
                     </Grid>
                     <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
-                        <TextBlock Text="ОБЗОРЫ:" Foreground="{StaticResource titleFontColor}" Width="120" />
+                        <TextBlock Text="ОТЗЫВЫ:" Foreground="{StaticResource titleFontColor}" Width="120" />
                         <TextBlock x:Name="reviewsPersentTextBlock" Text="ReviewsPersents"/>
+                        <TextBlock Text="% " />
+                        <TextBlock Text="положительных" Width="120" />
                     </StackPanel>
                     <StackPanel Grid.Row="3" Orientation="Horizontal">
                         <TextBlock Text="ДАТА ВЫХОДА:" Foreground="{StaticResource titleFontColor}" Width="120"/>

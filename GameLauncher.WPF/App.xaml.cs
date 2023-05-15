@@ -53,6 +53,7 @@ namespace GameLauncher.WPF
             });
 
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
 
             services.AddTransient<IApplicationService, ApplicationService>();
 

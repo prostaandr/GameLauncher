@@ -59,6 +59,9 @@ namespace GameLauncher.WPF.Views
             publisherTextBlock.Text = application.Publisher.Name;
             priceTextBlock.Text = application.Price.ToString();
 
+            var persent = await service.GetReviewsPersent(application.Id);
+            reviewsPersentTextBlock.Text = persent.ToString();
+
             genresTextBlock.Text = String.Join(", ", application.Genres.Select(a => a.Name));
             featuresTextBlock.Text = String.Join(", ", application.Features.Select(a => a.Name));
             languagesTextBlock.Text = String.Join(", ", application.Languages.Select(a => a.Name));
