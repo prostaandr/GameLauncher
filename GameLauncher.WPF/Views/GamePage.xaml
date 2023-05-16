@@ -39,47 +39,10 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="15"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListBox Grid.Row="1" ItemsSource="{StaticResource menuButtons}" Background="{StaticResource headerBackgroundColor}" BorderThickness="0" Margin="30 0 0 0">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Button Content="{Binding}" FontSize="20" Background="{StaticResource headerBackgroundColor}" Foreground="{StaticResource mainFontColor}" BorderThickness="0">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"></Setter>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Border  Background="{StaticResource headerBackgroundColor}" BorderThickness="0" Padding="10" >
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Focusable" Value="false"/>
-                            <Setter Property="Height" Value="50"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="Transparent" />
-                                    <Setter Property="BorderBrush" Value="Transparent" />
-                                    <Setter Property="Focusable" Value="False" />
-                                    <Setter Property="BorderBrush" Value="{StaticResource headerBackgroundColor}"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Background="{StaticResource headerBackgroundColor}" Margin="30 0 0 0">
+                    <Button Content="Магазин" Style="{StaticResource menuButtonsStyle}" Foreground="{StaticResource mainFontColor}"></Button>
+                    <Button Content="Библиотека" Style="{StaticResource menuButtonsStyle}"></Button>
+                </StackPanel>
             </Grid>
         </Border>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible">
