@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:GameLauncher.WPF.Views" xmlns:col="clr-namespace:System.Collections;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=netstandard"
         xmlns:enums="clr-namespace:GameLauncher.Model.Enum;assembly=GameLauncher.Model"
         xmlns:converters="clr-namespace:GameLauncher.WPF.Helpers.Converters"
@@ -108,16 +109,23 @@
                         <RowDefinition Height="3*"/>
                         <RowDefinition Height="80"/>
                     </Grid.RowDefinitions>
-                    <Image x:Name="mediaImage" Grid.Row="0" Source="{Binding Application.Medias[0].Url}" Stretch="Uniform"></Image>
+                    <Image x:Name="mediaImage" Grid.Row="0" Source="{Binding MainImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform"></Image>
                     <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden"
                                   Grid.Row="1" Margin="0 0 0 -23" CanContentScroll="True">
                         <ListBox x:Name="mediaListBox" 
                                  Grid.Row="1" 
                                  MaxHeight="120"
                                  Background="{StaticResource backgroundColor}" 
-                                 
+                                 SelectedIndex="0"
                                  BorderThickness="0"
                                  ItemsSource="{Binding Application.Medias}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding ChangeMainImageCommand}" CommandParameter="{Binding ElementName=mediaListBox,Path=SelectedIndex}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel IsItemsHost="True" />
@@ -258,22 +266,22 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="5" Grid.Column="1" Margin="0 15 0 10">
+                <Grid Grid.Row="5" Grid.Column="1" Margin="0 30 0 0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Отзывы" FontSize="18"/>
-                        <Separator Margin="0 25 0 0">
+                        <TextBlock Grid.Row="0" Text="Отзывы" FontSize="18" Margin="0 0 0 20"/>
+                        <Separator Margin="0 8 0 0">
                             <Separator.RenderTransform>
                                 <ScaleTransform ScaleX="1" />
                             </Separator.RenderTransform>
                         </Separator>
-                        <ListBox x:Name="reviewsListBox" Grid.Row="1" ItemsSource="{Binding Application.Reviews}" BorderThickness="0" Background="{StaticResource backgroundColor}" Foreground="{StaticResource mainFontColor}">
-                            <ListBox.ItemTemplate>
+                        <ItemsControl Grid.Row="1" ItemsSource="{Binding Application.Reviews}" BorderThickness="0" Background="{StaticResource backgroundColor}" Foreground="{StaticResource mainFontColor}">
+                            <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Grid.Row="2">
+                                    <Grid Grid.Row="2" Background="{StaticResource headerBackgroundColor}" Margin="0 0 0 10">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
@@ -297,7 +305,7 @@
                                             </Grid>
                                         <Separator Grid.Row="1" Grid.Column="1" Margin="0 5 0 0" VerticalAlignment="Top">
                                             <Separator.RenderTransform>
-                                                <ScaleTransform ScaleX="5" />
+                                                <ScaleTransform ScaleX="1" />
                                             </Separator.RenderTransform>
                                         </Separator>
                                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Comment}" Margin="10 15" FontSize="14" TextWrapping="Wrap" MaxWidth="660"></TextBlock>
@@ -305,18 +313,11 @@
                                             <TextBlock Text="Опубликовано:  " Foreground="{StaticResource titleFontColor}"></TextBlock>
                                             <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy}"></TextBlock>
                                         </StackPanel>
-
                                     </Grid>
                                 </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="Margin" Value="0 15 0 0"/>
-                                    <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"/>
-                                    <Setter Property="Focusable" Value="False"/>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                        </ListBox>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
                     </Grid>
                 </Grid>
             </Grid>
