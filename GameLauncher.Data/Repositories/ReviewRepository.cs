@@ -36,7 +36,7 @@ namespace GameLauncher.Data.Repositories
 
         public async Task Update(Review Entity)
         {
-            _db.Reviews.Remove(Entity);
+            _db.Reviews.Update(Entity);
             await _db.SaveChangesAsync();
         }
 

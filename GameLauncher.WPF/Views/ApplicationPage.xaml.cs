@@ -22,15 +22,14 @@ using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-// TODO: Нужно убрать эти блядские списки с кнопок и системных требований
 namespace GameLauncher.WPF.Views
 {
     /// <summary>
     /// Interaction logic for GamePage.xaml
     /// </summary>
-    public partial class GamePage : Window
+    public partial class ApplicationPage : Window
     {
-        public GamePage()
+        public ApplicationPage()
         {
             InitializeComponent();
 

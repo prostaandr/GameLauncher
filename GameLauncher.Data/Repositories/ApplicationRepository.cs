@@ -48,7 +48,7 @@ namespace GameLauncher.Data.Repositories
 
         public async Task Update(Application Entity)
         {
-            _db.Applications.Remove(Entity);
+            _db.Applications.Update(Entity);
             await _db.SaveChangesAsync();
         }
 
