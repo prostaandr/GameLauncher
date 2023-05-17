@@ -51,7 +51,7 @@ namespace GameLauncher.WPF
             {
                 options.UseSqlServer(connectionString);
             });
-
+            
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

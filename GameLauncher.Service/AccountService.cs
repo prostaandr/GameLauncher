@@ -14,13 +14,15 @@ namespace GameLauncher.Service
         private readonly IUserRepository _userRepository;
         private readonly ICountryRepository _countryRepository;
 
+        public static User CurrentUser { get; set; }
+
         public AccountService(IUserRepository userRepository, ICountryRepository countryRepository)
         {
             _userRepository = userRepository;
             _countryRepository = countryRepository; 
         }
 
-        public async Task AddUser(User user)
+        public async Task Registration(User user)
         {
             await _userRepository.Create(user);
         }
@@ -28,6 +30,18 @@ namespace GameLauncher.Service
         public async Task<User> GetUser(int id)
         {
             return await _userRepository.Get(id);
+        }
+
+        public async Task<User> Login(string login, string password)
+        {
+            var user = await _userRepository.GetByLogin(login);
+
+            if (user == null || user.Password != password)
+            {
+                throw new InvalidDataException("Неправильный логин или пароль");
+            }
+            
+            return user;
         }
 
         public async Task<List<Country>> GetAllCountries()

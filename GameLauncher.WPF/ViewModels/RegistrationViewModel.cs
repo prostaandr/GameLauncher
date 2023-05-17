@@ -41,6 +41,18 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private string _repeatePassword;
+        public string RepeatePassword
+        {
+            get => _repeatePassword;
+            set
+            {
+                if (value == _repeatePassword) return;
+                _repeatePassword = value;
+                OnPropertyChanged();
+            }
+        }
+
         private RelayCommand _addUserCommand;
         public RelayCommand AddUserCommand
         {
@@ -51,15 +63,15 @@ namespace GameLauncher.WPF.ViewModels
                   {
                       var country = obj as CountryViewModel;
                       User.CountryId = Convert.ToInt32(country.Country.Id);
-                      AddUser();
+                      AddUserAsync();
                       MessageBox.Show("Регистрация прошла успешно");
                   }));
             }
         }
 
-        private async void AddUser()
+        private async void AddUserAsync()
         {
-            await _accountService.AddUser(User);
+            await _accountService.Registration(User);
         }
 
         public RegistrationViewModel()

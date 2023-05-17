@@ -46,6 +46,11 @@ namespace GameLauncher.Data.Repositories
             await _db.SaveChangesAsync();
         }
 
+        public async Task<User> GetByLogin(string login)
+        {
+            return _db.Users.AsNoTracking().FirstOrDefault(a => a.Login == login);
+        }
+
         public async Task<List<Application>> GetAvailableApplications(int userId, int applicationId)
         {
             return null;

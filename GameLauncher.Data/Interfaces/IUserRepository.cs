@@ -9,6 +9,7 @@ namespace GameLauncher.Data.Interfaces
 {
     public interface IUserRepository : IBaseRepository<User>
     {
+        public Task<User> GetByLogin(string login);
         public Task<List<Application>> GetAvailableApplications(int userId, int applicationId);
     }
 }

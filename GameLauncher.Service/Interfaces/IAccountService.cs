@@ -9,8 +9,9 @@ namespace GameLauncher.Service.Interfaces
 {
     public interface IAccountService
     {
-        Task AddUser(User user);
+        Task Registration(User user);
         Task<User> GetUser(int id);
+        Task<User> Login(string login, string password);
         Task<List<Country>> GetAllCountries();
     }
 }
