@@ -9,7 +9,7 @@
         xmlns:converters="clr-namespace:GameLauncher.WPF.Helpers.Converters"
         xmlns:viewModel="clr-namespace:GameLauncher.WPF.ViewModels"
         mc:Ignorable="d"
-        Title="GamePage" Height="Auto" Width="1280"
+        Height="Auto" Width="1280"
         Background="{StaticResource backgroundColor}"
         Foreground="{StaticResource mainFontColor}"
         WindowStartupLocation="CenterScreen"

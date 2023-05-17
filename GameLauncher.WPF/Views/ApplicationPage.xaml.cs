@@ -35,10 +35,5 @@ namespace GameLauncher.WPF.Views
 
             DataContext = new GamePageViewModel();
         }
-
-        //private void mediaListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    mediaImage.Source = new BitmapImage(new Uri(Medias[mediaListBox.SelectedIndex].Url));
-        //}
     }
 }
