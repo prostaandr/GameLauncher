@@ -36,41 +36,8 @@ namespace GameLauncher.Data
             
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    base.OnConfiguring(optionsBuilder);
-        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=GameLauncher;Trusted_Connection=True;");
-        //}
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<AvailableApplication>()
-            //        .HasKey(e => new { e.UserId, e.ApplicationId });
-
-            //modelBuilder.Entity<WishList>()
-            //        .HasKey(e => new { e.UserId, e.ApplicationId });
-
-            //modelBuilder.Entity<User>()
-            //        .HasMany(u => u.AvailableApplications)
-            //        .WithOne(aa => aa.User)
-            //        .HasForeignKey(aa => aa.UserId);
-
-            //modelBuilder.Entity<Application>()
-            //        .HasMany(a => a.AvailableApplications)
-            //        .WithOne(aa => aa.Application)
-            //        .HasForeignKey(aa => aa.ApplicationId);
-
-            //modelBuilder.Entity<User>()
-            //        .HasMany(u => u.WishListApplication)
-            //        .WithOne(aa => aa.User)
-            //        .HasForeignKey(aa => aa.UserId);
-
-            //modelBuilder.Entity<Application>()
-            //        .HasMany(a => a.WishListApplications)
-            //        .WithOne(aa => aa.Application)
-            //        .HasForeignKey(aa => aa.ApplicationId);
-
-
             modelBuilder.Entity<User>()
                     .HasMany(u => u.AvailableApplications)
                     .WithMany(a => a.Users)
