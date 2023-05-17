@@ -38,7 +38,7 @@ namespace GameLauncher.Service
 
             if (user == null || user.Password != password)
             {
-                throw new InvalidDataException("Неправильный логин или пароль");
+                throw new ArgumentException("Неправильный логин или пароль");
             }
             
             return user;

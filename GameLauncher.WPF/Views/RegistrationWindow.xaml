@@ -17,10 +17,18 @@
         ResizeMode="CanResizeWithGrip"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
-        
-        
+        <Style x:Key="errorsBlock" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red"/>
+            <Style.Triggers>
+                <Trigger Property="Text" Value="">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
-    <Grid>
+    <ScrollViewer>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition MinWidth="400" MaxWidth="600"></ColumnDefinition>
@@ -31,19 +39,22 @@
             <StackPanel Style="{StaticResource textElementBlock}">
                 <TextBlock Text="Логин" Margin="0 0 0 5"></TextBlock>
                 <TextBox Style="{StaticResource textElementBlockTextBox}" Text="{Binding User.Login}"></TextBox>
+                <TextBlock Text="{Binding LoginErrors}" Style="{StaticResource errorsBlock}"></TextBlock>
             </StackPanel>
             <StackPanel Style="{StaticResource textElementBlock}">
                 <TextBlock Text="Электронная почта" Margin="0 0 0 5"></TextBlock>
                 <TextBox Style="{StaticResource textElementBlockTextBox}" Text="{Binding User.Email}"></TextBox>
-            </StackPanel>
+                    <TextBlock Text="{Binding EmailErrors}" Style="{StaticResource errorsBlock}"></TextBlock>
+                </StackPanel>
             <StackPanel Style="{StaticResource textElementBlock}">
                 <TextBlock Text="Пароль" Margin="0 0 0 5"></TextBlock>
                 <PasswordBox Style="{StaticResource textElementBlockPasswordBox}" 
                              ff:PasswordBoxAssistant.BindPassword="true" ff:PasswordBoxAssistant.BoundPassword="{Binding Path=User.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 </PasswordBox>
-            </StackPanel>
+                    <TextBlock Text="{Binding PasswordErrors}" Style="{StaticResource errorsBlock}"></TextBlock>
+                </StackPanel>
             <StackPanel Style="{StaticResource textElementBlock}">
-                <TextBlock Text="Повтор пароля" Margin="0 0 0 5"></TextBlock>
+                <TextBlock Text="Подтверждение пароля" Margin="0 0 0 5"></TextBlock>
                 <PasswordBox Style="{StaticResource textElementBlockPasswordBox}" 
                              ff:PasswordBoxAssistant.BindPassword="true" ff:PasswordBoxAssistant.BoundPassword="{Binding Path=RepeatePassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 </PasswordBox>
@@ -52,7 +63,8 @@
             <StackPanel Style="{StaticResource textElementBlock}">
                 <TextBlock Text="Имя пользователя" Margin="0 0 0 5"></TextBlock>
                 <TextBox Style="{StaticResource textElementBlockTextBox}" Text="{Binding User.Nickname}"></TextBox>
-            </StackPanel>
+                <TextBlock Text="{Binding NickNameErrors}" Style="{StaticResource errorsBlock}"></TextBlock>
+                </StackPanel>
             <StackPanel Style="{StaticResource textElementBlock}">
                 <TextBlock Text="Страна" Margin="0 0 0 5"></TextBlock>
                 <ComboBox x:Name="countryComboBox" Template="{DynamicResource ComboBoxTemplate1}" Style="{StaticResource textElementBlockComboBox}" ItemsSource="{Binding Countries, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
@@ -73,7 +85,8 @@
                         </Style>
                     </ComboBox.ItemContainerStyle>
                 </ComboBox>
-            </StackPanel>
+                <TextBlock Text="{Binding CountryErrors}" Style="{StaticResource errorsBlock}"></TextBlock>
+                </StackPanel>
             <Grid Margin="0 20 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -92,8 +105,9 @@
                     <Image Source="{Binding User.IconUrl}" Stretch="UniformToFill" ></Image>
                 </Border>
             </Grid>
-            <Button HorizontalAlignment="Center" Width="200" Height="35" Margin="0 50 0 0"
+            <Button HorizontalAlignment="Center" Width="200" Height="35" Margin="0 50 0 50"
                     Command="{Binding AddUserCommand}" CommandParameter="{Binding ElementName=countryComboBox, Path=SelectedItem}">Регистрация</Button>
         </StackPanel>
     </Grid>
+    </ScrollViewer>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Model;
+using GameLauncher.Service;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.WPF.Commands;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,6 +57,8 @@ namespace GameLauncher.WPF.ViewModels
         private async void LoginAsync()
         {
             var loginUser = await _accountService.Login(Login, Password);
+            AccountService.CurrentUser = loginUser;
+
             if (loginUser != null)
             {
                 MessageBox.Show("Вход успешен");
