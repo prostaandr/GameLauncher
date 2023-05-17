@@ -24,8 +24,6 @@ namespace GameLauncher.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Country> Countries { get; set; }
-        public DbSet<AvailableApplication> AvailableApplications { get; set; }
-        public DbSet<WishList> WishList { get; set; }
         public DbSet<Order> Orders { get; set; }
 
         public GameLauncherContext()
@@ -46,31 +44,48 @@ namespace GameLauncher.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AvailableApplication>()
-                    .HasKey(e => new { e.UserId, e.ApplicationId });
+            //modelBuilder.Entity<AvailableApplication>()
+            //        .HasKey(e => new { e.UserId, e.ApplicationId });
 
-            modelBuilder.Entity<WishList>()
-                    .HasKey(e => new { e.UserId, e.ApplicationId });
+            //modelBuilder.Entity<WishList>()
+            //        .HasKey(e => new { e.UserId, e.ApplicationId });
+
+            //modelBuilder.Entity<User>()
+            //        .HasMany(u => u.AvailableApplications)
+            //        .WithOne(aa => aa.User)
+            //        .HasForeignKey(aa => aa.UserId);
+
+            //modelBuilder.Entity<Application>()
+            //        .HasMany(a => a.AvailableApplications)
+            //        .WithOne(aa => aa.Application)
+            //        .HasForeignKey(aa => aa.ApplicationId);
+
+            //modelBuilder.Entity<User>()
+            //        .HasMany(u => u.WishListApplication)
+            //        .WithOne(aa => aa.User)
+            //        .HasForeignKey(aa => aa.UserId);
+
+            //modelBuilder.Entity<Application>()
+            //        .HasMany(a => a.WishListApplications)
+            //        .WithOne(aa => aa.Application)
+            //        .HasForeignKey(aa => aa.ApplicationId);
+
 
             modelBuilder.Entity<User>()
                     .HasMany(u => u.AvailableApplications)
-                    .WithOne(aa => aa.User)
-                    .HasForeignKey(aa => aa.UserId);
-
-            modelBuilder.Entity<Application>()
-                    .HasMany(a => a.AvailableApplications)
-                    .WithOne(aa => aa.Application)
-                    .HasForeignKey(aa => aa.ApplicationId);
+                    .WithMany(a => a.Users)
+                    .UsingEntity<Dictionary<string, object>>("AvailableApplications",
+                            e => e.HasOne<Application>().WithMany().HasForeignKey("ApplicationId"),
+                            e => e.HasOne<User>().WithMany().HasForeignKey("UserId"));
 
             modelBuilder.Entity<User>()
-                    .HasMany(u => u.WishListApplication)
-                    .WithOne(aa => aa.User)
-                    .HasForeignKey(aa => aa.UserId);
+                    .HasMany(u => u.WishListApplications)
+                    .WithMany(a => a.Users)
+                    .UsingEntity<Dictionary<string, object>>("WishListApplications",
+                            e => e.HasOne<Application>().WithMany().HasForeignKey("ApplicationId"),
+                            e => e.HasOne<User>().WithMany().HasForeignKey("UserId"));
 
-            modelBuilder.Entity<Application>()
-                    .HasMany(a => a.WishListApplications)
-                    .WithOne(aa => aa.Application)
-                    .HasForeignKey(aa => aa.ApplicationId);
+
 
             modelBuilder.Entity<Application>()
                     .HasMany(a => a.Orders)

@@ -2,6 +2,7 @@
 using GameLauncher.Service;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.WPF.Commands;
+using GameLauncher.WPF.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,9 @@ namespace GameLauncher.WPF.ViewModels
                   (_loginCommand = new RelayCommand(obj =>
                   {
                       LoginAsync();
+
+                      var appPage = new ApplicationPage();
+                      appPage.Show();
                   }));
             }
         }
@@ -59,10 +63,6 @@ namespace GameLauncher.WPF.ViewModels
             var loginUser = await _accountService.Login(Login, Password);
             AccountService.CurrentUser = loginUser;
 
-            if (loginUser != null)
-            {
-                MessageBox.Show("Вход успешен");
-            }
         }
 
         public LoginViewModel()
