@@ -29,7 +29,7 @@ namespace GameLauncher.WPF.ViewModels
                 _user = value;
                 OnPropertyChanged();
             }
-        }
+        } 
 
         private ObservableCollection<CountryViewModel> _countries;
         public ObservableCollection<CountryViewModel> Countries
@@ -149,17 +149,34 @@ namespace GameLauncher.WPF.ViewModels
             await _accountService.Registration(User);
         }
 
+        private RelayCommand _closingCommand;
+        public RelayCommand ClosingCommand
+        {
+            get
+            {
+                return _closingCommand ??
+                  (_closingCommand = new RelayCommand(obj =>
+                  {
+                      var current = obj as Window;
+                      var login = new LoginWindow();
+                      login.Show();
+                      current.Hide();
+                  }));
+            }
+        }
+
         public RegistrationViewModel()
         {
-            _accountService = App.serviceProvider.GetService<IAccountService>();
-
-            User = new User();
-
             InitializeAsync();
         }
 
         private async void InitializeAsync()
         {
+            _accountService = App.serviceProvider.GetService<IAccountService>();
+
+            User = new User();
+            User.IconUrl = "";
+
             Countries = new ObservableCollection<CountryViewModel>();
             var countries = await _accountService.GetAllCountries();
             for (int i = 0; i < countries.Count; i++)

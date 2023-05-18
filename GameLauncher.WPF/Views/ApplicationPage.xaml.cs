@@ -27,7 +27,7 @@ namespace GameLauncher.WPF.Views
     /// <summary>
     /// Interaction logic for GamePage.xaml
     /// </summary>
-    public partial class ApplicationPage : Window
+    public partial class ApplicationPage : Page
     {
         public ApplicationPage()
         {

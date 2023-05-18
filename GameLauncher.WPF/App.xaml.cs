@@ -60,7 +60,10 @@ namespace GameLauncher.WPF
             services.AddTransient<IApplicationService, ApplicationService>();
             services.AddTransient<IAccountService, AccountService>();
 
+            services.AddSingleton<LoginWindow>();
             services.AddSingleton<RegistrationWindow>();
+            services.AddSingleton<MainWindow>();
+
             services.AddSingleton<ApplicationPage>();
         }
     }

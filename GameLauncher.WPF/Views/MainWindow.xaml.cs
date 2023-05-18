@@ -16,22 +16,15 @@ using System.Windows.Shapes;
 namespace GameLauncher.WPF.Views
 {
     /// <summary>
-    /// Логика взаимодействия для Login.xaml
+    /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class MainWindow : Window
     {
-        public LoginWindow()
+        public MainWindow()
         {
             InitializeComponent();
 
-            DataContext = new LoginViewModel();
-        }
-
-        private void Registration_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var registration = new RegistrationWindow();
-            registration.Show();
-            this.Hide();
+            DataContext = new MainViewModel();
         }
 
         private void Window_Closed(object sender, EventArgs e)

@@ -50,19 +50,39 @@ namespace GameLauncher.WPF.ViewModels
                 return _loginCommand ??
                   (_loginCommand = new RelayCommand(obj =>
                   {
-                      LoginAsync();
-
-                      var appPage = new ApplicationPage();
-                      appPage.Show();
+                        LoginAsync();
                   }));
             }
         }
 
         private async void LoginAsync()
         {
-            var loginUser = await _accountService.Login(Login, Password);
-            AccountService.CurrentUser = loginUser;
+            try
+            {
+                var loginUser = await _accountService.Login(Login, Password);
+                AccountService.CurrentUser = loginUser;
 
+                var mainWindow = new MainWindow();
+                mainWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private RelayCommand _closingCommand;
+        public RelayCommand ClosingCommand
+        {
+            get
+            {
+                return _closingCommand ??
+                  (_closingCommand = new RelayCommand(obj =>
+                  {
+                      var current   = obj as Window;
+                      current.Hide();
+                  }));
+            }
         }
 
         public LoginViewModel()

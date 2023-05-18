@@ -23,12 +23,11 @@ namespace GameLauncher.WPF.Views
         public RegistrationWindow()
         {
             InitializeComponent();
-
             DataContext = new RegistrationViewModel();
         }
 
         private void IconUrlTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
-      {
+        {
             var tb = sender as TextBox;
             if (Key.Enter == e.Key)
                 tb.MoveFocus(new TraversalRequest(FocusNavigationDirection.Last));
