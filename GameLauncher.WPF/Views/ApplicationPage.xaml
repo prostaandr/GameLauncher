@@ -222,7 +222,8 @@
                     <ItemsControl Grid.Row="1" ItemsSource="{Binding Application.Reviews}" BorderThickness="0" Background="{StaticResource backgroundColor}" Foreground="{StaticResource mainFontColor}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Grid.Row="2" Background="{StaticResource headerBackgroundColor}" Margin="0 0 0 10">
+                                <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" Background="#2e3238" Margin="10 0 0 20">
+                                    <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition></RowDefinition>
                                         <RowDefinition></RowDefinition>
@@ -232,18 +233,20 @@
                                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Grid Grid.Row="0" Grid.Column="1" Margin="10 10 0 0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="32"></ColumnDefinition>
-                                            <ColumnDefinition Width="450"></ColumnDefinition>
-                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0" BorderBrush="White" BorderThickness="1">
-                                            <Image Source="{Binding User.IconUrl}" Stretch="Uniform" Height="32" Width="32"></Image>
-                                        </Border>
-                                        <TextBlock Grid.Column="1" Text="{Binding User.Nickname}" Margin="10 6 0 0" FontSize="16"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="{Binding Grade, Converter={StaticResource enumConverter}}" FontSize="20"></TextBlock>
-                                    </Grid>
+
+                                        <Grid Grid.Row="0" Grid.Column="1" Margin="5 4 0 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="32"></ColumnDefinition>
+                                                <ColumnDefinition Width="450"></ColumnDefinition>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" BorderBrush="White" BorderThickness="1">
+                                                <Image Source="{Binding User.IconUrl}" Stretch="Uniform" Height="32" Width="32"></Image>
+                                            </Border>
+                                            <TextBlock Grid.Column="1" Text="{Binding User.Nickname}" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="16"></TextBlock>
+                                            <TextBlock Grid.Column="2" Text="{Binding Grade, Converter={StaticResource enumConverter}}" VerticalAlignment="Center" FontSize="20"></TextBlock>
+                                        </Grid>
+                                    
                                     <Separator Grid.Row="1" Grid.Column="1" Margin="0 5 0 0" VerticalAlignment="Top">
                                         <Separator.RenderTransform>
                                             <ScaleTransform ScaleX="1" />
@@ -255,6 +258,7 @@
                                         <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy}"></TextBlock>
                                     </StackPanel>
                                 </Grid>
+                                </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
 

@@ -110,8 +110,8 @@
                     <TextBox x:Name="IconUrlTextBox" Style="{StaticResource textElementBlockTextBox}" Width="Auto" Text="{Binding User.IconUrl}" PreviewKeyDown="IconUrlTextBox_PreviewKeyDown">
                     </TextBox>
                 </StackPanel>
-                <Border Grid.Row="1" Grid.Column="1" Height="96" Width="96" BorderThickness="1" BorderBrush="White">
-                    <Image Source="{Binding User.IconUrl}" Stretch="UniformToFill" ></Image>
+                    <Border Grid.Row="1" Grid.Column="1" Height="96" Width="96" BorderThickness="1" BorderBrush="Black" Background="{StaticResource textElemBackgroundColor}">
+                    <Image Source="{Binding User.IconUrl}" Stretch="UniformToFill"></Image>
                 </Border>
             </Grid>
                 <Button Content="Регистрация" HorizontalAlignment="Center" Width="200" Height="35" Margin="0 50 0 50"
