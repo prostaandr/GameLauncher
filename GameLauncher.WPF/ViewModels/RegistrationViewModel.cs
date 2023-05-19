@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -124,7 +125,8 @@ namespace GameLauncher.WPF.ViewModels
                 return _addUserCommand ??
                   (_addUserCommand = new RelayCommand(obj =>
                   {
-                      var country = obj as CountryViewModel;
+                      var values = (object[])obj;
+                      var country = values[0] as CountryViewModel;
                       if (country == null) country = new CountryViewModel() { Country = new Country() };
 
                       LoginErrors = String.Join("\n", User.Login.Rules().NotEmpty().MinCharacters(5).MaxCharacters(30).Validate());
@@ -139,6 +141,7 @@ namespace GameLauncher.WPF.ViewModels
                           User.CountryId = Convert.ToInt32(country.Country.Id);
                           AddUserAsync();
                           MessageBox.Show("Регистрация прошла успешно");
+                          ClosingCommand.Execute(values[1]);
                       }
                   }));
             }
