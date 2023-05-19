@@ -65,6 +65,7 @@ namespace GameLauncher.WPF
             services.AddSingleton<MainWindow>();
 
             services.AddSingleton<ApplicationPage>();
+            services.AddSingleton<LibraryPage>();
         }
     }
 }

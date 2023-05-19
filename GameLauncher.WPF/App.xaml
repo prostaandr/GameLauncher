@@ -5,7 +5,7 @@
              StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
 
-        <SolidColorBrush x:Key="backgroundColor" Color="#212429"/>
+        <SolidColorBrush x:Key="backgroundColor" Color="#1e1e1e"/>
         <SolidColorBrush x:Key="headerBackgroundColor" Color="#121212"/>
         <SolidColorBrush x:Key="textElemBackgroundColor" Color="#32353c"/>
         <SolidColorBrush x:Key="mainFontColor" Color="White"/>

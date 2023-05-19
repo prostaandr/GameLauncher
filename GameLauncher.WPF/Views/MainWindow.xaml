@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameLauncher.WPF.Views"
         mc:Ignorable="d"
-        Height="720" Width="1280"
-        MinWidth="1000" MinHeight="600"
+        MinWidth="1280" MinHeight="720"
         Background="{StaticResource backgroundColor}"
         Foreground="{StaticResource mainFontColor}"
         WindowStartupLocation="CenterScreen"
@@ -18,7 +17,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderThickness="0 0 0 1.5" BorderBrush="Black">
@@ -44,8 +42,8 @@
                             </Style>
                         </StackPanel.Style>
                         <Border>
-                                <TextBlock Text="{Binding CurrentUser.Nickname}" VerticalAlignment="Center" FontSize="16" Padding="10 0 10 0"></TextBlock>
-                            </Border>
+                            <TextBlock Text="{Binding CurrentUser.Nickname}" VerticalAlignment="Center" FontSize="16" Padding="10 0 10 0"></TextBlock>
+                        </Border>
                         <Border BorderBrush="White" BorderThickness="1">
                             <Image Source="{Binding CurrentUser.IconUrl}" Stretch="Uniform" Height="32" Width="32"></Image>
                         </Border>
@@ -53,8 +51,6 @@
                 </Grid>
             </Grid>
         </Border>
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible">
-            <Frame x:Name="MainFrame" Source="ApplicationPage.xaml"></Frame>
-        </ScrollViewer>
+        <Frame x:Name="MainFrame" Grid.Row="1" Source="LibraryPage.xaml"></Frame>
     </Grid> 
 </Window>

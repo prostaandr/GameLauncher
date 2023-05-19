@@ -19,11 +19,16 @@ namespace GameLauncher.Service
         public AccountService(IUserRepository userRepository, ICountryRepository countryRepository)
         {
             _userRepository = userRepository;
-            _countryRepository = countryRepository; 
+            _countryRepository = countryRepository;
         }
 
         public async Task Registration(User user)
         {
+            if (user == null)
+            {
+                throw new ArgumentNullException("Пользователь оказался null");
+            }
+
             await _userRepository.Create(user);
         }
 
@@ -40,7 +45,7 @@ namespace GameLauncher.Service
             {
                 throw new ArgumentException("Неправильный логин или пароль");
             }
-            
+
             return user;
         }
 

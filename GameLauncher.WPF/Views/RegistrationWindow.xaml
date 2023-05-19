@@ -22,8 +22,8 @@
             <Setter Property="Foreground" Value="Red"/>
             <Style.Triggers>
                 <Trigger Property="Text" Value="">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                    </Trigger>
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Trigger>
             </Style.Triggers>
         </Style>
 

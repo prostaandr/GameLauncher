@@ -9,7 +9,7 @@
         xmlns:converters="clr-namespace:GameLauncher.WPF.Helpers.Converters"
         xmlns:viewModel="clr-namespace:GameLauncher.WPF.ViewModels"
         mc:Ignorable="d"
-        Height="Auto" Width="1280"
+        Height="Auto" Width="Auto"
         Background="{StaticResource backgroundColor}"
         Foreground="{StaticResource mainFontColor}"
         RenderOptions.BitmapScalingMode="HighQuality"
@@ -17,254 +17,251 @@
     <Page.Resources>
         <converters:EnumConverter x:Key="enumConverter"/>
     </Page.Resources>
-    
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.7*" />
-                <ColumnDefinition MinWidth="700"/>
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="0.7*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Name="gameNameTextBlock"
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="700"/>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="gameNameTextBlock"
                        Grid.Column="1" Grid.Row="0"
                        Text="{Binding Application.Name}" FontSize="32"
                        Background="{StaticResource backgroundColor}"
                        Margin="0,15,0,15"/>
-            <Grid Grid.Column="1" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="80"/>
-                </Grid.RowDefinitions>
-                <Image x:Name="mediaImage" Grid.Row="0" Source="{Binding MainImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform"></Image>
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden"
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="80"/>
+                    </Grid.RowDefinitions>
+                    <Image x:Name="mediaImage" Grid.Row="0" Source="{Binding MainImageUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform"></Image>
+                    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden"
                                   Grid.Row="1" Margin="0 0 0 -23" CanContentScroll="True">
-                    <ListBox x:Name="mediaListBox" 
+                        <ListBox x:Name="mediaListBox" 
                                  Grid.Row="1" 
                                  MaxHeight="120"
                                  Background="{StaticResource backgroundColor}" 
                                  SelectedIndex="0"
                                  BorderThickness="0"
                                  ItemsSource="{Binding Application.Medias}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction 
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction 
                                         Command="{Binding ChangeMainImageCommand}" CommandParameter="{Binding ElementName=mediaListBox,Path=SelectedIndex}">
-                                </i:InvokeCommandAction>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel IsItemsHost="True" />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding Url}" Height="80"></Image>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
-            </Grid>
-            <Grid Grid.Column="3" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition MinHeight="150"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Image x:Name="posterImage" Source="{Binding Application.PosterUrl}" Stretch="Uniform"></Image>
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Url}" Height="80"></Image>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
                 </Grid>
-                <Grid Grid.Row="1" Margin="0,5,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="49*"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="shortDescriptionTextBlock" Text="{Binding Application.Description}" TextWrapping="Wrap"/>
-                </Grid>
-                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
-                    <TextBlock Text="ОТЗЫВЫ:" Foreground="{StaticResource titleFontColor}" Width="120" />
-                    <TextBlock x:Name="reviewsPersentTextBlock" Text="{Binding ReviewsPersent}"/>
-                    <TextBlock Text="% " />
-                    <TextBlock Text="положительных" Width="120" />
-                </StackPanel>
-                <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <TextBlock Text="ДАТА ВЫХОДА:" Foreground="{StaticResource titleFontColor}" Width="120"/>
-                    <TextBlock x:Name="releaseDateTextBlock" Text="{Binding Application.ReleaseDate, StringFormat=dd.MM.yyyy}"/>
-                </StackPanel>
-                <StackPanel Grid.Row="4" Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="РАЗРАБОТЧИК:" Foreground="{StaticResource titleFontColor}" Width="120" />
-                        <TextBlock x:Name="develoverTextBlock" Text="{Binding Application.Developer.Name}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="ИЗДАТЕЛЬ:" Foreground="{StaticResource titleFontColor}" Width="120" />
-                        <TextBlock x:Name="publisherTextBlock" Text="{Binding Application.Publisher.Name}"/>
-                    </StackPanel>
-                </StackPanel>
-                <Grid Grid.Row="5">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                            <TextBlock x:Name="priceTextBlock" Text="{Binding Application.Price}" FontSize="16" />
-                            <TextBlock Text=" руб." FontSize="16" />
-                        </StackPanel>
-                        <Button Content="ДОБАВИТЬ В КОРЗИНУ" Height="40" FontSize="14" Margin="0 5 0 0"></Button>
-                        <Button Content="В СПИСОК ЖЕЛАЕМОГО" Height="40" FontSize="14" Margin="0 5 0 0"></Button>
-                    </StackPanel>
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="4" Grid.Column="3">
-                <Grid>
+                <Grid Grid.Column="3" Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition MinHeight="150"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Margin="0 0 0 20">
-                        <StackPanel>
-                            <TextBlock Text="Жанры: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
-                            <TextBlock x:Name="genresTextBlock" Text="{Binding Genres}" FontSize="14" TextWrapping="Wrap"></TextBlock>
-                        </StackPanel>
+                    <Grid Grid.Row="0">
+                        <Image x:Name="posterImage" Source="{Binding Application.PosterUrl}" Stretch="Uniform"></Image>
                     </Grid>
-                    <Grid Grid.Row="1" Margin="0 0 0 20">
-                        <StackPanel>
-                            <TextBlock Text="Особенности: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
-                            <TextBlock x:Name="featuresTextBlock" Text="{Binding Features}" FontSize="14" TextWrapping="Wrap"></TextBlock>
-                        </StackPanel>
+                    <Grid Grid.Row="1" Margin="0,5,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="49*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="shortDescriptionTextBlock" Text="{Binding Application.Description}" TextWrapping="Wrap"/>
                     </Grid>
-                    <Grid Grid.Row="2" Margin="0 0 0 20">
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock Text="ОТЗЫВЫ:" Foreground="{StaticResource titleFontColor}" Width="120" />
+                        <TextBlock x:Name="reviewsPersentTextBlock" Text="{Binding ReviewsPersent}"/>
+                        <TextBlock Text="% " />
+                        <TextBlock Text="положительных" Width="120" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock Text="ДАТА ВЫХОДА:" Foreground="{StaticResource titleFontColor}" Width="120"/>
+                        <TextBlock x:Name="releaseDateTextBlock" Text="{Binding Application.ReleaseDate, StringFormat=dd.MM.yyyy}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="РАЗРАБОТЧИК:" Foreground="{StaticResource titleFontColor}" Width="120" />
+                            <TextBlock x:Name="develoverTextBlock" Text="{Binding Application.Developer.Name}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="ИЗДАТЕЛЬ:" Foreground="{StaticResource titleFontColor}" Width="120" />
+                            <TextBlock x:Name="publisherTextBlock" Text="{Binding Application.Publisher.Name}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid Grid.Row="5">
                         <StackPanel>
-                            <TextBlock Text="Языки: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
-                            <TextBlock x:Name="languagesTextBlock" Text="{Binding Languages}" FontSize="14" TextWrapping="Wrap"></TextBlock>
+                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                <TextBlock x:Name="priceTextBlock" Text="{Binding Application.Price}" FontSize="16" />
+                                <TextBlock Text=" руб." FontSize="16" />
+                            </StackPanel>
+                            <Button Content="ДОБАВИТЬ В КОРЗИНУ" Height="40" FontSize="14" Margin="0 5 0 0"></Button>
+                            <Button Content="В СПИСОК ЖЕЛАЕМОГО" Height="40" FontSize="14" Margin="0 5 0 0"></Button>
                         </StackPanel>
                     </Grid>
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="4" Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="1" Grid.Column="0">
+                <Grid Grid.Row="4" Grid.Column="3">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0 0 0 20">
+                            <StackPanel>
+                                <TextBlock Text="Жанры: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
+                                <TextBlock x:Name="genresTextBlock" Text="{Binding Genres}" FontSize="14" TextWrapping="Wrap"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="0 0 0 20">
+                            <StackPanel>
+                                <TextBlock Text="Особенности: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
+                                <TextBlock x:Name="featuresTextBlock" Text="{Binding Features}" FontSize="14" TextWrapping="Wrap"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="2" Margin="0 0 0 20">
+                            <StackPanel>
+                                <TextBlock Text="Языки: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
+                                <TextBlock x:Name="languagesTextBlock" Text="{Binding Languages}" FontSize="14" TextWrapping="Wrap"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="4" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 0 10">
-                        <TextBlock Text="Системные требования" FontSize="18"/>
-                        <Separator Margin="0 25 0 0">
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 0 10">
+                            <TextBlock Text="Системные требования" FontSize="18"/>
+                            <Separator Margin="0 25 0 0">
+                                <Separator.RenderTransform>
+                                    <ScaleTransform ScaleX="2" />
+                                </Separator.RenderTransform>
+                            </Separator>
+                        </Grid>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                            <TextBlock Text="МИНИМАЛЬНЫЕ: " Margin="0 0 0 8"></TextBlock>
+                            <ItemsControl ItemsSource="{Binding MinSystemRequirements}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                            <TextBlock Text="{Binding Title}" Foreground="{StaticResource titleFontColor}"></TextBlock>
+                                            <TextBlock Text="{Binding Value}"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                            <TextBlock Text="РЕКОМЕНДУЕМЫЕ: " Margin="0 0 0 8"></TextBlock>
+                            <ItemsControl ItemsSource="{Binding RecSystemRequirements}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                            <TextBlock Text="{Binding Title}" Foreground="{StaticResource titleFontColor}"></TextBlock>
+                                            <TextBlock Text="{Binding Value}"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="5" Grid.Column="1" Margin="0 30 0 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Отзывы" FontSize="18" Margin="0 0 0 20"/>
+                        <Separator Margin="0 8 0 0">
                             <Separator.RenderTransform>
-                                <ScaleTransform ScaleX="2" />
+                                <ScaleTransform ScaleX="1" />
                             </Separator.RenderTransform>
                         </Separator>
-                    </Grid>
-                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-                        <TextBlock Text="МИНИМАЛЬНЫЕ: " Margin="0 0 0 8"></TextBlock>
-                        <ItemsControl ItemsSource="{Binding MinSystemRequirements}">
+                        <ItemsControl Grid.Row="1" ItemsSource="{Binding Application.Reviews}" BorderThickness="0" Background="{StaticResource backgroundColor}" Foreground="{StaticResource mainFontColor}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
-                                        <TextBlock Text="{Binding Title}" Foreground="{StaticResource titleFontColor}"></TextBlock>
-                                        <TextBlock Text="{Binding Value}"></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                        <TextBlock Text="РЕКОМЕНДУЕМЫЕ: " Margin="0 0 0 8"></TextBlock>
-                        <ItemsControl ItemsSource="{Binding RecSystemRequirements}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
-                                        <TextBlock Text="{Binding Title}" Foreground="{StaticResource titleFontColor}"></TextBlock>
-                                        <TextBlock Text="{Binding Value}"></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="5" Grid.Column="1" Margin="0 30 0 0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Отзывы" FontSize="18" Margin="0 0 0 20"/>
-                    <Separator Margin="0 8 0 0">
-                        <Separator.RenderTransform>
-                            <ScaleTransform ScaleX="1" />
-                        </Separator.RenderTransform>
-                    </Separator>
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Application.Reviews}" BorderThickness="0" Background="{StaticResource backgroundColor}" Foreground="{StaticResource mainFontColor}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" Background="#2e3238" Margin="10 0 0 20">
-                                    <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Row="0" Grid.Column="1" Margin="5 4 0 0">
+                                    <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" Background="#212429" Margin="0 0 0 20">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="32"></ColumnDefinition>
-                                                <ColumnDefinition Width="450"></ColumnDefinition>
                                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Border Grid.Column="0" BorderBrush="White" BorderThickness="1">
-                                                <Image Source="{Binding User.IconUrl}" Stretch="Uniform" Height="32" Width="32"></Image>
-                                            </Border>
-                                            <TextBlock Grid.Column="1" Text="{Binding User.Nickname}" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="16"></TextBlock>
-                                            <TextBlock Grid.Column="2" Text="{Binding Grade, Converter={StaticResource enumConverter}}" VerticalAlignment="Center" FontSize="20"></TextBlock>
-                                        </Grid>
-                                    
-                                    <Separator Grid.Row="1" Grid.Column="1" Margin="0 5 0 0" VerticalAlignment="Top">
-                                        <Separator.RenderTransform>
-                                            <ScaleTransform ScaleX="1" />
-                                        </Separator.RenderTransform>
-                                    </Separator>
-                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Comment}" Margin="10 15" FontSize="14" TextWrapping="Wrap" MaxWidth="660"></TextBlock>
-                                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="10 0 0 10">
-                                        <TextBlock Text="Опубликовано:  " Foreground="{StaticResource titleFontColor}"></TextBlock>
-                                        <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy}"></TextBlock>
-                                    </StackPanel>
-                                </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
 
-                    </ItemsControl>
+                                            <Grid Grid.Row="0" Grid.Column="1" Margin="5 4 0 0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="32"></ColumnDefinition>
+                                                    <ColumnDefinition Width="450"></ColumnDefinition>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Grid.Column="0" BorderBrush="White" BorderThickness="1">
+                                                    <Image Source="{Binding User.IconUrl}" Stretch="Uniform" Height="32" Width="32"></Image>
+                                                </Border>
+                                                <TextBlock Grid.Column="1" Text="{Binding User.Nickname}" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="16"></TextBlock>
+                                                <TextBlock Grid.Column="2" Text="{Binding Grade, Converter={StaticResource enumConverter}}" VerticalAlignment="Center" FontSize="20"></TextBlock>
+                                            </Grid>
+
+                                            <Separator Grid.Row="1" Grid.Column="1" Margin="0 5 0 0" VerticalAlignment="Top">
+                                                <Separator.RenderTransform>
+                                                    <ScaleTransform ScaleX="1" />
+                                                </Separator.RenderTransform>
+                                            </Separator>
+                                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Comment}" Margin="10 15" FontSize="14" TextWrapping="Wrap" MaxWidth="660"></TextBlock>
+                                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="10 0 0 10">
+                                                <TextBlock Text="Опубликовано:  " Foreground="{StaticResource titleFontColor}"></TextBlock>
+                                                <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy}"></TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+                    </Grid>
                 </Grid>
             </Grid>
-        </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

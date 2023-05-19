@@ -1,5 +1,7 @@
 ﻿using GameLauncher.Model;
 using GameLauncher.Service;
+using GameLauncher.Service.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace GameLauncher.WPF.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        private IAccountService _accountService;
+
         private User _currentUser;
         public User CurrentUser
         {
@@ -24,8 +28,15 @@ namespace GameLauncher.WPF.ViewModels
 
         public MainViewModel()
         {
+            _accountService = App.serviceProvider.GetService<IAccountService>();
+            
+            InitializeAsync();
+        }
+
+        private async void InitializeAsync()
+        {
+            if (AccountService.CurrentUser == null) AccountService.CurrentUser = await _accountService.GetUser(1);
             CurrentUser = AccountService.CurrentUser;
-            if (CurrentUser == null) CurrentUser = new User() { Nickname = "test", IconUrl = "https://avatars.akamai.steamstatic.com/1aa3ba8fc495dc04406e08791ae031eca01ca0b8_full.jpg" };
         }
     }
 }
