@@ -2,8 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GameLauncher.WPF" xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+             xmlns:viewModels="clr-namespace:GameLauncher.WPF.ViewModels"
+             xmlns:views="clr-namespace:GameLauncher.WPF.Views"
              StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
+
+        <DataTemplate DataType="{x:Type viewModels:LibraryViewModel}">
+            <views:LibraryPage></views:LibraryPage>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ApplicationPageViewModel}">
+            <views:ApplicationPage></views:ApplicationPage>
+        </DataTemplate>
 
         <SolidColorBrush x:Key="backgroundColor" Color="#1e1e1e"/>
         <SolidColorBrush x:Key="headerBackgroundColor" Color="#121212"/>

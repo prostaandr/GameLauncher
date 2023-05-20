@@ -1,6 +1,7 @@
 ﻿using GameLauncher.Model;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.WPF.Commands;
+using GameLauncher.WPF.Helpers;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,7 +19,7 @@ using System.Windows.Media;
 
 namespace GameLauncher.WPF.ViewModels
 {
-    public class GamePageViewModel : BaseViewModel
+    public class ApplicationPageViewModel : BaseViewModel
     {
         private IApplicationService _applicationService;
 
@@ -133,7 +134,8 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
-        public GamePageViewModel()
+
+        public ApplicationPageViewModel()
         {
             _applicationService = App.serviceProvider.GetService<IApplicationService>();
 
@@ -142,7 +144,7 @@ namespace GameLauncher.WPF.ViewModels
 
         private async void InitializeAsync()
         {
-            Application = await _applicationService.GetApplication(3);
+            Application = (await _applicationService.GetApplication(3));
 
             ReviewsPersent = (await _applicationService.GetReviewsPersent(3)).ToString();
 

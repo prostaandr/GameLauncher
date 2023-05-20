@@ -27,13 +27,11 @@ namespace GameLauncher.WPF.Views
     /// <summary>
     /// Interaction logic for GamePage.xaml
     /// </summary>
-    public partial class ApplicationPage : Page
+    public partial class ApplicationPage : UserControl
     {
         public ApplicationPage()
         {
             InitializeComponent();
-
-            DataContext = new GamePageViewModel();
         }
     }
 }

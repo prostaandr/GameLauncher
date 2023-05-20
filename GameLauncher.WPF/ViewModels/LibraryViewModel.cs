@@ -2,6 +2,8 @@
 using GameLauncher.Service;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.WPF.Commands;
+using GameLauncher.WPF.Helpers;
+using GameLauncher.WPF.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -9,11 +11,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace GameLauncher.WPF.ViewModels
 {
     public class LibraryViewModel : BaseViewModel
     {
+        //private BaseViewModel _currentViewModel;
+        //public BaseViewModel CurrentViewModel
+        //{
+        //    get => _currentViewModel;
+        //    set
+        //    {
+        //        if (value == _currentViewModel) return;
+        //        _currentViewModel = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
         private List<Application> _applications;
         public List<Application> Applications
         {
@@ -57,16 +72,20 @@ namespace GameLauncher.WPF.ViewModels
         {
             get
             {
-                return _openApplicationPageCommand ??
-                  (_changeSelectedApplicationCommand = new RelayCommand(obj =>
+                return _openApplicationPageCommand ?? 
+                  (_openApplicationPageCommand = new RelayCommand(obj =>
                   {
-                      
+                      //var navigator = new Navigator();
+                      //navigator.ChangeViewModelHandler(new ApplicationPageViewModel());
+                      _main.CurrentViewModel = new ApplicationPageViewModel();
                   }));
             }
         }
 
-        public LibraryViewModel()
+        private MainViewModel _main;
+        public LibraryViewModel(MainViewModel main)
         {
+            _main = main;
             Applications = AccountService.CurrentUser.AvailableApplications;;
         }
 

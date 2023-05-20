@@ -1,4 +1,4 @@
-﻿<Page x:Class="GameLauncher.WPF.Views.ApplicationPage"
+﻿<UserControl x:Class="GameLauncher.WPF.Views.ApplicationPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,16 +7,16 @@
         xmlns:local="clr-namespace:GameLauncher.WPF.Views" xmlns:col="clr-namespace:System.Collections;assembly=netstandard" xmlns:sys="clr-namespace:System;assembly=netstandard"
         xmlns:enums="clr-namespace:GameLauncher.Model.Enum;assembly=GameLauncher.Model"
         xmlns:converters="clr-namespace:GameLauncher.WPF.Helpers.Converters"
-        xmlns:viewModel="clr-namespace:GameLauncher.WPF.ViewModels"
+        xmlns:viewModels="clr-namespace:GameLauncher.WPF.ViewModels"
         mc:Ignorable="d"
         Height="Auto" Width="Auto"
         Background="{StaticResource backgroundColor}"
         Foreground="{StaticResource mainFontColor}"
         RenderOptions.BitmapScalingMode="HighQuality"
         RenderOptions.EdgeMode="Aliased">
-    <Page.Resources>
+    <UserControl.Resources>
         <converters:EnumConverter x:Key="enumConverter"/>
-    </Page.Resources>
+    </UserControl.Resources>
 
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Visible">
@@ -264,4 +264,4 @@
             </Grid>
         </ScrollViewer>
     </Grid>
-</Page>
+</UserControl>

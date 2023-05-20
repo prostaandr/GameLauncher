@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GameLauncher.WPF.Views"
+        xmlns:local="clr-namespace:GameLauncher.WPF.Views" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         MinWidth="1280" MinHeight="720"
         Background="{StaticResource backgroundColor}"
@@ -28,7 +28,15 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="1" Background="{StaticResource headerBackgroundColor}" Margin="30 0 30 0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Button Content="Магазин" Style="{StaticResource menuButtonsStyle}"></Button>
+                        <Button Content="Магазин" Style="{StaticResource menuButtonsStyle}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding OpenApplicationPageCommand}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
                         <Button Content="Библиотека" Style="{StaticResource menuButtonsStyle}"></Button>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -51,6 +59,9 @@
                 </Grid>
             </Grid>
         </Border>
-        <Frame x:Name="MainFrame" Grid.Row="1" Source="LibraryPage.xaml"></Frame>
+        <!--<Frame x:Name="mainFrame" Grid.Row="1" Source="LibraryPage.xaml"></Frame>-->
+        <Grid Grid.Row="1">
+            <ContentControl x:Name="pages" Content="{Binding CurrentViewModel}"></ContentControl>
+        </Grid>
     </Grid> 
 </Window>

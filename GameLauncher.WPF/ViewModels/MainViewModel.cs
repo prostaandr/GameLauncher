@@ -1,18 +1,34 @@
 ﻿using GameLauncher.Model;
 using GameLauncher.Service;
 using GameLauncher.Service.Interfaces;
+using GameLauncher.WPF.Commands;
+using GameLauncher.WPF.Helpers;
+using GameLauncher.WPF.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace GameLauncher.WPF.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private IAccountService _accountService;
+        private readonly IAccountService _accountService;
+
+        private BaseViewModel _currentViewModel;
+        public BaseViewModel CurrentViewModel
+        {
+            get => _currentViewModel;
+            set
+            {
+                if (value == _currentViewModel) return;
+                _currentViewModel = value;
+                OnPropertyChanged();
+            }
+        }
 
         private User _currentUser;
         public User CurrentUser
@@ -26,17 +42,41 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private RelayCommand _openApplicationPageCommand;
+        public RelayCommand OpenApplicationPageCommand
+        {
+            get
+            {
+                return _openApplicationPageCommand ??
+                  (_openApplicationPageCommand = new RelayCommand(obj =>
+                  {
+                      CurrentViewModel = new ApplicationPageViewModel();
+                  }));
+            }
+        }
+
+        private Navigator _navigator = new Navigator();
+
         public MainViewModel()
         {
             _accountService = App.serviceProvider.GetService<IAccountService>();
-            
+            CurrentViewModel = new LibraryViewModel(this);
+
             InitializeAsync();
+
+            _navigator.ChangeViewModel += OnChangeViewModel;
         }
 
         private async void InitializeAsync()
         {
             if (AccountService.CurrentUser == null) AccountService.CurrentUser = await _accountService.GetUser(1);
             CurrentUser = AccountService.CurrentUser;
+        }
+
+        private void OnChangeViewModel(object sender, EventArgs e)
+        {
+            var n = sender as Navigator;
+            CurrentViewModel = n.CurrentViewModel;
         }
     }
 }

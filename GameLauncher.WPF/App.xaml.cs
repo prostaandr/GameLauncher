@@ -4,6 +4,7 @@ using GameLauncher.Data.Repositories;
 using GameLauncher.Model;
 using GameLauncher.Service;
 using GameLauncher.Service.Interfaces;
+using GameLauncher.WPF.Helpers;
 using GameLauncher.WPF.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,8 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace GameLauncher.WPF
 {
@@ -50,8 +53,10 @@ namespace GameLauncher.WPF
             services.AddDbContext<GameLauncherContext>(options =>
             {
                 options.UseSqlServer(connectionString);
-            });
-            
+            }, ServiceLifetime.Transient);
+
+            services.AddSingleton<Navigator>();
+
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

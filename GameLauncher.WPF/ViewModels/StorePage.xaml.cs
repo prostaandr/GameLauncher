@@ -1,6 +1,4 @@
-﻿using GameLauncher.WPF.Helpers;
-using GameLauncher.WPF.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GameLauncher.WPF.Views
+namespace GameLauncher.WPF.ViewModels
 {
     /// <summary>
-    /// Логика взаимодействия для LibraryPage.xaml
+    /// Логика взаимодействия для StorePage.xaml
     /// </summary>
-    public partial class LibraryPage : UserControl
+    public partial class StorePage : UserControl
     {
-        public LibraryPage()
+        public StorePage()
         {
             InitializeComponent();
         }

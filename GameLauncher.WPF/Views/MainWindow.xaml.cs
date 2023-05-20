@@ -1,4 +1,5 @@
-﻿using GameLauncher.WPF.ViewModels;
+﻿using GameLauncher.WPF.Helpers;
+using GameLauncher.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
