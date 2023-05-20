@@ -32,12 +32,20 @@
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <i:InvokeCommandAction 
-                                        Command="{Binding OpenApplicationPageCommand}">
+                                        Command="{Binding OpenStorePageCommand}">
                                     </i:InvokeCommandAction>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Content="Библиотека" Style="{StaticResource menuButtonsStyle}"></Button>
+                        <Button Content="Библиотека" Style="{StaticResource menuButtonsStyle}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding OpenLibraryPageCommand}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <StackPanel.Style>

@@ -135,16 +135,16 @@ namespace GameLauncher.WPF.ViewModels
         }
 
 
-        public ApplicationPageViewModel()
+        public ApplicationPageViewModel(int id)
         {
             _applicationService = App.serviceProvider.GetService<IApplicationService>();
 
-            InitializeAsync();
+            InitializeAsync(id);
         }
 
-        private async void InitializeAsync()
+        private async void InitializeAsync(int id)
         {
-            Application = (await _applicationService.GetApplication(3));
+            Application = await _applicationService.GetApplication(id);
 
             ReviewsPersent = (await _applicationService.GetReviewsPersent(3)).ToString();
 

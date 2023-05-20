@@ -77,7 +77,7 @@ namespace GameLauncher.WPF.ViewModels
                   {
                       //var navigator = new Navigator();
                       //navigator.ChangeViewModelHandler(new ApplicationPageViewModel());
-                      _main.CurrentViewModel = new ApplicationPageViewModel();
+                      _main.CurrentViewModel = new ApplicationPageViewModel(SelectedApplication.Id);
                   }));
             }
         }

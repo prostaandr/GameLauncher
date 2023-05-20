@@ -42,15 +42,28 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
-        private RelayCommand _openApplicationPageCommand;
-        public RelayCommand OpenApplicationPageCommand
+        private RelayCommand _openStorePageCommand;
+        public RelayCommand OpenStorePageCommand
         {
             get
             {
-                return _openApplicationPageCommand ??
-                  (_openApplicationPageCommand = new RelayCommand(obj =>
+                return _openStorePageCommand ??
+                  (_openStorePageCommand = new RelayCommand(obj =>
                   {
-                      CurrentViewModel = new ApplicationPageViewModel();
+                      CurrentViewModel = new StorePageViewModel();
+                  }));
+            }
+        }
+
+        private RelayCommand _openLibraryPageCommand;
+        public RelayCommand OpenLibraryPageCommand
+        {
+            get
+            {
+                return _openLibraryPageCommand ??
+                  (_openLibraryPageCommand = new RelayCommand(obj =>
+                  {
+                      CurrentViewModel = new LibraryViewModel(this);
                   }));
             }
         }
