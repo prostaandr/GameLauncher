@@ -146,9 +146,12 @@ namespace GameLauncher.WPF.ViewModels
         {
             Application = await _applicationService.GetApplication(id);
 
-            ReviewsPersent = (await _applicationService.GetReviewsPersent(3)).ToString();
+            ReviewsPersent = (await _applicationService.GetReviewsPersent(id)).ToString();
 
-            MainImageUrl = Application.Medias[0].Url;
+            if (Application.Medias.Count > 0)
+            {
+                MainImageUrl = Application.Medias[0].Url;
+            }
 
             Genres = String.Join(", ", Application.Genres.Select(g => g.Name));
             Features = String.Join(", ", Application.Features.Select(f => f.Name));

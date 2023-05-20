@@ -47,6 +47,7 @@ namespace GameLauncher.Service
                 if (review.Grade == 0) positiveCount++;
             }
 
+            if (positiveCount == 0) return 0;
             return positiveCount * 100 / reviews.Count;
         }
     }
