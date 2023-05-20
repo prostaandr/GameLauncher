@@ -50,7 +50,7 @@ namespace GameLauncher.WPF.ViewModels
                 return _openStorePageCommand ??
                   (_openStorePageCommand = new RelayCommand(obj =>
                   {
-                      CurrentViewModel = new StorePageViewModel();
+                      CurrentViewModel = new StorePageViewModel(this);
                   }));
             }
         }
@@ -73,7 +73,7 @@ namespace GameLauncher.WPF.ViewModels
         public MainViewModel()
         {
             _accountService = App.serviceProvider.GetService<IAccountService>();
-            CurrentViewModel = new StorePageViewModel();
+            CurrentViewModel = new StorePageViewModel(this);
 
             InitializeAsync();
 

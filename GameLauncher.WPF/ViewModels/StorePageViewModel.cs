@@ -1,8 +1,10 @@
 ﻿using GameLauncher.Model;
 using GameLauncher.Service.Interfaces;
+using GameLauncher.WPF.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ namespace GameLauncher.WPF.ViewModels
 {
     public class StorePageViewModel : BaseViewModel
     {
+        MainViewModel _main;
         private IApplicationService _applicationService;
 
         private List<Application> _applications;
@@ -21,6 +24,18 @@ namespace GameLauncher.WPF.ViewModels
             {
                 if (value == _applications) return;
                 _applications = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _searchBarText;
+        public string SearchBarText
+        {
+            get => _searchBarText;
+            set
+            {
+                if (value == _searchBarText) return;
+                _searchBarText = value;
                 OnPropertyChanged();
             }
         }
@@ -37,8 +52,22 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
-        public StorePageViewModel()
+        private RelayCommand _openApplicationPageCommand;
+        public RelayCommand OpenApplicationPageCommand
         {
+            get
+            {
+                return _openApplicationPageCommand ??
+                  (_openApplicationPageCommand = new RelayCommand(obj =>
+                  {
+                      _main.CurrentViewModel = new ApplicationPageViewModel(Convert.ToInt32(obj));
+                  }));
+            }
+        }
+
+        public StorePageViewModel(MainViewModel main)
+        {
+            _main = main;
             _applicationService = App.serviceProvider.GetService<IApplicationService>();
 
             InitializeAsync();

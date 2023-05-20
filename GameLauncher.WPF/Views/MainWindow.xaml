@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameLauncher.WPF.Views" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewModels="clr-namespace:GameLauncher.WPF.ViewModels"
         mc:Ignorable="d"
         MinWidth="1280" MinHeight="720"
         Background="{StaticResource backgroundColor}"

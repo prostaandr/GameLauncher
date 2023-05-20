@@ -17,17 +17,7 @@ namespace GameLauncher.WPF.ViewModels
 {
     public class LibraryViewModel : BaseViewModel
     {
-        //private BaseViewModel _currentViewModel;
-        //public BaseViewModel CurrentViewModel
-        //{
-        //    get => _currentViewModel;
-        //    set
-        //    {
-        //        if (value == _currentViewModel) return;
-        //        _currentViewModel = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        private MainViewModel _main;
 
         private List<Application> _applications;
         public List<Application> Applications
@@ -75,23 +65,15 @@ namespace GameLauncher.WPF.ViewModels
                 return _openApplicationPageCommand ?? 
                   (_openApplicationPageCommand = new RelayCommand(obj =>
                   {
-                      //var navigator = new Navigator();
-                      //navigator.ChangeViewModelHandler(new ApplicationPageViewModel());
                       _main.CurrentViewModel = new ApplicationPageViewModel(SelectedApplication.Id);
                   }));
             }
         }
 
-        private MainViewModel _main;
         public LibraryViewModel(MainViewModel main)
         {
             _main = main;
             Applications = AccountService.CurrentUser.AvailableApplications;;
-        }
-
-        private async void InitializeAsync()
-        {
-
         }
     }
 }
