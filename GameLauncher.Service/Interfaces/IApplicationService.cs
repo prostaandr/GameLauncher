@@ -12,5 +12,6 @@ namespace GameLauncher.Service.Interfaces
         Task<Application> GetApplication(int id);
         Task<List<Application>> GetApplications();
         Task<int> GetReviewsPersent(int id);
+        Task<List<Genre>> GetGenres();
     }
 }

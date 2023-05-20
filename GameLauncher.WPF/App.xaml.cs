@@ -61,6 +61,7 @@ namespace GameLauncher.WPF
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
 
             services.AddTransient<IApplicationService, ApplicationService>();
             services.AddTransient<IAccountService, AccountService>();
@@ -71,6 +72,7 @@ namespace GameLauncher.WPF
 
             services.AddSingleton<ApplicationPage>();
             services.AddSingleton<LibraryPage>();
+            services.AddSingleton<StorePage>();
         }
     }
 }

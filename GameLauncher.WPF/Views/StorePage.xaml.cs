@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GameLauncher.WPF.ViewModels
+namespace GameLauncher.WPF.Views
 {
     /// <summary>
     /// Логика взаимодействия для StorePage.xaml

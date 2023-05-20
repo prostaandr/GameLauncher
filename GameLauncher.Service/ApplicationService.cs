@@ -13,11 +13,13 @@ namespace GameLauncher.Service
     {
         private readonly IApplicationRepository _applicationRepository;
         private readonly IReviewRepository _reviewRepository;
+        private readonly IGenreRepository _genreRepository;
 
-        public ApplicationService(IApplicationRepository applicationRepository, IReviewRepository reviewRepository)
+        public ApplicationService(IApplicationRepository applicationRepository, IReviewRepository reviewRepository, IGenreRepository genreRepository)
         {
             _applicationRepository = applicationRepository;
             _reviewRepository = reviewRepository;
+            _genreRepository = genreRepository;
         }
 
         public async Task<Application> GetApplication(int id)
@@ -28,6 +30,11 @@ namespace GameLauncher.Service
         public async Task<List<Application>> GetApplications()
         {
             return await _applicationRepository.GetAll();
+        }
+
+        public async Task<List<Genre>> GetGenres()
+        {
+            return await _genreRepository.GetAll();
         }
 
         public async Task<int> GetReviewsPersent(int id)
