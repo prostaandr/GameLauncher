@@ -19,7 +19,7 @@ namespace GameLauncher.Service.OrderFilter
                 case ApplicationOrderOptions.ByName:
                     return applications.OrderBy(a => a.Name);
                 case ApplicationOrderOptions.ByReviews:
-                    throw new NotImplementedException("Не работает пока что");
+                    return applications.OrderByDescending(a => a.ReviewsPercent);
                 case ApplicationOrderOptions.ByPriceAsc:
                     return applications.OrderBy(a => a.Price);
                 case ApplicationOrderOptions.ByPriceDesc:

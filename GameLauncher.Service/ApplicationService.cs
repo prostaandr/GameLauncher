@@ -52,9 +52,31 @@ namespace GameLauncher.Service
             return dto;
         }
 
-        public async Task<List<Application>> GetApplications()
+        public async Task<List<ApplicationDto>> GetApplications()
         {
-            return await _applicationRepository.GetAll();
+            var applications = await _applicationRepository.GetAll();
+
+            var dtos = new List<ApplicationDto>();
+
+            for (int i = 0; i < applications.Count; i++)
+            {
+                var dto = new ApplicationDto
+                {
+                    Id = applications[i].Id,
+                    Name = applications[i].Name,
+                    ReleaseDate = applications[i].ReleaseDate,
+                    Price = applications[i].Price,
+                    PosterUrl = applications[i].PosterUrl,
+                    ApplicationType = applications[i].ApplicationType,
+                    Genres = applications[i].Genres,
+                    Features = applications[i].Features,
+                    Languages = applications[i].Languages,
+                    ReviewsPercent = await GetReviewsPersent(applications[i].Reviews)
+                };
+
+                dtos.Add(dto);
+            }
+            return dtos;
         }
 
         public async Task<List<Genre>> GetGenres()

@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Model;
+using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.WPF.Commands;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,8 +17,8 @@ namespace GameLauncher.WPF.ViewModels
         MainViewModel _main;
         private IApplicationService _applicationService;
 
-        private List<Application> _applications;
-        public List<Application> Applications
+        private List<ApplicationDto> _applications;
+        public List<ApplicationDto> Applications
         {
             get => _applications;
             set
