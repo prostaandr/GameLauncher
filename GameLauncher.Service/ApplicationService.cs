@@ -3,6 +3,7 @@ using GameLauncher.Model;
 using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.Service.OrderFilter;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace GameLauncher.Service
                 RecommendedSystemRequirements = app.RecommendedSystemRequirements,
                 Medias = app.Medias,
                 Reviews = app.Reviews,
-                ReviewsPercent = await GetReviewsPersent(app.Reviews)
+                ReviewsPercent = await GetReviewsPersent(app.Id)
             };
 
             return dto;
@@ -55,7 +56,7 @@ namespace GameLauncher.Service
 
         public async Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions)
         {
-            var applications = _applicationRepository.GetAll().ToList();
+            var applications = await _applicationRepository.GetAll().ToListAsync();
 
             var dtos = new List<ApplicationDto>();
 
@@ -72,7 +73,7 @@ namespace GameLauncher.Service
                     Genres = applications[i].Genres,
                     Features = applications[i].Features,
                     Languages = applications[i].Languages,
-                    ReviewsPercent = await GetReviewsPersent(applications[i].Reviews)
+                    ReviewsPercent = await GetReviewsPersent(applications[i].Id)
                 };
 
                 dtos.Add(dto);
@@ -85,8 +86,10 @@ namespace GameLauncher.Service
             return _genreRepository.GetAll();
         }
 
-        public async Task<int> GetReviewsPersent(List<Review> reviews)
+        public async Task<int> GetReviewsPersent(int appId)
         {
+            var reviews = await _reviewRepository.GetFromAppliation(appId).ToListAsync();
+
             var positiveCount = 0;
             foreach (var review in reviews)
             {

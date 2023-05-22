@@ -17,7 +17,7 @@ namespace GameLauncher.Service.OrderFilter
                 case ApplicationSortOptions.Simple: 
                     return applications.OrderByDescending(a => a.Id);
                 case ApplicationSortOptions.ByName:
-                    return applications.OrderBy(a => a.Name);
+                    return applications.OrderByDescending(a => a.Name);
                 case ApplicationSortOptions.ByReviews:
                     return applications.OrderByDescending(a => a.ReviewsPercent);
                 case ApplicationSortOptions.ByPriceAsc:

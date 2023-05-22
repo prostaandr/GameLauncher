@@ -13,7 +13,7 @@ namespace GameLauncher.Service.Interfaces
     {
         Task<ApplicationDetailDto> GetApplication(int id);
         Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions);
-        Task<int> GetReviewsPersent(List<Review> reviews);
+        Task<int> GetReviewsPersent(int appId);
         IQueryable<Genre> GetGenres();
     }
 }

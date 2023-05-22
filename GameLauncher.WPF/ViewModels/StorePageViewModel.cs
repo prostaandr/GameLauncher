@@ -80,7 +80,7 @@ namespace GameLauncher.WPF.ViewModels
 
         private async void InitializeAsync()
         {
-            Applications =  (await _applicationService.GetApplications(ApplicationSortOptions.ByPriceAsc)).ToList();
+            Applications =  (await _applicationService.GetApplications(ApplicationSortOptions.ByReviews)).ToList();
         }
     }
 }
