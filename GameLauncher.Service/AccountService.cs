@@ -49,9 +49,9 @@ namespace GameLauncher.Service
             return user;
         }
 
-        public async Task<List<Country>> GetAllCountries()
+        public IQueryable<Country> GetAllCountries()
         {
-            return await _countryRepository.GetAll();
+            return _countryRepository.GetAll();
         }
     }
 }

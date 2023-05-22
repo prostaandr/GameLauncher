@@ -12,6 +12,6 @@ namespace GameLauncher.Service.Interfaces
         Task Registration(User user);
         Task<User> GetUser(int id);
         Task<User> Login(string login, string password);
-        Task<List<Country>> GetAllCountries();
+        IQueryable<Country> GetAllCountries();
     }
 }

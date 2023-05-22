@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLauncher.Service.OrderFilter
 {
-    public enum ApplicationOrderOptions
+    public enum ApplicationSortOptions
     {
         Simple,
         ByName,

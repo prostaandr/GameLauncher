@@ -33,9 +33,9 @@ namespace GameLauncher.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<List<Genre>> GetAll()
+        public IQueryable<Genre> GetAll()
         {
-            return await _db.Genres.AsNoTracking().ToListAsync();
+            return _db.Genres.AsNoTracking();
         }
 
         public Task Update(Genre Entity)

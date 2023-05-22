@@ -41,9 +41,9 @@ namespace GameLauncher.Data.Repositories
                 .SingleOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<List<Application>> GetAll()
+        public IQueryable<Application> GetAll()
         {
-            return await _db.Applications.AsNoTracking().ToListAsync();
+            return _db.Applications.AsNoTracking();
         }
 
         public async Task Update(Application Entity)

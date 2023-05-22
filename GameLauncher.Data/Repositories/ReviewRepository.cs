@@ -29,9 +29,9 @@ namespace GameLauncher.Data.Repositories
             return await _db.Reviews.AsNoTracking().SingleOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<List<Review>> GetAll()
+        public IQueryable<Review> GetAll()
         {
-            return await _db.Reviews.AsNoTracking().ToListAsync();
+            return  _db.Reviews.AsNoTracking();
         }
 
         public async Task Update(Review Entity)
@@ -46,9 +46,9 @@ namespace GameLauncher.Data.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public async Task<List<Review>> GetFromAppliation(int applicationId)
+        public IQueryable<Review> GetFromAppliation(int applicationId)
         {
-            return await _db.Reviews.AsNoTracking().Where(a => a.ApplicationId == applicationId).ToListAsync();
+            return _db.Reviews.AsNoTracking().Where(a => a.ApplicationId == applicationId);
         }
     }
 }

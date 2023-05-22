@@ -181,7 +181,7 @@ namespace GameLauncher.WPF.ViewModels
             User.IconUrl = "";
 
             Countries = new ObservableCollection<CountryViewModel>();
-            var countries = await _accountService.GetAllCountries();
+            var countries = _accountService.GetAllCountries().ToList();
             for (int i = 0; i < countries.Count; i++)
             {
                 Countries.Add(new CountryViewModel() { Country = countries[i] });

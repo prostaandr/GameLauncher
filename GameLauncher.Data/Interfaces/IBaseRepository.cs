@@ -10,7 +10,7 @@ namespace GameLauncher.Data.Interfaces
     {
         Task Create(T Entity);
         Task<T> Get(int id);
-        Task<List<T>> GetAll();
+        IQueryable<T> GetAll();
         Task Update(T Entity);
         Task Delete(T Entity);
     }

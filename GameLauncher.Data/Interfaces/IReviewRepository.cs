@@ -9,6 +9,6 @@ namespace GameLauncher.Data.Interfaces
 {
     public interface IReviewRepository : IBaseRepository<Review>
     {
-        Task<List<Review>> GetFromAppliation(int applicationId);
+        IQueryable<Review> GetFromAppliation(int applicationId);
     }
 }

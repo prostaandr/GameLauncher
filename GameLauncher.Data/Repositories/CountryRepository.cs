@@ -33,9 +33,9 @@ namespace GameLauncher.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<List<Country>> GetAll()
+        public IQueryable<Country> GetAll()
         {
-            return await _db.Countries.AsNoTracking().ToListAsync();
+            return _db.Countries.AsNoTracking();
         }
 
         public Task Update(Country Entity)

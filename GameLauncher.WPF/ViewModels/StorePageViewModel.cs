@@ -1,7 +1,9 @@
 ﻿using GameLauncher.Model;
 using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
+using GameLauncher.Service.OrderFilter;
 using GameLauncher.WPF.Commands;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -71,13 +73,14 @@ namespace GameLauncher.WPF.ViewModels
             _main = main;
             _applicationService = App.serviceProvider.GetService<IApplicationService>();
 
+            Genres = _applicationService.GetGenres().ToList();
+
             InitializeAsync();
         }
 
         private async void InitializeAsync()
         {
-            Applications = await _applicationService.GetApplications();
-            Genres = await _applicationService.GetGenres();
+            Applications =  (await _applicationService.GetApplications(ApplicationSortOptions.ByPriceAsc)).ToList();
         }
     }
 }

@@ -29,9 +29,9 @@ namespace GameLauncher.Data.Repositories
             return await _db.Users.AsNoTracking().Include(u => u.AvailableApplications).SingleOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<List<User>> GetAll()
+        public IQueryable<User> GetAll()
         {
-            return await _db.Users.AsNoTracking().ToListAsync();
+            return _db.Users.AsNoTracking();
         }
 
         public async Task Update(User Entity)

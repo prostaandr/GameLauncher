@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 
 namespace GameLauncher.Service.OrderFilter
 {
-    public static class OrderFilterBehavior
+    public static class SortFilterBehavior
     {
         // Application
-        public static IQueryable<ApplicationDetailDto> OrderApplicationBy(this IQueryable<ApplicationDetailDto> applications, ApplicationOrderOptions options)
+        public static IQueryable<ApplicationDto> OrderApplicationsBy(this IQueryable<ApplicationDto> applications, ApplicationSortOptions options)
         {
             switch (options)
             {
-                case ApplicationOrderOptions.Simple: 
+                case ApplicationSortOptions.Simple: 
                     return applications.OrderByDescending(a => a.Id);
-                case ApplicationOrderOptions.ByName:
+                case ApplicationSortOptions.ByName:
                     return applications.OrderBy(a => a.Name);
-                case ApplicationOrderOptions.ByReviews:
+                case ApplicationSortOptions.ByReviews:
                     return applications.OrderByDescending(a => a.ReviewsPercent);
-                case ApplicationOrderOptions.ByPriceAsc:
+                case ApplicationSortOptions.ByPriceAsc:
                     return applications.OrderBy(a => a.Price);
-                case ApplicationOrderOptions.ByPriceDesc:
+                case ApplicationSortOptions.ByPriceDesc:
                     return applications.OrderByDescending(a => a.Price);
-                case ApplicationOrderOptions.ByRealeseDateAsc:
+                case ApplicationSortOptions.ByRealeseDateAsc:
                     return applications.OrderBy(a => a.ReleaseDate);
-                case ApplicationOrderOptions.ByRealeseDateDesc:
+                case ApplicationSortOptions.ByRealeseDateDesc:
                     return applications.OrderByDescending(a => a.ReleaseDate);
                 default: throw new ArgumentNullException("Такой опции сортировани не существует");
             }

@@ -1,5 +1,6 @@
 ﻿using GameLauncher.Model;
 using GameLauncher.Service.DTOs;
+using GameLauncher.Service.OrderFilter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace GameLauncher.Service.Interfaces
     public interface IApplicationService
     {
         Task<ApplicationDetailDto> GetApplication(int id);
-        Task<List<ApplicationDto>> GetApplications();
+        Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions);
         Task<int> GetReviewsPersent(List<Review> reviews);
-        Task<List<Genre>> GetGenres();
+        IQueryable<Genre> GetGenres();
     }
 }

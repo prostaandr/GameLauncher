@@ -2,6 +2,7 @@
 using GameLauncher.Model;
 using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
+using GameLauncher.Service.OrderFilter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,9 +53,9 @@ namespace GameLauncher.Service
             return dto;
         }
 
-        public async Task<List<ApplicationDto>> GetApplications()
+        public async Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions)
         {
-            var applications = await _applicationRepository.GetAll();
+            var applications = _applicationRepository.GetAll().ToList();
 
             var dtos = new List<ApplicationDto>();
 
@@ -76,12 +77,12 @@ namespace GameLauncher.Service
 
                 dtos.Add(dto);
             }
-            return dtos;
+            return await Task.FromResult(dtos.AsQueryable().OrderApplicationsBy(sortOptions));
         }
 
-        public async Task<List<Genre>> GetGenres()
+        public IQueryable<Genre> GetGenres()
         {
-            return await _genreRepository.GetAll();
+            return _genreRepository.GetAll();
         }
 
         public async Task<int> GetReviewsPersent(List<Review> reviews)
