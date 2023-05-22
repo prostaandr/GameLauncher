@@ -21,8 +21,6 @@ namespace GameLauncher.Model
         public Country? Country { get; set; }
 
         public List<Review> Reviews { get; set; } = new List<Review>();
-        //public List<AvailableApplication> AvailableApplications { get; set; } = new List<AvailableApplication>();
-        //public List<WishList> WishListApplication { get; set; } = new List<WishList>();
         public List<Application> AvailableApplications { get; set; } = new List<Application>();
         public List<Application> WishListApplications { get; set; } = new List<Application>();
         public List<Order> Orders { get; set; } = new List<Order>();

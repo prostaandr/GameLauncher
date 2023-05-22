@@ -1,5 +1,6 @@
 ﻿using GameLauncher.Data.Interfaces;
 using GameLauncher.Model;
+using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,33 @@ namespace GameLauncher.Service
             _genreRepository = genreRepository;
         }
 
-        public async Task<Application> GetApplication(int id)
+        public async Task<ApplicationDetailDto> GetApplication(int id)
         {
-            return await _applicationRepository.Get(id); 
+            var app = await _applicationRepository.Get(id);
+
+            var dto = new ApplicationDetailDto
+            {
+                Id = app.Id,
+                Name = app.Name,
+                Description = app.Description,
+                Price = app.Price,
+                PosterUrl = app.PosterUrl,
+                ReleaseDate = app.ReleaseDate,
+                ApplicationType = app.ApplicationType,
+                LanguagesLine = String.Join(", ", app.Languages.Select(l => l.Name)),
+                FeaturesLine = String.Join(", ", app.Features.Select(f => f.Name)),
+                GenresLine = String.Join(", ", app.Genres.Select(g => g.Name)),
+                DeveloperName = app.Developer.Name,
+                PublisherName = app.Publisher.Name,
+                ParentId = app.ParentId,
+                MinimumSystemRequirements = app.MinimumSystemRequirements,
+                RecommendedSystemRequirements = app.RecommendedSystemRequirements,
+                Medias = app.Medias,
+                Reviews = app.Reviews,
+                ReviewsPercent = await GetReviewsPersent(app.Reviews)
+            };
+
+            return dto;
         }
 
         public async Task<List<Application>> GetApplications()
@@ -37,10 +62,8 @@ namespace GameLauncher.Service
             return await _genreRepository.GetAll();
         }
 
-        public async Task<int> GetReviewsPersent(int id)
+        public async Task<int> GetReviewsPersent(List<Review> reviews)
         {
-            var reviews = await _reviewRepository.GetFromAppliation(id);
-
             var positiveCount = 0;
             foreach (var review in reviews)
             {

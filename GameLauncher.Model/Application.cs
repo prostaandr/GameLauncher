@@ -40,8 +40,6 @@ namespace GameLauncher.Model
         public List<Media> Medias { get; set; } = new List<Media>();
         public List<Promotion> Promotions { get; set; } = new List<Promotion>();
         public List<Review> Reviews { get; set; } = new List<Review>();
-        //public List<AvailableApplication> AvailableApplications { get; set; } = new List<AvailableApplication>();
-        //public List<WishList> WishListApplications { get; set; } = new List<WishList>();
         public List<User> Users { get; set; } = new List<User>();
         public List<Order> Orders { get; set; } = new List<Order>();
     }

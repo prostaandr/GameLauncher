@@ -97,7 +97,7 @@
                     </Grid>
                     <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
                         <TextBlock Text="ОТЗЫВЫ:" Foreground="{StaticResource titleFontColor}" Width="120" />
-                        <TextBlock x:Name="reviewsPersentTextBlock" Text="{Binding ReviewsPersent}"/>
+                        <TextBlock x:Name="reviewsPersentTextBlock" Text="{Binding Application.ReviewsPercent}"/>
                         <TextBlock Text="% " />
                         <TextBlock Text="положительных" Width="120" />
                     </StackPanel>
@@ -108,11 +108,11 @@
                     <StackPanel Grid.Row="4" Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="РАЗРАБОТЧИК:" Foreground="{StaticResource titleFontColor}" Width="120" />
-                            <TextBlock x:Name="develoverTextBlock" Text="{Binding Application.Developer.Name}"/>
+                            <TextBlock x:Name="develoverTextBlock" Text="{Binding Application.DeveloperName}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="ИЗДАТЕЛЬ:" Foreground="{StaticResource titleFontColor}" Width="120" />
-                            <TextBlock x:Name="publisherTextBlock" Text="{Binding Application.Publisher.Name}"/>
+                            <TextBlock x:Name="publisherTextBlock" Text="{Binding Application.PublisherName}"/>
                         </StackPanel>
                     </StackPanel>
                     <Grid Grid.Row="5">
@@ -136,19 +136,19 @@
                         <Grid Grid.Row="0" Margin="0 0 0 20">
                             <StackPanel>
                                 <TextBlock Text="Жанры: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
-                                <TextBlock x:Name="genresTextBlock" Text="{Binding Genres}" FontSize="14" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock x:Name="genresTextBlock" Text="{Binding Application.GenresLine}" FontSize="14" TextWrapping="Wrap"></TextBlock>
                             </StackPanel>
                         </Grid>
                         <Grid Grid.Row="1" Margin="0 0 0 20">
                             <StackPanel>
                                 <TextBlock Text="Особенности: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
-                                <TextBlock x:Name="featuresTextBlock" Text="{Binding Features}" FontSize="14" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock x:Name="featuresTextBlock" Text="{Binding Application.FeaturesLine}" FontSize="14" TextWrapping="Wrap"></TextBlock>
                             </StackPanel>
                         </Grid>
                         <Grid Grid.Row="2" Margin="0 0 0 20">
                             <StackPanel>
                                 <TextBlock Text="Языки: " Foreground="{StaticResource titleFontColor}" FontSize="14"></TextBlock>
-                                <TextBlock x:Name="languagesTextBlock" Text="{Binding Languages}" FontSize="14" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock x:Name="languagesTextBlock" Text="{Binding Application.LanguagesLine}" FontSize="14" TextWrapping="Wrap"></TextBlock>
                             </StackPanel>
                         </Grid>
                     </Grid>

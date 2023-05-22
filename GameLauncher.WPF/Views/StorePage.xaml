@@ -109,6 +109,14 @@
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                         <RadioButton GroupName="Sort" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 10 0"></RadioButton>
+                        <TextBlock Text="По названию" FontSize="14"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <RadioButton GroupName="Sort" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 10 0"></RadioButton>
+                        <TextBlock Text="По отзывам" FontSize="14"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <RadioButton GroupName="Sort" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 10 0"></RadioButton>
                         <TextBlock Text="По цене (↑)" FontSize="14"></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
@@ -119,17 +127,9 @@
                         <RadioButton GroupName="Sort" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 10 0"></RadioButton>
                         <TextBlock Text="По дате выхода (↑)" FontSize="14"></TextBlock>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                        <RadioButton GroupName="Sort" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 10 0"></RadioButton>
-                        <TextBlock Text="По дате выхода (↓)" FontSize="14"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                        <RadioButton GroupName="Sort" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 10 0"></RadioButton>
-                        <TextBlock Text="По названию" FontSize="14"></TextBlock>
-                    </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 10 0 10">
                         <RadioButton GroupName="Sort" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 10 0"></RadioButton>
-                        <TextBlock Text="По отзывам" FontSize="14"></TextBlock>
+                        <TextBlock Text="По дате выхода (↓)" FontSize="14"></TextBlock>
                     </StackPanel>
                 </StackPanel>
             </Border>

@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Model;
+using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.WPF.Commands;
 using GameLauncher.WPF.Helpers;
@@ -23,8 +24,8 @@ namespace GameLauncher.WPF.ViewModels
     {
         private IApplicationService _applicationService;
 
-        private Application _application;
-        public Application Application
+        private ApplicationDetailDto _application;
+        public ApplicationDetailDto Application
         {
             get => _application;
             set
@@ -43,42 +44,6 @@ namespace GameLauncher.WPF.ViewModels
             {
                 if (value == _reviewsPersent) return;
                 _reviewsPersent = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _genres;
-        public string Genres
-        {
-            get => _genres;
-            set
-            {
-                if (value == _genres) return;
-                _genres = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _features;
-        public string Features
-        {
-            get => _features;
-            set
-            {
-                if (value == _features) return;
-                _features = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _languages;
-        public string Languages
-        {
-            get => _languages;
-            set
-            {
-                if (value == _languages) return;
-                _languages = value;
                 OnPropertyChanged();
             }
         }
@@ -146,16 +111,10 @@ namespace GameLauncher.WPF.ViewModels
         {
             Application = await _applicationService.GetApplication(id);
 
-            ReviewsPersent = (await _applicationService.GetReviewsPersent(id)).ToString();
-
             if (Application.Medias.Count > 0)
             {
                 MainImageUrl = Application.Medias[0].Url;
             }
-
-            Genres = String.Join(", ", Application.Genres.Select(g => g.Name));
-            Features = String.Join(", ", Application.Features.Select(f => f.Name));
-            Languages = String.Join(", ", Application.Languages.Select(l => l.Name));
 
             RecSystemRequirements = FillSystemRequirements(Application.RecommendedSystemRequirements);
             MinSystemRequirements = FillSystemRequirements(Application.MinimumSystemRequirements);

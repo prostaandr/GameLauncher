@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Model;
+using GameLauncher.Service.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace GameLauncher.Service.Interfaces
 {
     public interface IApplicationService
     {
-        Task<Application> GetApplication(int id);
+        Task<ApplicationDetailDto> GetApplication(int id);
         Task<List<Application>> GetApplications();
-        Task<int> GetReviewsPersent(int id);
+        Task<int> GetReviewsPersent(List<Review> reviews);
         Task<List<Genre>> GetGenres();
     }
 }
