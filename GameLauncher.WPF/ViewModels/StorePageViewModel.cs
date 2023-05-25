@@ -3,14 +3,17 @@ using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.Service.OrderFilter;
 using GameLauncher.WPF.Commands;
+using GameLauncher.WPF.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace GameLauncher.WPF.ViewModels
 {
@@ -43,6 +46,30 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private List<string> _sortOptions;
+        public List<string> SortOptions
+        {
+            get => _sortOptions;
+            set
+            {
+                if (value == _sortOptions) return;
+                _sortOptions = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _selectedSortIndex;
+        public int SelectedSortIndex
+        {
+            get => _selectedSortIndex;
+            set
+            {
+                if (value == _selectedSortIndex) return;
+                _selectedSortIndex = value;
+                OnPropertyChanged();
+            }
+        }
+
         private List<Genre> _genres;
         public List<Genre> Genres
         {
@@ -68,6 +95,24 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private RelayCommand _changeSortOptionCommand;
+        public RelayCommand ChangeSortOptionCommand
+        {
+            get
+            {
+                return _changeSortOptionCommand ??
+                  (_changeSortOptionCommand = new RelayCommand(obj =>
+                  {
+                      SetApplicationsBySort();
+                  }));
+            }
+        }
+
+        private async Task SetApplicationsBySort()
+        {
+            Applications =  Task.FromResult(await _applicationService.GetApplications((ApplicationSortOptions)SelectedSortIndex)).Result.ToList();
+        }
+
         public StorePageViewModel(MainViewModel main)
         {
             _main = main;
@@ -75,12 +120,24 @@ namespace GameLauncher.WPF.ViewModels
 
             Genres = _applicationService.GetGenres().ToList();
 
-            InitializeAsync();
+            SortOptions = new List<string>
+            {
+                "По имени",
+                "По отзывам",
+                "По цене (↑)",
+                "По цене (↓)",
+                "По дате выхода (↑)",
+                "По дате выхода (↓)"
+            };
+
+            SelectedSortIndex = 4;
+
+            SetApplicationsBySort();
         }
 
         private async void InitializeAsync()
         {
-            Applications =  (await _applicationService.GetApplications(ApplicationSortOptions.ByReviews)).ToList();
+           
         }
     }
 }

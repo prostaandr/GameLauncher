@@ -14,8 +14,6 @@ namespace GameLauncher.Service.OrderFilter
         {
             switch (options)
             {
-                case ApplicationSortOptions.Simple: 
-                    return applications.OrderByDescending(a => a.Id);
                 case ApplicationSortOptions.ByName:
                     return applications.OrderByDescending(a => a.Name);
                 case ApplicationSortOptions.ByReviews:
@@ -28,7 +26,7 @@ namespace GameLauncher.Service.OrderFilter
                     return applications.OrderBy(a => a.ReleaseDate);
                 case ApplicationSortOptions.ByRealeseDateDesc:
                     return applications.OrderByDescending(a => a.ReleaseDate);
-                default: throw new ArgumentNullException("Такой опции сортировани не существует");
+                default: throw new ArgumentNullException("Такой опции сортировки не существует");
             }
         }
     }

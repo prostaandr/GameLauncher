@@ -51,7 +51,7 @@ namespace GameLauncher.Service
                 ReviewsPercent = await GetReviewsPersent(app.Id)
             };
 
-            return dto;
+            return await Task.FromResult(dto);
         }
 
         public async Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions)
@@ -78,7 +78,7 @@ namespace GameLauncher.Service
 
                 dtos.Add(dto);
             }
-            return await Task.FromResult(dtos.AsQueryable().OrderApplicationsBy(sortOptions));
+            return dtos.AsQueryable().OrderApplicationsBy(sortOptions);
         }
 
         public IQueryable<Genre> GetGenres()

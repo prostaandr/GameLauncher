@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
+using System.Globalization;
 
 namespace GameLauncher.WPF.Helpers.Converters
 {
