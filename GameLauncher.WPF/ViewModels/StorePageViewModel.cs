@@ -110,7 +110,7 @@ namespace GameLauncher.WPF.ViewModels
 
         private async Task SetApplicationsBySort()
         {
-            Applications =  Task.FromResult(await _applicationService.GetApplications((ApplicationSortOptions)SelectedSortIndex)).Result.ToList();
+            Applications = Task.FromResult(await _applicationService.GetApplications((ApplicationSortOptions)SelectedSortIndex)).Result.ToList();
         }
 
         public StorePageViewModel(MainViewModel main)

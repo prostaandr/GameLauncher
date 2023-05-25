@@ -15,7 +15,7 @@ namespace GameLauncher.Service.OrderFilter
             switch (options)
             {
                 case ApplicationSortOptions.ByName:
-                    return applications.OrderByDescending(a => a.Name);
+                    return applications.OrderBy(a => a.Name);
                 case ApplicationSortOptions.ByReviews:
                     return applications.OrderByDescending(a => a.ReviewsPercent);
                 case ApplicationSortOptions.ByPriceAsc:
