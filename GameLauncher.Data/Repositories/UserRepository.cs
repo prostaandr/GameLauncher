@@ -50,5 +50,11 @@ namespace GameLauncher.Data.Repositories
         {
             return await _db.Users.AsNoTracking().Include(u => u.AvailableApplications).SingleOrDefaultAsync(a => a.Login == login);
         }
+
+        public async Task AddAvalaibleApplication(int userId, int appId)
+        {
+            _db.Users.Find(userId).AvailableApplications.Add(_db.Applications.Find(appId));
+            await _db.SaveChangesAsync();
+        }
     }
 }

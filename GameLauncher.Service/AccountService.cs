@@ -53,5 +53,10 @@ namespace GameLauncher.Service
         {
             return _countryRepository.GetAll();
         }
+
+        public async Task AddAvalableApplication(int appId)
+        {
+            await _userRepository.AddAvalaibleApplication(CurrentUser.Id, appId);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GameLauncher.Service.DTOs;
+﻿using GameLauncher.Service;
+using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.WPF.Commands;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GameLauncher.WPF.ViewModels
 {
@@ -17,6 +19,7 @@ namespace GameLauncher.WPF.ViewModels
         MainViewModel _main;
         private IApplicationService _applicationService;
         private IOrderService _orderService;
+        private IAccountService _accountService;
 
         private List<ApplicationDto> _applications;
         public List<ApplicationDto> Applications
@@ -29,20 +32,6 @@ namespace GameLauncher.WPF.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        private ObservableCollection<ApplicationViewModel> _applicationsVM;
-        public ObservableCollection<ApplicationViewModel> ApplicationsVM
-        {
-            get => _applicationsVM;
-            set
-            {
-                if (value == _applicationsVM) return;
-                _applicationsVM = value;
-                OnPropertyChanged();
-            }
-        }
-
-
 
         private int _totalPrice;
         public int TotalPrice
@@ -85,11 +74,33 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private RelayCommand _buyCommand;
+        public RelayCommand BuyCommand
+        {
+            get
+            {
+                return _buyCommand ??
+                  (_buyCommand = new RelayCommand(obj =>
+                  {
+                      foreach(var app in Applications)
+                      {
+                          _accountService.AddAvalableApplication(app.Id);
+                      }
+                      _orderService.CloseOrder();
+                      Applications = new List<ApplicationDto> { };
+                      TotalPrice = 0;
+
+                      MessageBox.Show("Покупка завершилась успешно");
+                  }));
+            }
+        }
+
         public BasketViewModel(MainViewModel main)
         {
             _main = main;
             _applicationService = App.serviceProvider.GetService<IApplicationService>();
             _orderService = App.serviceProvider.GetService<IOrderService>();
+            _accountService = App.serviceProvider.GetService<IAccountService>();
 
             InitializeAsync();
         }
@@ -103,11 +114,6 @@ namespace GameLauncher.WPF.ViewModels
         private async void InitializeAsync()
         {
             SetApplications();
-            ApplicationsVM = new ObservableCollection<ApplicationViewModel>();
-            //foreach (var application in Applications)
-            //{
-            //    ApplicationsVM.Add(new ApplicationViewModel() { Application = application });
-            //}
         }
     }
 }

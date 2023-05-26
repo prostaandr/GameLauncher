@@ -10,5 +10,6 @@ namespace GameLauncher.Data.Interfaces
     public interface IUserRepository : IBaseRepository<User>
     {
         public Task<User> GetByLogin(string login);
+        public Task AddAvalaibleApplication(int userId, int appId);
     }
 }

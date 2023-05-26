@@ -125,6 +125,7 @@
                     <TextBlock Text="{Binding TotalPrice}"></TextBlock>
                     <TextBlock Text=" руб."></TextBlock>
                 </StackPanel>
+                <Button Content="Купить" Margin="0 10" Height="30" Command="{Binding BuyCommand}"></Button>
             </StackPanel>
         </Grid>
     </ScrollViewer>

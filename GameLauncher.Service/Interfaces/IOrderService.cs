@@ -13,7 +13,7 @@ namespace GameLauncher.Service.Interfaces
         Task CreateOrder();
         Task AddOrderContent(int appId);
         Task RemoveOrderContent(int appId);
-        Task CloserOrder();
+        Task CloseOrder();
         Task SetCurrentOrder();
         Task<int> GetTotalPrice();
         Task<IQueryable<ApplicationDto>> GetOrderContentApplications();

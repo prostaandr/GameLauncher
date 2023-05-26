@@ -13,5 +13,6 @@ namespace GameLauncher.Service.Interfaces
         Task<User> GetUser(int id);
         Task<User> Login(string login, string password);
         IQueryable<Country> GetAllCountries();
+        Task AddAvalableApplication(int appId);
     }
 }

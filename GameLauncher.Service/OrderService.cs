@@ -59,10 +59,11 @@ namespace GameLauncher.Service
             await _orderRepository.Update(CurrentOrder);
         }
 
-        public async Task CloserOrder()
+        public async Task CloseOrder()
         {
             CurrentOrder.IsClose = true;
             await SetCurrentOrder();
+            await _orderRepository.Update(CurrentOrder);
         }
 
         public async Task SetCurrentOrder()
