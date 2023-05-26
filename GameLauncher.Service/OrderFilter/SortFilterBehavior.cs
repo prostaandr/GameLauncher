@@ -29,5 +29,15 @@ namespace GameLauncher.Service.OrderFilter
                 default: throw new ArgumentNullException("Такой опции сортировки не существует");
             }
         }
+
+        public static IQueryable<ApplicationDto> FilterApplicationsBy(this IQueryable<ApplicationDto> applications, ApplicationFilterOption options, object value)
+        {
+            switch (options)
+            {
+                case ApplicationFilterOption.ByGenre:
+                    return applications.Where(a => a.GenreNames.Contains(value));
+                default: throw new ArgumentNullException("Такой опции фильтрации не существует");
+            }
+        }
     }
 }

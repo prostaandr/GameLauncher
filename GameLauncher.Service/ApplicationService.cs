@@ -54,7 +54,7 @@ namespace GameLauncher.Service
             return await Task.FromResult(dto);
         }
 
-        public async Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions)
+        public async Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions, Dictionary<string, ApplicationFilterOption> filters)
         {
             var applications = await _applicationRepository.GetAll().ToListAsync();
 
@@ -70,7 +70,7 @@ namespace GameLauncher.Service
                     Price = applications[i].Price,
                     PosterUrl = applications[i].PosterUrl,
                     ApplicationType = applications[i].ApplicationType,
-                    Genres = applications[i].Genres,
+                    GenreNames = applications[i].Genres.Select(g => g.Name).ToList(),
                     Features = applications[i].Features,
                     Languages = applications[i].Languages,
                     ReviewsPercent = await GetReviewsPersent(applications[i].Id)
@@ -78,7 +78,16 @@ namespace GameLauncher.Service
 
                 dtos.Add(dto);
             }
-            return dtos.AsQueryable().OrderApplicationsBy(sortOptions);
+
+            var qDtos = dtos.AsQueryable();
+            qDtos = qDtos.OrderApplicationsBy(sortOptions);
+
+            foreach (var filter in filters)
+            {
+                qDtos = qDtos.FilterApplicationsBy(filter.Value, filter.Key);
+            }
+
+            return qDtos;
         }
 
         public IQueryable<Genre> GetGenres()

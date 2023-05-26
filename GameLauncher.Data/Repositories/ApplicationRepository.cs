@@ -43,7 +43,9 @@ namespace GameLauncher.Data.Repositories
 
         public IQueryable<Application> GetAll()
         {
-            return _db.Applications.AsNoTracking();
+            return _db.Applications
+                .AsNoTracking()
+                .Include(a => a.Genres);
         }
 
         public async Task Update(Application Entity)

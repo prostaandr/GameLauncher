@@ -70,6 +70,8 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private Dictionary<string, ApplicationFilterOption> _filters;
+
         private List<Genre> _genres;
         public List<Genre> Genres
         {
@@ -103,14 +105,16 @@ namespace GameLauncher.WPF.ViewModels
                 return _changeSortOptionCommand ??
                   (_changeSortOptionCommand = new RelayCommand(obj =>
                   {
-                      SetApplicationsBySort();
+                      SetApplications();
                   }));
             }
         }
 
-        private async Task SetApplicationsBySort()
+        private async Task SetApplications()
         {
-            Applications = Task.FromResult(await _applicationService.GetApplications((ApplicationSortOptions)SelectedSortIndex)).Result.ToList();
+            _filters.Add("Инди", ApplicationFilterOption.ByGenre);
+            _filters.Add("РПГ", ApplicationFilterOption.ByGenre);
+            Applications = Task.FromResult(await _applicationService.GetApplications((ApplicationSortOptions)SelectedSortIndex, _filters)).Result.ToList();
         }
 
         public StorePageViewModel(MainViewModel main)
@@ -132,7 +136,9 @@ namespace GameLauncher.WPF.ViewModels
 
             SelectedSortIndex = 4;
 
-            SetApplicationsBySort();
+            _filters = new Dictionary<string, ApplicationFilterOption>();
+
+            SetApplications();
         }
 
         private async void InitializeAsync()

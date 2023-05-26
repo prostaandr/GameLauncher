@@ -19,7 +19,7 @@ namespace GameLauncher.Service.DTOs
         public ApplicationTypeEnum ApplicationType { get; set; }
         public List<Language> Languages { get; set; } = new List<Language>();
         public List<Feature> Features { get; set; } = new List<Feature>();
-        public List<Genre> Genres { get; set; } = new List<Genre>();
+        public List<string> GenreNames { get; set; } = new List<string>();
         public int ReviewsPercent { get; set; }
     }
 }
