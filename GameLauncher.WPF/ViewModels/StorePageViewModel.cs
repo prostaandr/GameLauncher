@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace GameLauncher.WPF.ViewModels
@@ -165,10 +166,28 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
-        private async Task SetApplications()
+        public string ActualSearch = "";
+
+        private RelayCommand _searchCommand;
+        public RelayCommand SearchCommand
         {
-            Applications = Task.FromResult(await _applicationService.GetApplications((ApplicationSortOptions)SelectedSortIndex, _filters)).Result.ToList();
+            get
+            {
+                return _searchCommand ??
+                  (_searchCommand = new RelayCommand(obj =>
+                  {
+                      ActualSearch = SearchBarText;
+                      SetApplications();
+                  }));
+            }
         }
+
+        private async void SetApplications()
+        {
+            Applications = Task.FromResult(await _applicationService.GetApplications(ActualSearch, (ApplicationSortOptions)SelectedSortIndex, _filters)).Result.ToList();
+        }
+
+
 
         public StorePageViewModel(MainViewModel main)
         {

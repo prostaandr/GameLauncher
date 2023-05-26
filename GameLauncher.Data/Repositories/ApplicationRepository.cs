@@ -50,6 +50,16 @@ namespace GameLauncher.Data.Repositories
                 .Include(a => a.Languages);
         }
 
+        public IQueryable<Application> GetAll(string searchValue)
+        {
+            return _db.Applications
+                .AsNoTracking()
+                .Include(a => a.Genres)
+                .Include(a => a.Features)
+                .Include(a => a.Languages)
+                .Where(a => EF.Functions.Like(a.Name, "%" + searchValue + "%"));
+        }
+
         public async Task Update(Application Entity)
         {
             _db.Applications.Update(Entity);

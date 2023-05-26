@@ -59,9 +59,15 @@ namespace GameLauncher.Service
             return await Task.FromResult(dto);
         }
 
-        public async Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions, Dictionary<string, ApplicationFilterOption> filters)
+        public async Task<IQueryable<ApplicationDto>> GetApplications(string searchValue, ApplicationSortOptions sortOptions, Dictionary<string, ApplicationFilterOption> filters)
         {
-            var applications = await _applicationRepository.GetAll().ToListAsync();
+            List<Application> applications;
+
+            if (!String.IsNullOrEmpty(searchValue))
+            {
+                applications = await _applicationRepository.GetAll(searchValue).ToListAsync();
+            }
+            else applications = await _applicationRepository.GetAll().ToListAsync();
 
             var dtos = new List<ApplicationDto>();
 
@@ -85,6 +91,7 @@ namespace GameLauncher.Service
             }
 
             var qDtos = dtos.AsQueryable();
+
             qDtos = qDtos.OrderApplicationsBy(sortOptions);
 
             foreach (var filter in filters)

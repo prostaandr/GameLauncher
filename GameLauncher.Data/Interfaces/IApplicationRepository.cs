@@ -9,6 +9,6 @@ namespace GameLauncher.Data.Interfaces
 {
     public interface IApplicationRepository : IBaseRepository<Application>
     {
-        
+        IQueryable<Application> GetAll(string searchValue);
     }
 }
