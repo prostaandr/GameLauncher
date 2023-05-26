@@ -131,7 +131,7 @@ namespace GameLauncher.WPF.ViewModels
 
                       LoginErrors = String.Join("\n", User.Login.Rules().NotEmpty().MinCharacters(5).MaxCharacters(30).Validate());
                       EmailErrors = String.Join("\n", User.Email.Rules().NotEmpty().Validate());
-                      PasswordErrors = String.Join("\n", User.Password.Rules().NotEmpty().MinCharacters(8).Compliance(RepeatePassword, "Подтверждение пароля").Validate());
+                      PasswordErrors = String.Join("\n", User.Password.Rules().NotEmpty().MinCharacters(6).Compliance(RepeatePassword, "Подтверждение пароля").Validate());
                       NickNameErrors = String.Join("\n", User.Nickname.Rules().NotEmpty().MinCharacters(5).MaxCharacters(20).Validate());
                       CountryErrors = String.Join("\n", country.Country.Name.Rules().NotEmpty().Validate());
 

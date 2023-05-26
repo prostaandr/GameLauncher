@@ -13,6 +13,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace GameLauncher.WPF.ViewModels
@@ -110,10 +111,38 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private RelayCommand _changeFilterOptionCommand;
+        public RelayCommand ChangeFilterOptionCommand
+        {
+            get
+            {
+                return _changeFilterOptionCommand ??
+                  (_changeFilterOptionCommand = new RelayCommand(obj =>
+                  {
+                      var checkBox = obj as CheckBox;
+
+                      ApplicationFilterOption option = ApplicationFilterOption.ByGenre;
+                      if (checkBox.Name == "genreCheckBox") option = ApplicationFilterOption.ByGenre;
+                      else if (checkBox.Name == "featureCheckBox") return;
+                      else if (checkBox.Name == "languageCheckBox") return;
+                      else throw new Exception("Неизвестная фильтрация");
+
+                      if (checkBox.IsChecked == true)
+                      {
+                          _filters.Add(checkBox.Content.ToString(), option);
+                      }
+                      else if (checkBox.IsChecked == false)
+                      {
+                          _filters.Remove(checkBox.Content.ToString());
+                      }
+
+                      SetApplications();
+                  }));
+            }
+        }
+
         private async Task SetApplications()
         {
-            _filters.Add("Инди", ApplicationFilterOption.ByGenre);
-            _filters.Add("РПГ", ApplicationFilterOption.ByGenre);
             Applications = Task.FromResult(await _applicationService.GetApplications((ApplicationSortOptions)SelectedSortIndex, _filters)).Result.ToList();
         }
 

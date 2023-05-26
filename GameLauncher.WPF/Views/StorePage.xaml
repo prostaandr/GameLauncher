@@ -17,6 +17,7 @@
 
     <UserControl.Resources>
         <converters:EnumConverter x:Key="enumConverter"/>
+        <converters:MultiValueConverter x:Key="multiValueConverter"/>
         <Style x:Key="mouseOverBorder" TargetType="Border">
             <Setter Property="Background" Value="#212429"></Setter>
             <Style.Triggers>
@@ -148,8 +149,18 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="10 0 0 10">
-                                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"></CheckBox>
-                                <TextBlock Text="{Binding Name}" FontSize="14"></TextBlock>
+                                <CheckBox x:Name="genreCheckBox" Content="{Binding Name}" FontSize="14" Foreground="{StaticResource mainFontColor}" 
+                                          VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"
+                                          Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}},Path=ActualWidth}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction 
+                                                Command="{Binding ElementName=gg, Path=DataContext.ChangeFilterOptionCommand}"
+                                                CommandParameter="{Binding ElementName=genreCheckBox}">
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </CheckBox>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
