@@ -26,7 +26,7 @@ namespace GameLauncher.Data.Repositories
 
         public async Task<User> Get(int id)
         {
-            return await _db.Users.AsNoTracking().Include(u => u.AvailableApplications).SingleOrDefaultAsync(a => a.Id == id);
+            return await _db.Users.Include(u => u.AvailableApplications).SingleOrDefaultAsync(a => a.Id == id);
         }
 
         public IQueryable<User> GetAll()
@@ -48,7 +48,7 @@ namespace GameLauncher.Data.Repositories
 
         public async Task<User> GetByLogin(string login)
         {
-            return await _db.Users.AsNoTracking().Include(u => u.AvailableApplications).SingleOrDefaultAsync(a => a.Login == login);
+            return await _db.Users.Include(u => u.AvailableApplications).SingleOrDefaultAsync(a => a.Login == login);
         }
 
         public async Task AddAvalaibleApplication(int userId, int appId)
