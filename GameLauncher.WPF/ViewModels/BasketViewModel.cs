@@ -66,12 +66,15 @@ namespace GameLauncher.WPF.ViewModels
                 return _removeGameCommand ??
                   (_removeGameCommand = new RelayCommand(obj =>
                   {
-                      _orderService.RemoveOrderContent(Convert.ToInt32(obj));
-                      Applications.Remove(Applications.FirstOrDefault(a => a.Id == Convert.ToInt32(obj)));
-                      _orderService.SetCurrentOrder();
+                      RemoveAsync(Convert.ToInt32(obj));
                       SetApplications();
                   }));
             }
+        }
+
+        private async void RemoveAsync(int id)
+        {
+            await _orderService.RemoveOrderContent(id);
         }
 
         private RelayCommand _buyCommand;
@@ -82,17 +85,22 @@ namespace GameLauncher.WPF.ViewModels
                 return _buyCommand ??
                   (_buyCommand = new RelayCommand(obj =>
                   {
-                      foreach(var app in Applications)
-                      {
-                          _accountService.AddAvalableApplication(app.Id);
-                      }
-                      _orderService.CloseOrder();
-                      Applications = new List<ApplicationDto> { };
-                      TotalPrice = 0;
-
+                      BuyAsync();
+    
                       MessageBox.Show("Покупка завершилась успешно");
                   }));
             }
+        }
+
+        private async void BuyAsync()
+        {
+            foreach (var app in Applications)
+            {
+                await _accountService.AddAvalableApplication(app.Id);
+            }
+            await _orderService.CloseOrder();
+            Applications = new List<ApplicationDto> { };
+            TotalPrice = 0;
         }
 
         public BasketViewModel(MainViewModel main)

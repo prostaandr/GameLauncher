@@ -24,6 +24,7 @@ namespace GameLauncher.Service
             _orderRepository = orderRepository;
             _applicationRepository = applicationRepository;
             _applicationService = applicationService;
+
         }
 
         public async Task CreateOrder()
@@ -40,7 +41,6 @@ namespace GameLauncher.Service
         public async Task AddOrderContent(int appId)
         {
             await SetCurrentOrder();
-            await Task.Delay(100);
             var application = await _applicationRepository.GetForOrder(appId);
             await _orderRepository.AddContent(CurrentOrder.Id, appId);
             CurrentOrder.TotalPrice += application.Price;
@@ -74,6 +74,8 @@ namespace GameLauncher.Service
                 await CreateOrder();
                 CurrentOrder = Task.FromResult(await _orderRepository.GetCurrent()).Result;
             }
+
+            await Task.Delay(100);
         }
 
         public async Task<int> GetTotalPrice()
@@ -84,7 +86,6 @@ namespace GameLauncher.Service
         public async Task<IQueryable<ApplicationDto>> GetOrderContentApplications()
         {
             await SetCurrentOrder();
-            await Task.Delay(100);
             var dtos = new List<ApplicationDto>();
 
             for (int i = 0; i < CurrentOrder.Applications.Count; i++)
