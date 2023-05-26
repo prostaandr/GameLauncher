@@ -19,6 +19,10 @@
             <views:StorePage></views:StorePage>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModels:BasketViewModel}">
+            <views:Basket></views:Basket>
+        </DataTemplate>
+
         <SolidColorBrush x:Key="backgroundColor" Color="#1e1e1e"/>
         <SolidColorBrush x:Key="headerBackgroundColor" Color="#121212"/>
         <SolidColorBrush x:Key="textElemBackgroundColor" Color="#32353c"/>

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace GameLauncher.Data.Interfaces
 {
-    public interface IApplicationRepository : IBaseRepository<Application>
+    public interface IOrderRepository : IBaseRepository<Order>
     {
-        IQueryable<Application> GetAll(string searchValue);
-        Task<Application> GetForOrder(int id);
+        Task<Order> GetCurrent();
+        Task DeleteContent(int orderId, int appId);
+        Task AddContent(int orderId, int appId);
     }
 }

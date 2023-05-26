@@ -123,6 +123,19 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private RelayCommand _openBasketCommand;
+        public RelayCommand OpenBasketCommand
+        {
+            get
+            {
+                return _openBasketCommand ??
+                  (_openBasketCommand = new RelayCommand(obj =>
+                  {
+                      _main.CurrentViewModel = new BasketViewModel(_main);
+                  }));
+            }
+        }
+
         private RelayCommand _changeSortOptionCommand;
         public RelayCommand ChangeSortOptionCommand
         {
@@ -182,7 +195,7 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
-        private async void SetApplications()
+        private async Task SetApplications()
         {
             Applications = Task.FromResult(await _applicationService.GetApplications(ActualSearch, (ApplicationSortOptions)SelectedSortIndex, _filters)).Result.ToList();
         }

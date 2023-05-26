@@ -64,9 +64,11 @@ namespace GameLauncher.WPF
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IFeatureRepository, FeatureRepository>();
             services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
             services.AddTransient<IApplicationService, ApplicationService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IOrderService, OrderService>();
 
             services.AddSingleton<LoginWindow>();
             services.AddSingleton<RegistrationWindow>();
@@ -75,6 +77,7 @@ namespace GameLauncher.WPF
             services.AddSingleton<ApplicationPage>();
             services.AddSingleton<LibraryPage>();
             services.AddSingleton<StorePage>();
+            services.AddSingleton<Basket>();
         }
     }
 }

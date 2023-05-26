@@ -14,6 +14,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -23,6 +24,7 @@ namespace GameLauncher.WPF.ViewModels
     public class ApplicationPageViewModel : BaseViewModel
     {
         private IApplicationService _applicationService;
+        private IOrderService _orderService;
 
         private ApplicationDetailDto _application;
         public ApplicationDetailDto Application
@@ -99,10 +101,32 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private RelayCommand _addToBasketCommand;
+        public RelayCommand AddToBasketCommand
+        {
+            get
+            {
+                return _addToBasketCommand ??
+                  (_addToBasketCommand = new RelayCommand(obj =>
+                  {
+                      try
+                      {
+                          _orderService.AddOrderContent(Application.Id);
+                          MessageBox.Show("Товар добавлен в корзину");
+                      }
+                      catch (Exception ex)
+                      {
+                          MessageBox.Show(ex.Message);
+                      }
+                  }));
+            }
+        }
+
 
         public ApplicationPageViewModel(int id)
         {
             _applicationService = App.serviceProvider.GetService<IApplicationService>();
+            _orderService = App.serviceProvider.GetService<IOrderService>();
 
             InitializeAsync(id);
         }

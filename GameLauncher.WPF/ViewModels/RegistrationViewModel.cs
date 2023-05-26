@@ -179,6 +179,7 @@ namespace GameLauncher.WPF.ViewModels
 
             User = new User();
             User.IconUrl = "";
+            User.Role = Model.Enum.UserRoleEnum.Regular;
 
             Countries = new ObservableCollection<CountryViewModel>();
             var countries = _accountService.GetAllCountries().ToList();

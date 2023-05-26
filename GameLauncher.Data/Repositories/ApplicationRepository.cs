@@ -41,6 +41,24 @@ namespace GameLauncher.Data.Repositories
                 .SingleOrDefaultAsync(a => a.Id == id);
         }
 
+        public async Task<Application> GetForOrder(int id)
+        {
+            return await _db.Applications
+                .AsSplitQuery()
+                .Include(a => a.Developer)
+                .Include(a => a.Publisher)
+                .Include(a => a.Features)
+                .Include(a => a.Genres)
+                .Include(a => a.Languages)
+                .Include(a => a.MinimumSystemRequirements)
+                .Include(a => a.RecommendedSystemRequirements)
+                .Include(a => a.Medias)
+                .Include(a => a.Reviews)
+                .ThenInclude(r => r.User)
+                .SingleOrDefaultAsync(a => a.Id == id);
+        }
+
+
         public IQueryable<Application> GetAll()
         {
             return _db.Applications
