@@ -17,8 +17,8 @@ namespace GameLauncher.Service.DTOs
         public string? PosterUrl { get; set; }
         public DateTime ReleaseDate { get; set; }
         public ApplicationTypeEnum ApplicationType { get; set; }
-        public List<Language> Languages { get; set; } = new List<Language>();
-        public List<Feature> Features { get; set; } = new List<Feature>();
+        public List<string> LanguageNames { get; set; } = new List<string>();
+        public List<string> FeatureNames { get; set; } = new List<string>();
         public List<string> GenreNames { get; set; } = new List<string>();
         public int ReviewsPercent { get; set; }
     }

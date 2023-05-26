@@ -45,7 +45,9 @@ namespace GameLauncher.Data.Repositories
         {
             return _db.Applications
                 .AsNoTracking()
-                .Include(a => a.Genres);
+                .Include(a => a.Genres)
+                .Include(a => a.Features)
+                .Include(a => a.Languages);
         }
 
         public async Task Update(Application Entity)

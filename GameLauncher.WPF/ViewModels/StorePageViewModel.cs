@@ -85,6 +85,30 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private List<Feature> _features;
+        public List<Feature> Features
+        {
+            get => _features;
+            set
+            {
+                if (value == _features) return;
+                _features = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<Language> _languages;
+        public List<Language> Languages
+        {
+            get => _languages;
+            set
+            {
+                if (value == _languages) return;
+                _languages = value;
+                OnPropertyChanged();
+            }
+        }
+
         private RelayCommand _openApplicationPageCommand;
         public RelayCommand OpenApplicationPageCommand
         {
@@ -123,8 +147,8 @@ namespace GameLauncher.WPF.ViewModels
 
                       ApplicationFilterOption option = ApplicationFilterOption.ByGenre;
                       if (checkBox.Name == "genreCheckBox") option = ApplicationFilterOption.ByGenre;
-                      else if (checkBox.Name == "featureCheckBox") return;
-                      else if (checkBox.Name == "languageCheckBox") return;
+                      else if (checkBox.Name == "featureCheckBox") option = ApplicationFilterOption.ByFeature;
+                      else if (checkBox.Name == "languageCheckBox") option = ApplicationFilterOption.ByLanguage;
                       else throw new Exception("Неизвестная фильтрация");
 
                       if (checkBox.IsChecked == true)
@@ -152,6 +176,8 @@ namespace GameLauncher.WPF.ViewModels
             _applicationService = App.serviceProvider.GetService<IApplicationService>();
 
             Genres = _applicationService.GetGenres().ToList();
+            Features = _applicationService.GetFeatures().ToList();
+            Languages = _applicationService.GetLanguages().ToList();
 
             SortOptions = new List<string>
             {
@@ -163,7 +189,7 @@ namespace GameLauncher.WPF.ViewModels
                 "По дате выхода (↓)"
             };
 
-            SelectedSortIndex = 4;
+            SelectedSortIndex = 5;
 
             _filters = new Dictionary<string, ApplicationFilterOption>();
 

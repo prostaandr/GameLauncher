@@ -62,6 +62,8 @@ namespace GameLauncher.WPF
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IFeatureRepository, FeatureRepository>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
 
             services.AddTransient<IApplicationService, ApplicationService>();
             services.AddTransient<IAccountService, AccountService>();

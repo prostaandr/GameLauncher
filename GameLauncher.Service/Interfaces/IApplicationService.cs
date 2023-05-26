@@ -15,5 +15,7 @@ namespace GameLauncher.Service.Interfaces
         Task<IQueryable<ApplicationDto>> GetApplications(ApplicationSortOptions sortOptions, Dictionary<string, ApplicationFilterOption> filters);
         Task<int> GetReviewsPersent(int appId);
         IQueryable<Genre> GetGenres();
+        IQueryable<Feature> GetFeatures();
+        IQueryable<Language> GetLanguages();
     }
 }

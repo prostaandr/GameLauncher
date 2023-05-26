@@ -8,6 +8,8 @@ namespace GameLauncher.Service.OrderFilter
 {
     public enum ApplicationFilterOption
     {
-        ByGenre
+        ByGenre,
+        ByFeature,
+        ByLanguage
     }
 }

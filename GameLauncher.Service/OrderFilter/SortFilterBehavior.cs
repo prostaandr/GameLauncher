@@ -36,6 +36,10 @@ namespace GameLauncher.Service.OrderFilter
             {
                 case ApplicationFilterOption.ByGenre:
                     return applications.Where(a => a.GenreNames.Contains(value));
+                case ApplicationFilterOption.ByFeature:
+                    return applications.Where(a => a.FeatureNames.Contains(value));
+                case ApplicationFilterOption.ByLanguage:
+                    return applications.Where(a => a.LanguageNames.Contains(value));
                 default: throw new ArgumentNullException("Такой опции фильтрации не существует");
             }
         }

@@ -17,12 +17,17 @@ namespace GameLauncher.Service
         private readonly IApplicationRepository _applicationRepository;
         private readonly IReviewRepository _reviewRepository;
         private readonly IGenreRepository _genreRepository;
+        private readonly IFeatureRepository _featureRepository;
+        private readonly ILanguageRepository _languageRepository;
 
-        public ApplicationService(IApplicationRepository applicationRepository, IReviewRepository reviewRepository, IGenreRepository genreRepository)
+        public ApplicationService(IApplicationRepository applicationRepository, IReviewRepository reviewRepository, IGenreRepository genreRepository,
+            IFeatureRepository featureRepository, ILanguageRepository languageRepository)
         {
             _applicationRepository = applicationRepository;
             _reviewRepository = reviewRepository;
             _genreRepository = genreRepository;
+            _featureRepository = featureRepository;
+            _languageRepository = languageRepository;
         }
 
         public async Task<ApplicationDetailDto> GetApplication(int id)
@@ -71,8 +76,8 @@ namespace GameLauncher.Service
                     PosterUrl = applications[i].PosterUrl,
                     ApplicationType = applications[i].ApplicationType,
                     GenreNames = applications[i].Genres.Select(g => g.Name).ToList(),
-                    Features = applications[i].Features,
-                    Languages = applications[i].Languages,
+                    FeatureNames = applications[i].Features.Select(g => g.Name).ToList(),
+                    LanguageNames = applications[i].Languages.Select(g => g.Name).ToList(),
                     ReviewsPercent = await GetReviewsPersent(applications[i].Id)
                 };
 
@@ -93,6 +98,16 @@ namespace GameLauncher.Service
         public IQueryable<Genre> GetGenres()
         {
             return _genreRepository.GetAll();
+        }
+
+        public IQueryable<Feature> GetFeatures()
+        {
+            return _featureRepository.GetAll();
+        }
+
+        public IQueryable<Language> GetLanguages()
+        {
+            return _languageRepository.GetAll();
         }
 
         public async Task<int> GetReviewsPersent(int appId)
