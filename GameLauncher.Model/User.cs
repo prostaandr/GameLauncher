@@ -1,6 +1,7 @@
 ﻿using GameLauncher.Model.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,19 @@ namespace GameLauncher.Model
     public class User
     {
         public int Id { get; set; }
+        [Required]
         public string? Login { get; set; }
+        [Required]
         public string? Email { get; set; }
+        [Required]
         public string? Password { get; set; }
+        [Required]
         public string? Nickname { get; set; }
         public string? IconUrl { get; set; }
+        [Required]
         public UserRoleEnum Role { get; set; }
 
+        [Required]
         public int CountryId { get; set; }
         public Country? Country { get; set; }
 

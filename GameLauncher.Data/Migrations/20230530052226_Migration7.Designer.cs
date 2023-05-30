@@ -4,6 +4,7 @@ using GameLauncher.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameLauncher.Data.Migrations
 {
     [DbContext(typeof(GameLauncherContext))]
-    partial class GameLauncherContextModelSnapshot : ModelSnapshot
+    [Migration("20230530052226_Migration7")]
+    partial class Migration7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,10 +115,11 @@ namespace GameLauncher.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DeveloperId")
+                    b.Property<int?>("DeveloperId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("MinimumSystemRequirementsId")
+                    b.Property<int?>("MinimumSystemRequirementsId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -132,10 +136,11 @@ namespace GameLauncher.Data.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("PublisherId")
+                    b.Property<int?>("PublisherId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("RecommendedSystemRequirementsId")
+                    b.Property<int?>("RecommendedSystemRequirementsId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReleaseDate")
@@ -564,9 +569,7 @@ namespace GameLauncher.Data.Migrations
 
                     b.HasOne("GameLauncher.Model.SystemRequirements", "MinimumSystemRequirements")
                         .WithMany()
-                        .HasForeignKey("MinimumSystemRequirementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MinimumSystemRequirementsId");
 
                     b.HasOne("GameLauncher.Model.Application", "Parent")
                         .WithMany()
@@ -580,9 +583,7 @@ namespace GameLauncher.Data.Migrations
 
                     b.HasOne("GameLauncher.Model.SystemRequirements", "RecommendedSystemRequirements")
                         .WithMany()
-                        .HasForeignKey("RecommendedSystemRequirementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RecommendedSystemRequirementsId");
 
                     b.Navigation("Developer");
 

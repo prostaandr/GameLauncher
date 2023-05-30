@@ -4,6 +4,7 @@ using GameLauncher.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameLauncher.Data.Migrations
 {
     [DbContext(typeof(GameLauncherContext))]
-    partial class GameLauncherContextModelSnapshot : ModelSnapshot
+    [Migration("20230530052050_Migration6")]
+    partial class Migration6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,10 +115,12 @@ namespace GameLauncher.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DeveloperId")
+                    b.Property<int?>("DeveloperId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("MinimumSystemRequirementsId")
+                    b.Property<int?>("MinimumSystemRequirementsId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -132,10 +137,12 @@ namespace GameLauncher.Data.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("PublisherId")
+                    b.Property<int?>("PublisherId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("RecommendedSystemRequirementsId")
+                    b.Property<int?>("RecommendedSystemRequirementsId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReleaseDate")
@@ -284,7 +291,8 @@ namespace GameLauncher.Data.Migrations
                     b.Property<int>("TotalPrice")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");

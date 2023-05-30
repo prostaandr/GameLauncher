@@ -4,6 +4,7 @@ using GameLauncher.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameLauncher.Data.Migrations
 {
     [DbContext(typeof(GameLauncherContext))]
-    partial class GameLauncherContextModelSnapshot : ModelSnapshot
+    [Migration("20230530052401_Migration8")]
+    partial class Migration8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +115,8 @@ namespace GameLauncher.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DeveloperId")
+                    b.Property<int?>("DeveloperId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("MinimumSystemRequirementsId")
@@ -132,7 +136,8 @@ namespace GameLauncher.Data.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("PublisherId")
+                    b.Property<int?>("PublisherId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("RecommendedSystemRequirementsId")

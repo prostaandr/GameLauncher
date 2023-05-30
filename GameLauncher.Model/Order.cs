@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,8 @@ namespace GameLauncher.Model
         public int TotalPrice { get; set; }
         public bool IsClose { get; set; }
 
-        public int? UserId { get; set; }
-        public User? User { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
 
         public List<Application> Applications { get; set; } = new List<Application>();
     }

@@ -1,6 +1,7 @@
 ﻿using GameLauncher.Model.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace GameLauncher.Model
     public class Media
     {
         public int Id { get; set; }
-        public string? Url { get; set; }
+        public string Url { get; set; }
         public MediaTypeEnum MediaType { get; set; }
 
         public List<Application> Applications { get; set; } = new List<Application>();

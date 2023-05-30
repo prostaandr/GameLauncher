@@ -38,6 +38,10 @@ namespace GameLauncher.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Review>()
+                    .HasIndex(r => new { r.UserId, r.ApplicationId })
+                    .IsUnique();
+
             modelBuilder.Entity<User>()
                     .HasMany(u => u.AvailableApplications)
                     .WithMany(a => a.Users)
