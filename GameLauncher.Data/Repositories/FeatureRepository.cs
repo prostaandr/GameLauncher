@@ -35,7 +35,7 @@ namespace GameLauncher.Data.Repositories
 
         public IQueryable<Feature> GetAll()
         {
-            return _db.Features.AsNoTracking();
+            return _db.Features;
         }
 
         public Task Update(Feature Entity)

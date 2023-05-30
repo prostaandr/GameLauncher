@@ -22,8 +22,13 @@
         <DataTemplate DataType="{x:Type viewModels:BasketViewModel}">
             <views:Basket></views:Basket>
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewModels:ReviewViewModel}">
             <views:Review></views:Review>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:SetApplicationViewModel}">
+            <views:SetApplication></views:SetApplication>
         </DataTemplate>
 
         <SolidColorBrush x:Key="backgroundColor" Color="#1e1e1e"/>

@@ -11,5 +11,7 @@ namespace GameLauncher.Data.Interfaces
     {
         IQueryable<Application> GetAll(string searchValue);
         Task<Application> GetForOrder(int id);
+        IQueryable<Developer> GetDevelopers();
+        IQueryable<Publisher> GetPublishers();
     }
 }

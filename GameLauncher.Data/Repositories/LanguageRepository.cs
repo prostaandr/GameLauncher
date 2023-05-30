@@ -35,7 +35,7 @@ namespace GameLauncher.Data.Repositories
 
         public IQueryable<Language> GetAll()
         {
-            return _db.Languages.AsNoTracking();
+            return _db.Languages;
         }
 
         public Task Update(Language Entity)

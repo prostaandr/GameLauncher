@@ -79,6 +79,7 @@ namespace GameLauncher.WPF
             services.AddSingleton<StorePage>();
             services.AddSingleton<Basket>();
             services.AddSingleton<Views.Review>();
+            services.AddSingleton<SetApplication>();
         }
     }
 }

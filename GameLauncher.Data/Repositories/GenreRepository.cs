@@ -35,7 +35,7 @@ namespace GameLauncher.Data.Repositories
 
         public IQueryable<Genre> GetAll()
         {
-            return _db.Genres.AsNoTracking();
+            return _db.Genres;
         }
 
         public Task Update(Genre Entity)

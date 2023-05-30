@@ -12,6 +12,7 @@ namespace GameLauncher.Service.Interfaces
     public interface IApplicationService
     {
         Task<ApplicationDetailDto> GetApplication(int id);
+        Task<Application> GetApplicationForSet(int id);
         Task<IQueryable<ApplicationDto>> GetApplications(string searchValue, ApplicationSortOptions sortOptions, Dictionary<string, ApplicationFilterOption> filters);
         Task<int> GetReviewsPersent(int appId);
         IQueryable<Genre> GetGenres();
@@ -19,5 +20,8 @@ namespace GameLauncher.Service.Interfaces
         IQueryable<Language> GetLanguages();
         Task SetReview(Review review, bool isNew);
         Review GetReview(int appId, int userId);
+        IQueryable<Developer> GetDevelopers();
+        IQueryable<Publisher> GetPublishers();
+        Task SetApplication(Application application, bool isNew);
     }
 }

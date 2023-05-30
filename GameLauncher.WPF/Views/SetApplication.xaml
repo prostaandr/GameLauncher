@@ -1,0 +1,301 @@
+﻿<UserControl x:Class="GameLauncher.WPF.Views.SetApplication"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameLauncher.WPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="2000" d:DesignWidth="800"
+            Height="Auto" Width="auto"
+            Background="{StaticResource backgroundColor}"
+            Foreground="{StaticResource mainFontColor}"
+            RenderOptions.BitmapScalingMode="HighQuality"
+            RenderOptions.EdgeMode="Aliased">
+    <ScrollViewer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="600"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1" Grid.Row="0" Margin="0 10 0 0">
+                <StackPanel Margin="0 0 0 20" HorizontalAlignment="Left">
+                    <TextBlock Text="Название" Width="70" HorizontalAlignment="Left"  Margin="0 0 0 5"></TextBlock>
+                    <TextBox Text="{Binding Application.Name}" Style="{StaticResource textElementBlockTextBox}" Width="300"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="0 0 0 20" HorizontalAlignment="Left">
+                    <TextBlock Text="Описание" HorizontalAlignment="Left" Width="70" Margin="0 0 0 5"></TextBlock>
+                    <TextBox Text="{Binding Application.Description}" Style="{StaticResource textElementBlockTextBox}" TextWrapping="Wrap" Width="500" Height="150"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="0 0 0 20" HorizontalAlignment="Left">
+                    <TextBlock Text="Цена" Width="70" HorizontalAlignment="Left" Margin="0 0 0 5"></TextBlock>
+                    <TextBox Text="{Binding Application.Price}" Style="{StaticResource textElementBlockTextBox}" Width="100" ></TextBox>
+                </StackPanel>
+                <StackPanel Margin="0 0 0 20" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Ссылка на постер" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 0 5"></TextBlock>
+                            <TextBox Text="{Binding Application.PosterUrl}" Style="{StaticResource textElementBlockTextBox}" Width="300" ></TextBox>
+                        </StackPanel>
+                        <Image Source="{Binding Application.PosterUrl}" Height="80" Margin="20 0 0 0" Width="200"></Image>
+                    </StackPanel>
+                    <Grid Margin="0 30 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0 0 0 20" HorizontalAlignment="Left">
+                            <TextBlock Text="Разработчик" Width="70" HorizontalAlignment="Left" Margin="0 0 0 5"></TextBlock>
+                            <ComboBox ItemsSource="{Binding Developers}" SelectedIndex="{Binding SelectedDeveloper}" Style="{StaticResource textElementBlockComboBox}" Template="{StaticResource ComboBoxTemplate1}" Width="200" >
+                                <ComboBox.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White"  Opacity="0.15" />
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" Opacity="0.15"/>
+                                </ComboBox.Resources>
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"></Setter>
+                                        <Setter Property="Foreground" Value="{StaticResource mainFontColor}"></Setter>
+                                        <Setter Property="BorderBrush" Value="Black"></Setter>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="30 0 0 20" HorizontalAlignment="Left">
+                            <TextBlock Text="Публикатор" Width="70" HorizontalAlignment="Left" Margin="0 0 0 5"></TextBlock>
+                            <ComboBox ItemsSource="{Binding Publishers}" SelectedIndex="{Binding SelectedPublisher}" Style="{StaticResource textElementBlockComboBox}" Template="{StaticResource ComboBoxTemplate1}" Width="200" >
+                                <ComboBox.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White"  Opacity="0.15" />
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" Opacity="0.15"/>
+                                </ComboBox.Resources>
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"></Setter>
+                                        <Setter Property="Foreground" Value="{StaticResource mainFontColor}"></Setter>
+                                        <Setter Property="BorderBrush" Value="Black"></Setter>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0 0 0 20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Text="Жанры" Width="70" HorizontalAlignment="Left" Margin="0 0 0 5"></TextBlock>
+                            <ComboBox ItemsSource="{Binding Genres}" SelectedIndex="{Binding SelectedGenre}" Style="{StaticResource textElementBlockComboBox}" Template="{StaticResource ComboBoxTemplate1}" Width="200" >
+                                <ComboBox.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White"  Opacity="0.15" />
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" Opacity="0.15"/>
+                                </ComboBox.Resources>
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"></Setter>
+                                        <Setter Property="Foreground" Value="{StaticResource mainFontColor}"></Setter>
+                                        <Setter Property="BorderBrush" Value="Black"></Setter>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Content="Добавить" Margin="0 10 0 0" Height="30" Command="{Binding AddGenreCommand}"></Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="30 0 0 20" HorizontalAlignment="Left">
+                            <ListBox ItemsSource="{Binding Application.Genres}" Height="150" Width="200" Background="{StaticResource backgroundColor}" BorderBrush="{StaticResource titleFontColor}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" FontSize="10" Foreground="{StaticResource mainFontColor}"></TextBlock>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0 0 0 20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Text="Особенности" HorizontalAlignment="Left" Margin="0 0 0 5"></TextBlock>
+                            <ComboBox ItemsSource="{Binding Features}" SelectedIndex="{Binding SelectedFeature}" Style="{StaticResource textElementBlockComboBox}" Template="{StaticResource ComboBoxTemplate1}" Width="200" >
+                                <ComboBox.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White"  Opacity="0.15" />
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" Opacity="0.15"/>
+                                </ComboBox.Resources>
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"></Setter>
+                                        <Setter Property="Foreground" Value="{StaticResource mainFontColor}"></Setter>
+                                        <Setter Property="BorderBrush" Value="Black"></Setter>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Content="Добавить" Margin="0 10 0 0" Height="30" Command="{Binding AddFeatureCommand}"></Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="30 0 0 20" HorizontalAlignment="Left">
+                            <ListBox ItemsSource="{Binding Application.Features}" Height="150" Width="200" Background="{StaticResource backgroundColor}" BorderBrush="{StaticResource titleFontColor}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" FontSize="10" Foreground="{StaticResource mainFontColor}"></TextBlock>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0 0 0 20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Text="Языки" Width="70" HorizontalAlignment="Left" Margin="0 0 0 5"></TextBlock>
+                            <ComboBox ItemsSource="{Binding Languages}" SelectedIndex="{Binding SelectedLanguage}" Style="{StaticResource textElementBlockComboBox}" Template="{StaticResource ComboBoxTemplate1}" Width="200" >
+                                <ComboBox.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White"  Opacity="0.15" />
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" Opacity="0.15"/>
+                                </ComboBox.Resources>
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Background" Value="{StaticResource headerBackgroundColor}"></Setter>
+                                        <Setter Property="Foreground" Value="{StaticResource mainFontColor}"></Setter>
+                                        <Setter Property="BorderBrush" Value="Black"></Setter>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Content="Добавить" Margin="0 10 0 0" Height="30" Command="{Binding AddLanguageCommand}" CommandParameter="{Binding ElementName=languagesListBox}"></Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="30 0 0 20" HorizontalAlignment="Left">
+                            <ListBox Name="languagesListBox" ItemsSource="{Binding Application.Languages}" Height="150" Width="200" Background="{StaticResource backgroundColor}" BorderBrush="{StaticResource titleFontColor}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" FontSize="10" Foreground="{StaticResource mainFontColor}"></TextBlock>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="0 20 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 0 10">
+                                <TextBlock Text="Системные требования" FontSize="18"/>
+                                <Separator Margin="0 25 0 0">
+                                    <Separator.RenderTransform>
+                                        <ScaleTransform ScaleX="2" />
+                                    </Separator.RenderTransform>
+                                </Separator>
+                            </Grid>
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                                <TextBlock Text="МИНИМАЛЬНЫЕ: " Margin="0 0 0 8" HorizontalAlignment="Center"></TextBlock>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="ОС" Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.MinimumSystemRequirements.OS}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Процессор"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.MinimumSystemRequirements.Processor}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Память"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.MinimumSystemRequirements.Memory}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Графика"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.MinimumSystemRequirements.Graphics}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="DirectX"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.MinimumSystemRequirements.DirectX}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Сеть"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.MinimumSystemRequirements.Network}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Место на диске"  Width="60" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Foreground="{StaticResource titleFontColor}" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.MinimumSystemRequirements.Storage}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" >
+                                <TextBlock Text="РЕКОМЕНДУЕМЫЕ: " Margin="0 0 0 8" HorizontalAlignment="Center"></TextBlock>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="ОС" Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.RecommendedSystemRequirements.OS}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Процессор"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.RecommendedSystemRequirements.Processor}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Память"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.RecommendedSystemRequirements.Memory}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Графика"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.RecommendedSystemRequirements.Graphics}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="DirectX"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.RecommendedSystemRequirements.DirectX}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Сеть"  Width="60" FontSize="10" Foreground="{StaticResource titleFontColor}" VerticalAlignment="Center" TextAlignment="Center" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.RecommendedSystemRequirements.Network}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                                        <TextBlock Text="Место на диске"  Width="60" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Foreground="{StaticResource titleFontColor}" Margin="0 0 10 0"></TextBlock>
+                                        <TextBox Text="{Binding Application.RecommendedSystemRequirements.Storage}" Style="{StaticResource textElementBlockTextBox}" Height="60" Width="160" FontSize="10" TextWrapping="Wrap"></TextBox>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <Button Content="Сохранить" Margin="0 100 0 0" Width="150" Height="30" Command="{Binding SaveCommand}"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

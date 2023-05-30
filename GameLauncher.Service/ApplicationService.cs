@@ -148,5 +148,32 @@ namespace GameLauncher.Service
         {
             return _reviewRepository.Get(appId, userId);
         }
+
+        public async Task<Application> GetApplicationForSet(int id)
+        {
+            return await _applicationRepository.Get(id);
+        }
+
+        public IQueryable<Developer> GetDevelopers()
+        {
+            return _applicationRepository.GetDevelopers();
+        }
+
+        public IQueryable<Publisher> GetPublishers()
+        {
+            return _applicationRepository.GetPublishers();
+        }
+
+        public async Task SetApplication(Application application, bool isNew)
+        {
+            if (isNew)
+            {
+                await _applicationRepository.Create(application);
+            }
+            else
+            {
+                await _applicationRepository.Update(application);
+            }
+        }
     }
 }

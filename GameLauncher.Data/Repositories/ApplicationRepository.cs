@@ -26,7 +26,7 @@ namespace GameLauncher.Data.Repositories
 
         public async Task<Application> Get(int id)
         {
-            return await _db.Applications.AsNoTracking()
+            return await _db.Applications
                 .AsSplitQuery()
                 .Include(a => a.Developer)
                 .Include(a => a.Publisher)
@@ -88,6 +88,16 @@ namespace GameLauncher.Data.Repositories
         {
             _db.Applications.Remove(Entity);
             await _db.SaveChangesAsync();
+        }
+
+        public IQueryable<Developer> GetDevelopers()
+        {
+            return _db.Developers.AsNoTracking();
+        }
+
+        public IQueryable<Publisher> GetPublishers()
+        {
+            return _db.Publishers.AsNoTracking();
         }
     }
 }

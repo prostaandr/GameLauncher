@@ -49,21 +49,23 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <StackPanel.Style>
-                            <Style TargetType="StackPanel">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#363636"></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </StackPanel.Style>
-                        <Border>
-                            <TextBlock Text="{Binding CurrentUser.Nickname}" VerticalAlignment="Center" FontSize="16" Padding="10 0 10 0"></TextBlock>
-                        </Border>
-                        <Border BorderBrush="White" BorderThickness="1">
-                            <Image Source="{Binding CurrentUser.IconUrl}" Stretch="Uniform" Height="32" Width="32"></Image>
-                        </Border>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#363636"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <Border>
+                                <TextBlock Text="{Binding CurrentUser.Nickname}" VerticalAlignment="Center" FontSize="16" Padding="10 0 10 0"></TextBlock>
+                            </Border>
+                            <Border BorderBrush="White" BorderThickness="1">
+                                <Image Source="{Binding CurrentUser.IconUrl}" Stretch="Uniform" Height="32" Width="32"></Image>
+                            </Border>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Grid>
