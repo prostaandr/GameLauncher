@@ -73,8 +73,7 @@ namespace GameLauncher.WPF.ViewModels
         public MainViewModel()
         {
             _accountService = App.serviceProvider.GetService<IAccountService>();
-            //CurrentViewModel = new StorePageViewModel(this);
-            CurrentViewModel = new SetApplicationViewModel(2003);
+            CurrentViewModel = new StorePageViewModel(this);
 
             InitializeAsync();
 

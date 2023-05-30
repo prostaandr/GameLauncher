@@ -53,7 +53,7 @@ namespace GameLauncher.WPF.ViewModels
                 return _openApplicationPageCommand ??
                   (_openApplicationPageCommand = new RelayCommand(obj =>
                   {
-                      _main.CurrentViewModel = new ApplicationPageViewModel(Convert.ToInt32(obj));
+                      _main.CurrentViewModel = new ApplicationPageViewModel(_main, Convert.ToInt32(obj));
                   }));
             }
         }

@@ -23,5 +23,6 @@ namespace GameLauncher.Service.Interfaces
         IQueryable<Developer> GetDevelopers();
         IQueryable<Publisher> GetPublishers();
         Task SetApplication(Application application, bool isNew);
+        Task DeleteApplication(Application application);
     }
 }

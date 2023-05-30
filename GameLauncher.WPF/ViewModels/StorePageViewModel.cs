@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Model;
+using GameLauncher.Service;
 using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.Service.OrderFilter;
@@ -110,6 +111,18 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private int _role;
+        public int Role
+        {
+            get => _role;
+            set
+            {
+                if (value == _role) return;
+                _role = value;
+                OnPropertyChanged();
+            }
+        }
+
         private RelayCommand _openApplicationPageCommand;
         public RelayCommand OpenApplicationPageCommand
         {
@@ -118,7 +131,7 @@ namespace GameLauncher.WPF.ViewModels
                 return _openApplicationPageCommand ??
                   (_openApplicationPageCommand = new RelayCommand(obj =>
                   {
-                      _main.CurrentViewModel = new ApplicationPageViewModel(Convert.ToInt32(obj));
+                      _main.CurrentViewModel = new ApplicationPageViewModel(_main, Convert.ToInt32(obj));
                   }));
             }
         }
@@ -195,6 +208,20 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+
+        private RelayCommand _addGameCommand;
+        public RelayCommand AddGameCommand
+        {
+            get
+            {
+                return _addGameCommand ??
+                  (_addGameCommand = new RelayCommand(obj =>
+                  {
+                      _main.CurrentViewModel = new SetApplicationViewModel();
+                  }));
+            }
+        }
+
         private async Task SetApplications()
         {
             Applications = Task.FromResult(await _applicationService.GetApplications(ActualSearch, (ApplicationSortOptions)SelectedSortIndex, _filters)).Result.ToList();
@@ -224,6 +251,8 @@ namespace GameLauncher.WPF.ViewModels
             SelectedSortIndex = 5;
 
             _filters = new Dictionary<string, ApplicationFilterOption>();
+
+            Role = (int)AccountService.CurrentUser.Role;
 
             SetApplications();
         }

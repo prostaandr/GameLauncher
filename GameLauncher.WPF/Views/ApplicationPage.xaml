@@ -41,6 +41,30 @@
                        Text="{Binding Application.Name}" FontSize="32"
                        Background="{StaticResource backgroundColor}"
                        Margin="0,15,0,15"/>
+                <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Редактировать" HorizontalAlignment="Left" Height="30" Width="100" Margin="0 0 60 0" Command="{Binding UpdateApplicationCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Role}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="Удалить" HorizontalAlignment="Right" Height="30" Width="100" Margin="0 0 20 0" Command="{Binding DeleteApplicationCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Role}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
                 <Grid Grid.Column="1" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"/>

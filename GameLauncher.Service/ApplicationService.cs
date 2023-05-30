@@ -175,5 +175,10 @@ namespace GameLauncher.Service
                 await _applicationRepository.Update(application);
             }
         }
+
+        public async Task DeleteApplication(Application app)
+        {
+            await _applicationRepository.Delete(app);
+        }
     }
 }

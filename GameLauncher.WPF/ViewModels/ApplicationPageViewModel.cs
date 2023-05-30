@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Model;
+using GameLauncher.Service;
 using GameLauncher.Service.DTOs;
 using GameLauncher.Service.Interfaces;
 using GameLauncher.WPF.Commands;
@@ -10,7 +11,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,7 @@ namespace GameLauncher.WPF.ViewModels
 {
     public class ApplicationPageViewModel : BaseViewModel
     {
+        MainViewModel _main;
         private IApplicationService _applicationService;
         private IOrderService _orderService;
 
@@ -86,6 +90,18 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
+        private int _role;
+        public int Role
+        {
+            get => _role;
+            set
+            {
+                if (value == _role) return;
+                _role = value;
+                OnPropertyChanged();
+            }
+        }
+
         private RelayCommand _changeMainImageCommand;
         public RelayCommand ChangeMainImageCommand
         {
@@ -122,11 +138,47 @@ namespace GameLauncher.WPF.ViewModels
             }
         }
 
-
-        public ApplicationPageViewModel(int id)
+        private RelayCommand _updateApplicationCommand;
+        public RelayCommand UpdateApplicationCommand
         {
+            get
+            {
+                return _updateApplicationCommand ??
+                  (_updateApplicationCommand = new RelayCommand(obj =>
+                  {
+                      _main.CurrentViewModel = new SetApplicationViewModel(Application.Id);
+                  }));
+            }
+        }
+
+        private RelayCommand _deleteApplicationCommand;
+        public RelayCommand DeleteApplicationCommand
+        {
+            get
+            {
+                return _deleteApplicationCommand ??
+                  (_deleteApplicationCommand = new RelayCommand(obj =>
+                  {
+                      DeleteAsync();
+                      MessageBox.Show("Удаление прошло успешно");
+                      _main.CurrentViewModel = new StorePageViewModel(_main);
+                  }));
+            }
+        }
+
+        private async void DeleteAsync()
+        {
+            await _applicationService.DeleteApplication(await _applicationService.GetApplicationForSet(Application.Id));
+        }
+
+
+        public ApplicationPageViewModel(MainViewModel main, int id)
+        {
+            _main = main;
             _applicationService = App.serviceProvider.GetService<IApplicationService>();
             _orderService = App.serviceProvider.GetService<IOrderService>();
+
+            Role = (int)AccountService.CurrentUser.Role;
 
             InitializeAsync(id);
         }
