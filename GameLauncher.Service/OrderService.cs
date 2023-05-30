@@ -16,14 +16,16 @@ namespace GameLauncher.Service
         private readonly IOrderRepository _orderRepository;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationService _applicationService;
+        private readonly IAccountService _accountService;
 
         public Order CurrentOrder { get; set; }
 
-        public OrderService(IOrderRepository orderRepository, IApplicationRepository applicationRepository, IApplicationService applicationService)
+        public OrderService(IOrderRepository orderRepository, IApplicationRepository applicationRepository, IApplicationService applicationService, IAccountService accountService)
         {
             _orderRepository = orderRepository;
             _applicationRepository = applicationRepository;
             _applicationService = applicationService;
+            _accountService = accountService;
 
         }
 
@@ -64,6 +66,9 @@ namespace GameLauncher.Service
             CurrentOrder.IsClose = true;
             await SetCurrentOrder();
             await _orderRepository.Update(CurrentOrder);
+
+            AccountService.CurrentUser = await _accountService.GetUser(AccountService.CurrentUser.Id);
+
         }
 
         public async Task SetCurrentOrder()

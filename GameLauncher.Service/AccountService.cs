@@ -13,13 +13,15 @@ namespace GameLauncher.Service
     {
         private readonly IUserRepository _userRepository;
         private readonly ICountryRepository _countryRepository;
+        private readonly IReviewRepository _reviewRepository;
 
         public static User CurrentUser { get; set; }
 
-        public AccountService(IUserRepository userRepository, ICountryRepository countryRepository)
+        public AccountService(IUserRepository userRepository, ICountryRepository countryRepository, IReviewRepository reviewRepository)
         {
             _userRepository = userRepository;
             _countryRepository = countryRepository;
+            _reviewRepository = reviewRepository;
         }
 
         public async Task Registration(User user)
@@ -57,6 +59,16 @@ namespace GameLauncher.Service
         public async Task AddAvalableApplication(int appId)
         {
             await _userRepository.AddAvalaibleApplication(CurrentUser.Id, appId);
+        }
+
+        public List<Application> GetAvalable(int id)
+        {
+            return _userRepository.GetAvalable(id);
+        }
+
+        public Review GetReview(int applicationId, int userId)
+        {
+            return _reviewRepository.Get(applicationId, userId);
         }
     }
 }

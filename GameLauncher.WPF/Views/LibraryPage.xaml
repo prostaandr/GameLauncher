@@ -39,7 +39,7 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction 
-                                        Command="{Binding ChangeSelectedApplicationCommand}" CommandParameter="{Binding ElementName=gamesListBox,Path=SelectedItem}">
+                                        Command="{Binding ChangeSelectedApplicationCommand}" CommandParameter="{Binding ElementName=gamesListBox,Path=SelectedIndex}">
                             </i:InvokeCommandAction>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
@@ -60,8 +60,33 @@
                     <Image Source="{Binding SelectedApplication.PosterUrl}" Height="Auto" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
                 </Border>
                 <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 3 0 0">
-                    <Button Content="Страница магазина" FontSize="14" Height="30" Width="160" Margin="0 30" 
+                    <Button Content="Страница магазина" FontSize="14" Height="30" Width="160" Margin="0 30 0 20" 
                             Command="{Binding OpenApplicationPageCommand}"></Button>
+                    <Button Content="Написать отзыв" FontSize="14" Height="30" Width="160" Margin="0 0 0 20" 
+                            Command="{Binding OpenReviewCommand}">
+                        <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsNewReview}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                    </Button>
+                    
+                    <Button Content="Изменить отзыв" FontSize="14" Height="30" Width="160" Margin="0 0 0 20" 
+                            Command="{Binding OpenReviewCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsNewReview}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

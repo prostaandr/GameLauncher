@@ -11,5 +11,6 @@ namespace GameLauncher.Data.Interfaces
     {
         public Task<User> GetByLogin(string login);
         public Task AddAvalaibleApplication(int userId, int appId);
+        public List<Application> GetAvalable(int userId);
     }
 }

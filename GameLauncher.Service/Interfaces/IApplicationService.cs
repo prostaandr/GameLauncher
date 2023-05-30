@@ -17,5 +17,7 @@ namespace GameLauncher.Service.Interfaces
         IQueryable<Genre> GetGenres();
         IQueryable<Feature> GetFeatures();
         IQueryable<Language> GetLanguages();
+        Task SetReview(Review review, bool isNew);
+        Review GetReview(int appId, int userId);
     }
 }

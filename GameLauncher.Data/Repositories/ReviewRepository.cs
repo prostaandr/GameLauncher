@@ -50,5 +50,10 @@ namespace GameLauncher.Data.Repositories
         {
             return _db.Reviews.AsNoTracking().Where(a => a.ApplicationId == applicationId);
         }
+
+        public Review Get(int applicationId, int userId)
+        {
+            return _db.Reviews.Where(r => r.ApplicationId == applicationId).Where(r => r.UserId == userId).SingleOrDefault();
+        }
     }
 }

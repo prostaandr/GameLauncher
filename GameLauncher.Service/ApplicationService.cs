@@ -130,5 +130,23 @@ namespace GameLauncher.Service
             if (positiveCount == 0) return 0;
             return positiveCount * 100 / reviews.Count;
         }
+
+
+        public async Task SetReview(Review review, bool isNew)
+        {
+            if (isNew)
+            {
+                await _reviewRepository.Create(review);
+            }
+            else
+            {
+                await _reviewRepository.Update(review);
+            }
+        }
+
+        public Review GetReview(int appId, int userId)
+        {
+            return _reviewRepository.Get(appId, userId);
+        }
     }
 }

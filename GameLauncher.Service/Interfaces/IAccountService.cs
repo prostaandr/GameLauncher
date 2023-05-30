@@ -14,5 +14,7 @@ namespace GameLauncher.Service.Interfaces
         Task<User> Login(string login, string password);
         IQueryable<Country> GetAllCountries();
         Task AddAvalableApplication(int appId);
+        List<Application> GetAvalable(int id);
+        Review GetReview(int applicationId, int userId);
     }
 }
