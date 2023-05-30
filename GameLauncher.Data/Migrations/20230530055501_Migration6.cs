@@ -19,14 +19,6 @@ namespace GameLauncher.Data.Migrations
                 table: "Application");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Application_SystemRequirements_MinimumSystemRequirementsId",
-                table: "Application");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Application_SystemRequirements_RecommendedSystemRequirementsId",
-                table: "Application");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_Order_User_UserId",
                 table: "Order");
 
@@ -244,6 +236,14 @@ namespace GameLauncher.Data.Migrations
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
+            migrationBuilder.AlterColumn<string>(
+                name: "ApplicationType",
+                table: "Application",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "int");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Application_Developer_DeveloperId",
                 table: "Application",
@@ -257,22 +257,6 @@ namespace GameLauncher.Data.Migrations
                 table: "Application",
                 column: "PublisherId",
                 principalTable: "Publisher",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Application_SystemRequirements_MinimumSystemRequirementsId",
-                table: "Application",
-                column: "MinimumSystemRequirementsId",
-                principalTable: "SystemRequirements",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Application_SystemRequirements_RecommendedSystemRequirementsId",
-                table: "Application",
-                column: "RecommendedSystemRequirementsId",
-                principalTable: "SystemRequirements",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -305,14 +289,6 @@ namespace GameLauncher.Data.Migrations
                 table: "Application");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Application_SystemRequirements_MinimumSystemRequirementsId",
-                table: "Application");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Application_SystemRequirements_RecommendedSystemRequirementsId",
-                table: "Application");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_Order_User_UserId",
                 table: "Order");
 
@@ -488,6 +464,14 @@ namespace GameLauncher.Data.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
+            migrationBuilder.AlterColumn<int>(
+                name: "ApplicationType",
+                table: "Application",
+                type: "int",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Application_Developer_DeveloperId",
                 table: "Application",
@@ -500,20 +484,6 @@ namespace GameLauncher.Data.Migrations
                 table: "Application",
                 column: "PublisherId",
                 principalTable: "Publisher",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Application_SystemRequirements_MinimumSystemRequirementsId",
-                table: "Application",
-                column: "MinimumSystemRequirementsId",
-                principalTable: "SystemRequirements",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Application_SystemRequirements_RecommendedSystemRequirementsId",
-                table: "Application",
-                column: "RecommendedSystemRequirementsId",
-                principalTable: "SystemRequirements",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(

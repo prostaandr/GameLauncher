@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameLauncher.Data.Migrations
 {
     [DbContext(typeof(GameLauncherContext))]
-    [Migration("20230530052050_Migration6")]
-    partial class Migration6
+    [Migration("20230530055953_Migration7")]
+    partial class Migration7
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,19 +108,18 @@ namespace GameLauncher.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ApplicationType")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DeveloperId")
-                        .IsRequired()
+                    b.Property<int>("DeveloperId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MinimumSystemRequirementsId")
-                        .IsRequired()
+                    b.Property<int>("MinimumSystemRequirementsId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -137,12 +136,10 @@ namespace GameLauncher.Data.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PublisherId")
-                        .IsRequired()
+                    b.Property<int>("PublisherId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RecommendedSystemRequirementsId")
-                        .IsRequired()
+                    b.Property<int>("RecommendedSystemRequirementsId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReleaseDate")
@@ -262,8 +259,9 @@ namespace GameLauncher.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("MediaType")
-                        .HasColumnType("int");
+                    b.Property<string>("MediaType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
                         .IsRequired()
@@ -291,8 +289,7 @@ namespace GameLauncher.Data.Migrations
                     b.Property<int>("TotalPrice")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -367,8 +364,9 @@ namespace GameLauncher.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
+                    b.Property<string>("Grade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -447,8 +445,9 @@ namespace GameLauncher.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -571,9 +570,9 @@ namespace GameLauncher.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("GameLauncher.Model.SystemRequirements", "MinimumSystemRequirements")
-                        .WithMany()
+                        .WithMany("MinApplications")
                         .HasForeignKey("MinimumSystemRequirementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GameLauncher.Model.Application", "Parent")
@@ -587,9 +586,9 @@ namespace GameLauncher.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("GameLauncher.Model.SystemRequirements", "RecommendedSystemRequirements")
-                        .WithMany()
+                        .WithMany("RecApplications")
                         .HasForeignKey("RecommendedSystemRequirementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Developer");
@@ -705,6 +704,13 @@ namespace GameLauncher.Data.Migrations
             modelBuilder.Entity("GameLauncher.Model.Publisher", b =>
                 {
                     b.Navigation("Applications");
+                });
+
+            modelBuilder.Entity("GameLauncher.Model.SystemRequirements", b =>
+                {
+                    b.Navigation("MinApplications");
+
+                    b.Navigation("RecApplications");
                 });
 
             modelBuilder.Entity("GameLauncher.Model.User", b =>

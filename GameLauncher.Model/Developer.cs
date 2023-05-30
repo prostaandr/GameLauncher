@@ -12,7 +12,9 @@ namespace GameLauncher.Model
     public class Developer
     {
         public int Id { get; set; }
+        [MaxLength(30)]
         public string Name { get; set; }
+        [MaxLength(500)]
         public string? Description { get; set; }
 
         public List<Application> Applications { get; set; } = new List<Application>();

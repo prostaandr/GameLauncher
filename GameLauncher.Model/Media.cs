@@ -14,6 +14,7 @@ namespace GameLauncher.Model
     {
         public int Id { get; set; }
         public string Url { get; set; }
+        [MaxLength(20)]
         public MediaTypeEnum MediaType { get; set; }
 
         public List<Application> Applications { get; set; } = new List<Application>();

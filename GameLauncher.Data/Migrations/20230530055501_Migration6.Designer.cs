@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameLauncher.Data.Migrations
 {
     [DbContext(typeof(GameLauncherContext))]
-    [Migration("20230530052721_Migration9")]
-    partial class Migration9
+    [Migration("20230530055501_Migration6")]
+    partial class Migration6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,8 +108,9 @@ namespace GameLauncher.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ApplicationType")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -566,9 +567,9 @@ namespace GameLauncher.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("GameLauncher.Model.SystemRequirements", "MinimumSystemRequirements")
-                        .WithMany()
+                        .WithMany("MinApplications")
                         .HasForeignKey("MinimumSystemRequirementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GameLauncher.Model.Application", "Parent")
@@ -582,9 +583,9 @@ namespace GameLauncher.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("GameLauncher.Model.SystemRequirements", "RecommendedSystemRequirements")
-                        .WithMany()
+                        .WithMany("RecApplications")
                         .HasForeignKey("RecommendedSystemRequirementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Developer");
@@ -700,6 +701,13 @@ namespace GameLauncher.Data.Migrations
             modelBuilder.Entity("GameLauncher.Model.Publisher", b =>
                 {
                     b.Navigation("Applications");
+                });
+
+            modelBuilder.Entity("GameLauncher.Model.SystemRequirements", b =>
+                {
+                    b.Navigation("MinApplications");
+
+                    b.Navigation("RecApplications");
                 });
 
             modelBuilder.Entity("GameLauncher.Model.User", b =>

@@ -13,11 +13,14 @@ namespace GameLauncher.Model
     public class Application
     {
         public int Id { get; set; }
+        [MaxLength(50)]
         public string Name { get; set; }
+        [MaxLength(500)]
         public string Description { get; set; }
         public int Price { get; set; }
         public string PosterUrl { get; set; }
         public DateTime ReleaseDate { get; set; }
+        [MaxLength(20)]
         public ApplicationTypeEnum ApplicationType { get; set; }
 
         public int? ParentId { get; set; }

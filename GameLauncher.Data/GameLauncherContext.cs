@@ -92,6 +92,35 @@ namespace GameLauncher.Data
                     .UsingEntity<Dictionary<string, object>>("ApplicationMedia",
                             e => e.HasOne<Media>().WithMany().HasForeignKey("MediaId"),
                             e => e.HasOne<Application>().WithMany().HasForeignKey("ApplicationId"));
+
+            modelBuilder.Entity<Application>()
+                    .HasOne(a => a.MinimumSystemRequirements)
+                    .WithMany(s => s.MinApplications)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+
+            modelBuilder.Entity<Application>()
+                    .HasOne(a => a.RecommendedSystemRequirements)
+                    .WithMany(s => s.RecApplications)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Application>()
+                    .Property(a => a.ApplicationType)
+                    .HasConversion<string>();
+
+            modelBuilder.Entity<Media>()
+                    .Property(m => m.MediaType)
+                    .HasConversion<string>();
+
+            modelBuilder.Entity<Review>()
+                    .Property(r => r.Grade)
+                    .HasConversion<string>();
+
+            modelBuilder.Entity<User>()
+                   .Property(u => u.Role)
+                   .HasConversion<string>();
+
+
         }
     }
 }

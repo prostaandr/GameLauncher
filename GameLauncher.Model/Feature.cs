@@ -12,6 +12,7 @@ namespace GameLauncher.Model
     public class Feature
     {
         public int Id { get; set; }
+        [MaxLength(30)]
         public string Name { get; set; }
 
         public List<Application> Applications { get; set; } = new List<Application>();

@@ -14,7 +14,9 @@ namespace GameLauncher.Model
     public class Review
     {
         public int Id { get; set; }
+        [MaxLength(1000)]
         public string Comment { get; set; }
+        [MaxLength(20)]
         public ReviewGradeEnum Grade { get; set; }
         public DateTime Date { get; set; }
 

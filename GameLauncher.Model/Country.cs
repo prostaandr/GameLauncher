@@ -12,6 +12,7 @@ namespace GameLauncher.Model
     public class Country
     {
         public int Id { get; set; }
+        [MaxLength(30)]
         public string Name { get; set; }
         public string? FlagUrl { get; set; }
 
