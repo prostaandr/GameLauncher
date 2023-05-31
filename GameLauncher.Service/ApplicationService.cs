@@ -52,7 +52,7 @@ namespace GameLauncher.Service
                 MinimumSystemRequirements = app.MinimumSystemRequirements,
                 RecommendedSystemRequirements = app.RecommendedSystemRequirements,
                 Medias = app.Medias,
-                Reviews = app.Reviews,
+                Reviews = await _reviewRepository.GetFromAppliation(app.Id).ToListAsync(),
                 ReviewsPercent = await GetReviewsPersent(app.Id)
             };
 

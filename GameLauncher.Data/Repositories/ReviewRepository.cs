@@ -26,12 +26,12 @@ namespace GameLauncher.Data.Repositories
 
         public async Task<Review> Get(int id)
         {
-            return await _db.Reviews.AsNoTracking().SingleOrDefaultAsync(a => a.Id == id);
+            return await _db.Reviews.SingleOrDefaultAsync(a => a.Id == id);
         }
 
         public IQueryable<Review> GetAll()
         {
-            return  _db.Reviews.AsNoTracking();
+            return _db.Reviews.AsNoTracking();
         }
 
         public async Task Update(Review Entity)
@@ -48,7 +48,7 @@ namespace GameLauncher.Data.Repositories
 
         public IQueryable<Review> GetFromAppliation(int applicationId)
         {
-            return _db.Reviews.AsNoTracking().Where(a => a.ApplicationId == applicationId);
+            return _db.Reviews.AsNoTracking().Where(a => a.ApplicationId == applicationId).OrderByDescending(r => r.Date);
         }
 
         public Review Get(int applicationId, int userId)
